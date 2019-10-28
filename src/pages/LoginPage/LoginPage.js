@@ -9,7 +9,7 @@ import Container from '../../elements/Container'
 import PageFooter from '../../components/Footer'
 
 const LoginSection = styled.section`
-    background: url(${backgroundImg});
+    background: url(${backgroundImg}) #3F414A;
     min-height: 100vh;
     background-size: cover;
     color: white;
