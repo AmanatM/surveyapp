@@ -1,9 +1,6 @@
 import React from 'react'
 import GlobalStyle from './GlobalStyle' 
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // import {
 //   BrowserRouter as Router,
@@ -13,7 +10,9 @@ import {
 import LoginPage from './pages/LoginPage/LoginPage'
 
 
-function App() {
+function App(props) {
+
+
   return (
       <div className="App">
         <GlobalStyle/>
@@ -24,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default App 
