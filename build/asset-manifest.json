@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/static/js/main.b30cfa20.chunk.js",
+    "main.js.map": "/static/js/main.b30cfa20.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.030f8fb7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.030f8fb7.js.map",
+    "static/js/2.91bba52d.chunk.js": "/static/js/2.91bba52d.chunk.js",
+    "static/js/2.91bba52d.chunk.js.map": "/static/js/2.91bba52d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.746efcd2eaab5d13acc2b9bfff6651f7.js": "/precache-manifest.746efcd2eaab5d13acc2b9bfff6651f7.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/facebook-icon.svg": "/static/media/facebook-icon.8cda0158.svg",
+    "static/media/google-icon.svg": "/static/media/google-icon.8d124e45.svg",
+    "static/media/logo.svg": "/static/media/logo.fe84ffc3.svg",
+    "static/media/refresh-icon.svg": "/static/media/refresh-icon.dc4c3d95.svg",
+    "static/media/survapp-bg1.jpg": "/static/media/survapp-bg1.14cf3f18.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.030f8fb7.js",
+    "static/js/2.91bba52d.chunk.js",
+    "static/js/main.b30cfa20.chunk.js"
+  ]
+}
