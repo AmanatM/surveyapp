@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> Published to heroku
+          Edit <code>src/App.js</code> Published to herok
         </p>
         <a
           className="App-link"
