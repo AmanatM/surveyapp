@@ -1,23 +1,25 @@
 import React from 'react'
-import styled from 'styled-components'
 import GlobalStyle from './GlobalStyle' 
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
-import Loginform from './components/LoginForm'
+// import {
+//   BrowserRouter as Router,
+//   Route, Link, Redirect, withRouter
+// } from 'react-router-dom'
 
-const Container = styled.div`
-  width: 90%;
-  max-width: 1280px;
-  margin: 0 auto;
-`
+import LoginPage from './pages/LoginPage/LoginPage'
+
 
 function App() {
   return (
       <div className="App">
         <GlobalStyle/>
-        <Container>
-          Amanat
-          <Loginform/>
-        </Container>
+          <Router>
+            <Route exact path="/login" render={() => <LoginPage/>}/>
+          </Router>
       </div>
   );
 }
