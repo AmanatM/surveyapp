@@ -55,8 +55,8 @@ const LoginPage = () => {
                 </Info>
 
                 <Loginform/>
-            <PageFooter/>
             </Container>
+            <PageFooter/>
         </LoginSection>
     )
 }

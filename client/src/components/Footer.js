@@ -3,11 +3,8 @@ import styled from 'styled-components'
 
 const Footer = styled.footer`
     text-align: center;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    padding: 20px 0;
     width: 100%;
-    padding-bottom: 15px;
     
     ul {
         display: flex;
