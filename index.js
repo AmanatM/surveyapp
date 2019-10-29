@@ -6,7 +6,6 @@ app.use(cors())
 
 app.use(express.static('build'))
 
-res.redirect('https://' + req.headers.host + req.url);
 
 
 app.get('/*', function(req, res) {
