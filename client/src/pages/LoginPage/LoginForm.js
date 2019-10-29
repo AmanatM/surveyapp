@@ -93,19 +93,21 @@ const Divider = styled.div`
 const LoginForm = () => {
 
     return (
-        <Form >
-            <Input type="text" autoComplete="username" placeholder="Никнэйм"/>
-            <Input type="password" autoComplete="current-password" placeholder="Пароль"/>
-            <div className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></div>
-            <AuthButton red type="submit">Войти</AuthButton>
-            <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
-            <Divider><div>OR</div></Divider>
-            <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Войти через Facebook</div></AuthSocial>
-            <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial>
+        <main>
+            <Form >
+                <Input aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
+                <Input aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
+                <div className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></div>
+                <AuthButton red type="submit">Войти</AuthButton>
+                <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
+                <Divider><div>OR</div></Divider>
+                <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Войти через Facebook</div></AuthSocial>
+                <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial>
 
-            <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
+                <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
+            </Form>
+        </main>
 
-        </Form>
     )
 }
 

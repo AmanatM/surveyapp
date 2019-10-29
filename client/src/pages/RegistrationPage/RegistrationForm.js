@@ -190,7 +190,7 @@ const Eye = styled.div`
 const PasswordVisibilityToggler = ({toggle, eyeClass}) => {
 
     return (
-        <button onClick={toggle}>
+        <button onClick={toggle} aria-label="password visibiliy toggle">
             <Eye className={eyeClass}></Eye>
         </button>
     )
@@ -212,7 +212,7 @@ const PassWordInput = ({placeholder}) => {
 
     return (
         <PasswordContainer>
-            <Input type={inputType} autoComplete="new-password" placeholder={placeholder}/><PasswordVisibilityToggler toggle={toggle} eyeClass={eyeClass}/>
+            <Input aria-label={placeholder} type={inputType} autoComplete="new-password" placeholder={placeholder}/><PasswordVisibilityToggler toggle={toggle} eyeClass={eyeClass}/>
         </PasswordContainer>
     )
 }
@@ -263,22 +263,22 @@ const RegistrationForm = () => {
                 <p><small>Справшивате и отвечайте</small></p>
             </FormTitle>
 
-            <Input require type="email" autoComplete="false" placeholder="Email почта"/>
-            <Input type="email" autoComplete="false" placeholder="Имя"/>
-            <Input type="email" autoComplete="false" placeholder="Фамилия"/>
+            <Input aria-label="Электронная почта" require type="email" autoComplete="false" placeholder="Email почта"/>
+            <Input aria-label="Имя" type="email" autoComplete="false" placeholder="Имя"/>
+            <Input aria-label="Фамилия" type="email" autoComplete="false" placeholder="Фамилия"/>
 
             <TwoInOneLine colWidth="50">
-                <Input type="date" placeholder="Дата рождения"/>
-                <select>
+                <Input aria-label="Дата" type="date" placeholder="Дата рождения"/>
+                <select aria-label="Пол">
                     <option value="male">Мужской</option>
                     <option value="female">Женский</option>
                 </select>
             </TwoInOneLine>
-            <Input type="text" placeholder="Страна"/>
-            <Input type="text" placeholder="Город"/>
+            <Input aria-label="Страна" type="text" placeholder="Страна"/>
+            <Input aria-label="Город" type="text" placeholder="Город"/>
             <TwoInOneLine colWidth="30">
-                <Input type="number" placeholder="+996"/>
-                <Input type="number"placeholder="Телефон"/>
+                <Input aria-label="Код телефона" type="number" placeholder="+996"/>
+                <Input aria-label="Телефон без кода страны" type="number" placeholder="+996"/>
             </TwoInOneLine>
 
             <PassWordInput placeholder="Пароль"/>
