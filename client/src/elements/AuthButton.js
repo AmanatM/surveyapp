@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const AuthButton = styled.button`
+let AuthButton = styled.button`
     background-color: grey;
     background-color: ${props => props.red ? '#FF473A' : '#3a71ff'};
     color: white;

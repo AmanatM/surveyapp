@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import AuthButton from '../elements/AuthButton'
-import facebookLogo from '../assets/imgs/facebook-icon.svg'
-import googleLogo from '../assets/imgs/google-icon.svg'
-import refreshIcon from '../assets/imgs/refresh-icon.svg'
+import AuthButton from '../../elements/AuthButton'
+import facebookLogo from '../../assets/imgs/facebook-icon.svg'
+import googleLogo from '../../assets/imgs/google-icon.svg'
+import refreshIcon from '../../assets/imgs/refresh-icon.svg'
 
 const Form = styled.form`
     max-width: 100%;
@@ -38,7 +39,7 @@ const Form = styled.form`
 const Input = styled.input`
     font-size: inherit;
     border: none;
-    padding: 5px 20px;
+    padding: 10px 20px;
     margin: 5px 0;
     border-radius: 8px;
     font-family: inherit;
@@ -93,14 +94,14 @@ const LoginForm = () => {
 
     return (
         <Form >
-            <Input type="email"  placeholder="Email"/>
-            <Input type="password"  placeholder="Password"/>
-            <div className="forgotPass">Forgot your password? <img src={refreshIcon} alt=""/></div>
-            <AuthButton red type="submit">Sign In</AuthButton>
-            <div className="createAcc">Create account</div>
+            <Input type="text" autoComplete="username" placeholder="Никнэйм"/>
+            <Input type="password" autoComplete="current-password" placeholder="Пароль"/>
+            <div className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></div>
+            <AuthButton red type="submit">Войти</AuthButton>
+            <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
             <Divider><div>OR</div></Divider>
-            <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Sign in with Facebook</div></AuthSocial>
-            <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Sign in with Google</div></AuthSocial>
+            <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Войти через Facebook</div></AuthSocial>
+            <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial>
 
             <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
 

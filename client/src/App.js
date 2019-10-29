@@ -1,6 +1,6 @@
 import React from 'react'
 import GlobalStyle from './GlobalStyle' 
-import { BrowserRouter as Router,Redirect, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // import {
 //   BrowserRouter as Router,
@@ -8,17 +8,22 @@ import { BrowserRouter as Router,Redirect, Route } from 'react-router-dom'
 // } from 'react-router-dom'
 
 import LoginPage from './pages/LoginPage/LoginPage'
+import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
+import HomePage from './pages/HomePage/HomePage'
 
 
-function App(props) {
-
+function App() {
 
   return (
       <div className="App">
         <GlobalStyle/>
           <Router>
-            <Redirect to="/login"/>
-            <Route exact path="/login" render={() => <LoginPage/>}/>
+            <Switch>
+            <Route exact path="/" render={() => <HomePage/>}/>
+              <Route exact path="/login" render={() => <LoginPage/>}/>
+              <Route exact path="/registration" render={() => <RegistrationPage/>}/>             
+            </Switch>
+
           </Router>
       </div>
   );

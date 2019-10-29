@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fa1fddbe1c8d79fd2faf8ddc39921d40",
+    "revision": "fbd9d7f3426badb2613839f83eb1effb",
     "url": "/index.html"
   },
   {
-    "revision": "04eea4f91d51050ed8dc",
-    "url": "/static/js/2.1136e422.chunk.js"
+    "revision": "7585df03bf8e11e10083",
+    "url": "/static/js/2.3e3eb0f2.chunk.js"
   },
   {
-    "revision": "1dd5ee36d8f092b18d05",
-    "url": "/static/js/main.79147985.chunk.js"
+    "revision": "2851143a9e999b458123",
+    "url": "/static/js/main.379f53c7.chunk.js"
   },
   {
     "revision": "023857dc4c6ceebfad34",
@@ -32,7 +32,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/refresh-icon.dc4c3d95.svg"
   },
   {
-    "revision": "14cf3f18a34d1d18d66cbaa65b9a8ede",
-    "url": "/static/media/survapp-bg1.14cf3f18.jpg"
+    "revision": "b2776b9ecb2965a8e532823516aa94bc",
+    "url": "/static/media/survapp-bg-blured.b2776b9e.jpg"
+  },
+  {
+    "revision": "055fcb42ddcb624b7a219fdbf177a216",
+    "url": "/static/media/survapp-bg1.055fcb42.jpg"
   }
 ]);

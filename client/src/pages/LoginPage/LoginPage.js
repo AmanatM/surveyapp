@@ -1,12 +1,13 @@
 import React from 'react'
-import Loginform from '../../components/LoginForm'
-import backgroundImg  from './survapp-bg1.jpg'
+import backgroundImg  from '../../assets/imgs/survapp-bg1.jpg'
 import styled from 'styled-components'
 import logo from '../../assets/imgs/logo.svg'
 
 
 import Container from '../../elements/Container'
 import PageFooter from '../../components/Footer'
+import Loginform from './LoginForm'
+
 
 const LoginSection = styled.section`
     background: url(${backgroundImg}) #3F414A;
@@ -14,7 +15,7 @@ const LoginSection = styled.section`
     background-size: cover;
     color: white;
     background-position: center;
-    padding-top: 4em;
+    padding-top: 45px;
 `
 
 const Logo = styled.img`
