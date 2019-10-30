@@ -1,24 +1,36 @@
 {
   "files": {
-    "main.js": "/static/js/main.a55106a7.chunk.js",
-    "main.js.map": "/static/js/main.a55106a7.chunk.js.map",
+    "main.js": "/static/js/main.7a819e7a.chunk.js",
+    "main.js.map": "/static/js/main.7a819e7a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.030f8fb7.js",
     "runtime-main.js.map": "/static/js/runtime-main.030f8fb7.js.map",
-    "static/js/2.3e3eb0f2.chunk.js": "/static/js/2.3e3eb0f2.chunk.js",
-    "static/js/2.3e3eb0f2.chunk.js.map": "/static/js/2.3e3eb0f2.chunk.js.map",
+    "static/js/2.9474b2ba.chunk.js": "/static/js/2.9474b2ba.chunk.js",
+    "static/js/2.9474b2ba.chunk.js.map": "/static/js/2.9474b2ba.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.3711598328a2014063e741869c8ef409.js": "/precache-manifest.3711598328a2014063e741869c8ef409.js",
+    "precache-manifest.d31dde435041621350d724624e05d66d.js": "/precache-manifest.d31dde435041621350d724624e05d66d.js",
     "service-worker.js": "/service-worker.js",
+    "static/media/bulb-icon.svg": "/static/media/bulb-icon.43b32b5f.svg",
+    "static/media/demo-profile-img.jpg": "/static/media/demo-profile-img.bb311baa.jpg",
     "static/media/facebook-icon.svg": "/static/media/facebook-icon.8cda0158.svg",
+    "static/media/filter-icon.svg": "/static/media/filter-icon.d184a890.svg",
+    "static/media/general-bg.jpg": "/static/media/general-bg.d33ff396.jpg",
     "static/media/google-icon.svg": "/static/media/google-icon.8d124e45.svg",
+    "static/media/logo-dark.svg": "/static/media/logo-dark.5c673b72.svg",
     "static/media/logo.svg": "/static/media/logo.fe84ffc3.svg",
+    "static/media/members-icon.svg": "/static/media/members-icon.cb427b10.svg",
+    "static/media/notification-icon.svg": "/static/media/notification-icon.a85be627.svg",
+    "static/media/person-icon.svg": "/static/media/person-icon.bb555c68.svg",
+    "static/media/question-icon.svg": "/static/media/question-icon.9629a3c7.svg",
     "static/media/refresh-icon.svg": "/static/media/refresh-icon.dc4c3d95.svg",
+    "static/media/settings-icon.svg": "/static/media/settings-icon.3cf0a3a4.svg",
+    "static/media/sort-icon.svg": "/static/media/sort-icon.a7d747f3.svg",
+    "static/media/stats-icon.svg": "/static/media/stats-icon.a0c14913.svg",
     "static/media/survapp-bg-blured.jpg": "/static/media/survapp-bg-blured.b2776b9e.jpg",
-    "static/media/survapp-bg1.jpg": "/static/media/survapp-bg1.055fcb42.jpg"
+    "static/media/survapp-bg1.jpg": "/static/media/survapp-bg1.73426b55.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.030f8fb7.js",
-    "static/js/2.3e3eb0f2.chunk.js",
-    "static/js/main.a55106a7.chunk.js"
+    "static/js/2.9474b2ba.chunk.js",
+    "static/js/main.7a819e7a.chunk.js"
   ]
 }
