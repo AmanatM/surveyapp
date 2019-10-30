@@ -21,7 +21,8 @@
   "homepage": "https://bitbucket.org/amanatm/surveyapp-front#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react-transition-group": "^4.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

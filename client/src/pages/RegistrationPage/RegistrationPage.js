@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import RegistrationForm from './RegistrationForm'
 import Footer from '../../components/Footer'
@@ -33,7 +34,7 @@ const RegistrationPage = () => {
     return (
         <RegistrationSection>
             <Container>
-                <Logo alt="surveyapp logo" src={logo}/>
+                <Link to="/"><Logo alt="surveyapp logo" src={logo}/></Link>
                 <RegistrationForm/>
             </Container>
             <Footer/>

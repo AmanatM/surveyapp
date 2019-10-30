@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import backgroundImg  from '../../assets/imgs/survapp-bg1.jpg'
 import styled from 'styled-components'
 import logo from '../../assets/imgs/logo.svg'
@@ -47,7 +49,7 @@ const LoginPage = () => {
         <LoginSection>
             <Container>
 
-                <Logo alt='logo' src={logo}/>
+                <Link to="/"><Logo alt="surveyapp logo" src={logo}/></Link>
 
                 <Info>
                     <div >Create your <br/>Own Surveys</div>

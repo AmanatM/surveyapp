@@ -260,12 +260,12 @@ const RegistrationForm = () => {
         <Form >
             <FormTitle>
                 <h2>Новый пользователь</h2>
-                <p><small>Справшивате и отвечайте</small></p>
+                <p><small>Справшиватйе и отвечайте</small></p>
             </FormTitle>
 
             <Input aria-label="Электронная почта" require type="email" autoComplete="false" placeholder="Email почта"/>
-            <Input aria-label="Имя" type="email" autoComplete="false" placeholder="Имя"/>
-            <Input aria-label="Фамилия" type="email" autoComplete="false" placeholder="Фамилия"/>
+            <Input aria-label="Имя" type="text" autoComplete="false" placeholder="Имя"/>
+            <Input aria-label="Фамилия" type="text" autoComplete="false" placeholder="Фамилия"/>
 
             <TwoInOneLine colWidth="50">
                 <Input aria-label="Дата" type="date" placeholder="Дата рождения"/>
@@ -277,8 +277,8 @@ const RegistrationForm = () => {
             <Input aria-label="Страна" type="text" placeholder="Страна"/>
             <Input aria-label="Город" type="text" placeholder="Город"/>
             <TwoInOneLine colWidth="30">
-                <Input aria-label="Код телефона" type="number" placeholder="+996"/>
-                <Input aria-label="Телефон без кода страны" type="number" placeholder="+996"/>
+                <Input aria-label="Код телефона" type="tel" placeholder="+996"/>
+                <Input aria-label="Телефон без кода страны" type="tel" placeholder="Номер телефона"/>
             </TwoInOneLine>
 
             <PassWordInput placeholder="Пароль"/>
