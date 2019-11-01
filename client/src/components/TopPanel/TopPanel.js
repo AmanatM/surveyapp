@@ -49,7 +49,8 @@ const SearchBox = styled.div`
         border-radius: 21px;
         width: 100%;
         padding-left: 15px;
-        padding-bottom: 3px;
+        padding-bottom: 0px;
+        padding-top: 3px;
         outline: none;
 
         &::placeholder {

@@ -10,6 +10,10 @@ const MainContainer = styled.main`
     min-height: 85vh;
     margin: 20px 0;
     color: #353C64;
+
+    @media screen and (max-width: 760px) {
+        margin: 20px 0;
+    }
 `
 
 
@@ -18,7 +22,6 @@ const MyPollsPage = () => {
     return (
         <MainContainer>
             <InnerTopBar titleText="Все вопросы"/>
-            My polls page
         </MainContainer>
     )
 }

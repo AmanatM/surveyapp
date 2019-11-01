@@ -25,7 +25,12 @@ const Content = styled.div`
     background-position: center;
     width: 100%;
 
+    @media screen and (max-width: 760px) {
+        padding: 20px 10px;
+    }
 
+
+/* 
         .fade-enter {
             opacity: 0.01;
         }
@@ -42,7 +47,7 @@ const Content = styled.div`
         .fade-exit.fade-exit-active {
             opacity: 0.01;
             transition: opacity 300ms ease-in;
-        }
+        } */
 
 `
 
