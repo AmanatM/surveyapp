@@ -245,10 +245,6 @@ const Profile = styled.div`
             }
 
         }
-
-
-
-
     }
 
 `

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import setMetaTheme from '../../utils/setThemeColor'
 //import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
@@ -55,6 +56,8 @@ const Content = styled.div`
 const Demo = ({text}) => (<div style={{color:'white', margin: '20px'}}>{text}</div>)
 
 const MainFrame = ({location}) => {
+
+    setMetaTheme('#283e37')
 
     return (
         <MainFrameSection>

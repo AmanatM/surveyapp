@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import setMetaTheme from '../../utils/setThemeColor'
+
 
 import RegistrationForm from './RegistrationForm'
 import Footer from '../../components/Footer'
@@ -30,6 +32,8 @@ const Logo = styled.img`
 
 
 const RegistrationPage = () => {
+
+    setMetaTheme('#fff')
 
     return (
         <RegistrationSection>

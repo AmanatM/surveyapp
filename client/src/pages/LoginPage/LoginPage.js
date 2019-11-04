@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import setMetaTheme from '../../utils/setThemeColor'
 
 import backgroundImg  from '../../assets/imgs/survapp-bg1.jpg'
 import styled from 'styled-components'
@@ -44,6 +45,8 @@ const Info = styled.div`
 
 
 const LoginPage = () => {
+
+    setMetaTheme('#091211')
     
     return (
         <LoginSection>

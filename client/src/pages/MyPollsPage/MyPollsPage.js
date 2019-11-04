@@ -13,10 +13,12 @@ const PollsContainer = styled.table`
     width: 100%;
     border-collapse: collapse;
 
+
     th {
         text-align: left;
         border: none;
         color: #353C64;
+        padding-bottom: 30px;
         font-size: .85em;
     }
 
@@ -38,6 +40,39 @@ const PollTr = styled.tr`
 
     .poll_details {
 
+        display: flex;
+        align-items: center;
+        
+        img {
+            width: 35px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        p {
+            font-weight: bold;
+        }
+    }
+
+    .rating {
+        background-color: #353C64;
+        color: white;
+        border-radius: 100px;
+        text-align: center;
+        color: #C5C7CD;
+        max-width: 60px;
+        padding: 3px;
+        font-size: .9em;
+    }
+
+    .create_dates {
+
+        .create_time {
+            color: #5F76FF;
+            font-size: .9em; 
+            margin-top: 5px;        
+        }
+
     }
 
     .submenu {
@@ -53,21 +88,27 @@ const PollTr = styled.tr`
             padding: 10px;
             border-radius: 50%;
             cursor: pointer;
-            transition: all .2s;
+            transition: none;
             position: relative;
             z-index: 21;
 
-            &:hover {
-                background: #5F76FF;
+
+
+
+            @media (pointer: fine) {
+
+                transition: all .2s;
+
+                &:hover {
+
+                    background: #5F76FF;
                 
-                img {
-                    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(5281%) hue-rotate(65deg) brightness(121%) contrast(109%);
+                    img {
+                        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(5281%) hue-rotate(65deg) brightness(121%) contrast(109%);
+                    }
                 }
             }
 
-            img {   
-                width: 100%;
-            }
         }
 
 
@@ -81,6 +122,8 @@ const PollTr = styled.tr`
 
         }
     }
+
+
 
     &.active {
 
@@ -193,18 +236,19 @@ const MyPollsPage = () => {
                     <Poll key={poll.id}>
 
                         <td className="poll_details">
-                            {poll.title}
+                            <img src={profileImg}/>
+                            <p>{poll.title}</p>
                         </td>
 
                         <td>{poll.publishedBy}</td>
 
-                        <td>
-                            {poll.createdDate}<br/>
-                            {poll.createdTime}
+                        <td className="create_dates">
+                            <div className="create_date">{poll.createdDate}</div>
+                            <div className="create_time">{poll.createdTime}</div>
                         </td>
 
                         <td>
-                            {poll.rating}
+                            <div className="rating">{poll.rating}</div>
                         </td>
                     </Poll>)}
                 </tbody>
