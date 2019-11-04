@@ -13,7 +13,6 @@ const PollsContainer = styled.table`
     width: 100%;
     border-collapse: collapse;
 
-
     th {
         text-align: left;
         border: none;
@@ -26,7 +25,83 @@ const PollsContainer = styled.table`
         border: none
     }
 
+    @media screen and (max-width: 780px) {
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+ 
+            thead tr { 
+                display: none;
+            }
 
+            tbody tr {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: flex-start;
+                border-bottom: 1px solid grey;
+                padding: 20px 0;
+
+            }
+
+            td:nth-of-type(5) { 
+                order: -2;
+                width: 20%;
+            }
+
+            td.poll_details {
+                width: 79%;
+                order: -1;
+
+            }
+
+
+            td:before { 
+                display: block;
+                white-space: nowrap;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            
+    
+            td:nth-of-type(2):before { content: "Пользователь: "; }
+            td:nth-of-type(3):before { content: "Дата: "; }
+            td:nth-of-type(4):before { content: "Рейтинг: "; }
+
+
+        }
+
+        @media screen and (max-width: 600px) {
+
+            tbody tr {
+                justify-content: center;
+            }
+            td {
+                width: 100%;
+            }
+
+            div {
+                display: inline-block;
+            }
+
+            .rating {
+                padding: 5px 10px !important;
+            }
+
+            div.create_time {
+                margin-left: 10px !important;
+            }
+
+            td:before { 
+                display: inline-block;
+                white-space: nowrap;
+                font-weight: bold;
+                margin-right: 15px;
+                margin-bottom: 0;
+            }
+        }
+    }
 
 `
 
@@ -150,6 +225,9 @@ const PollTr = styled.tr`
                 left: -116px;
                 bottom: -66px;
 
+
+
+
                 li {
                     border-bottom: 1px solid #EDEDED;
                     padding: 3px 0;
@@ -158,6 +236,22 @@ const PollTr = styled.tr`
                         border-bottom: none;
                     }
                 }
+
+                @media screen and (max-width: 780px) {
+                    border-radius: 0px 10px 10px 10px;
+                    left: 35px;
+                    bottom: -110px;
+
+                    li {
+                        padding: 7px 0;
+                    }
+                }
+
+                @media screen and (max-width: 600px) {
+                    left: 45px;
+                    bottom: -120px;
+                }
+
             }
         }
 
@@ -165,16 +259,22 @@ const PollTr = styled.tr`
 
 `  
 
-const Poll = ({children}) => {
+const Poll = ({children ,id}) => {
 
     const [ submenuActive, setSubmenuActive] = useState(false)
     let menuActive = submenuActive ? 'active' : ''
 
+    const handleMouseLeave = () => {
+        setSubmenuActive(false)
+    }
+
     
     return (
         <PollTr className={menuActive}>
+
             {children}
-            <td className="submenu">
+            
+            <td className="submenu" onMouseLeave={handleMouseLeave} >
 
                 <div className="toggle_btn" onClick={() => setSubmenuActive(!submenuActive)}>
                     <img src={threedots}/>
@@ -215,6 +315,10 @@ const MyPollsPage = () => {
         }
     ]
 
+
+
+    
+
     return (
         <MainContainer>
             <InnerTopBar titleText="Мои опросы"/>
@@ -233,14 +337,14 @@ const MyPollsPage = () => {
                 <tbody>
                     {mockPolls.map(poll => 
 
-                    <Poll key={poll.id}>
+                    <Poll key={poll.id} id={poll.id}>
 
                         <td className="poll_details">
                             <img src={profileImg}/>
                             <p>{poll.title}</p>
                         </td>
 
-                        <td>{poll.publishedBy}</td>
+                        <td className="user">{poll.publishedBy}</td>
 
                         <td className="create_dates">
                             <div className="create_date">{poll.createdDate}</div>

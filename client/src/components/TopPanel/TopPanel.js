@@ -254,6 +254,8 @@ const TopPanel = () => {
     const [ profileActive, setProfileActive] = useState(false)
     let profileClassName = profileActive ? 'active' : ''
 
+    const profileMouseLeave = () => setProfileActive(false)
+
     return (
         <TopPanelSection>
             <h3>Опросы</h3>
@@ -271,7 +273,7 @@ const TopPanel = () => {
 
             <Divider/>
 
-            <Profile className={profileClassName} onClick={() => setProfileActive(!profileActive)}>
+            <Profile className={profileClassName} onMouseLeave={profileMouseLeave} onClick={() => setProfileActive(!profileActive)}>
                 <p>Нео Бисов</p>
                 <img alt="Фото профиля" src={profilePhoto}/>
 
