@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import notificationIcon from './notification-icon.svg'
-import profilePhoto from './demo-profile-img.jpg'
+import profilePhoto from '../../assets/imgs/demo-profile-img.jpg'
+
 
 const TopPanelSection = styled.div`
     color: white;
@@ -168,14 +170,48 @@ const Profile = styled.div`
     margin-left: 20px;
     min-width: 150px;
     justify-content: flex-end;
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
 
     p {
         margin-right: 20px;
     }
 
     img {
-        width: 33px;
+        width: 50px;
         border-radius: 50%;
+        position: relative;
+        z-index: 21;
+        border: 5px solid transparent;
+    }
+
+    div.submenu {
+        display: none;
+    }
+
+    &.active {
+
+        img {
+            border-color: #5F76FF;
+        }   
+
+        div.submenu {
+            display: block;
+            position: absolute;
+            background-color: #5F76FF; 
+            padding: 10px 15px;
+            z-index: 15;
+            border-radius: 38px 0px 38px 38px;
+            bottom: -210%;
+            left: -20px;
+            text-align: center;
+
+            li {
+                list-style: none;
+                margin: 13px 0;
+            }
+        }
     }
 
     @media screen and (max-width: 780px) {
@@ -196,11 +232,31 @@ const Profile = styled.div`
         &:hover {
             animation: none;
         }
+
+        &.active { 
+
+            div.submenu {
+                padding: 20px;
+                border-radius: 38px;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -285%;
+
+            }
+
+        }
+
+
+
+
     }
 
 `
 
 const TopPanel = () => {
+
+    const [ profileActive, setProfileActive] = useState(false)
+    let profileClassName = profileActive ? 'active' : ''
 
     return (
         <TopPanelSection>
@@ -219,9 +275,17 @@ const TopPanel = () => {
 
             <Divider/>
 
-            <Profile>
+            <Profile className={profileClassName} onClick={() => setProfileActive(!profileActive)}>
                 <p>Нео Бисов</p>
                 <img alt="Фото профиля" src={profilePhoto}/>
+
+                <div className="submenu">
+                    <ul>
+                        <li><Link to="/main/profile">Профиль</Link></li>
+                        <li><Link>Тех. Поддержка</Link></li>
+                        <li><Link>Выйти</Link></li>
+                    </ul>
+                </div>
             </Profile>
 
         </TopPanelSection>

@@ -10,16 +10,20 @@ import membersIcon from './members-icon.svg'
 import statsIcon from './stats-icon.svg'
 import settingsIcon from './settings-icon.svg'
 
+const NavSection = styled.div`
+
+` 
+
 const Nav = styled.nav`
     background-color: #EDEDED;
     min-width: 255px;
-    min-height: 100vh;
+    height: 100vh;
     position: relative;
     top: 0;
     left: 0;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    
 
     @media screen and (max-width: 1100px) {
         min-width: 70px;
@@ -215,21 +219,20 @@ const SideNav = () => {
     }
 
     return (
-        <div>
-            <ToggleBtn className={menuClass} onClick={toggleMenu}/>
+        <NavSection>
+           <ToggleBtn className={menuClass} onClick={toggleMenu}/>
             <Nav className={menuClass}>
                 <NavLink to="/"><Logo src={logo}/></NavLink>
                 <MenuList>
                     <MenuItem><NavLink onClick={linkClick} to="/main/my-polls" ><img alt="Мои Опросы" src={personIcon}/><span>Мои опросы</span></NavLink></MenuItem>
                     <MenuItem><NavLink onClick={linkClick} to="/main/all-polls"><img alt="Опросы" src={questionIcon}/><span>Опросы</span></NavLink></MenuItem>
                     <MenuItem><NavLink onClick={linkClick} to="/main/create-poll"><img alt="Создать Опрос" src={bulbIcon}/><span>Создать опрос</span></NavLink></MenuItem>
-                    <MenuItem><NavLink onClick={linkClick} to="/main/users"><img alt="Пользователи " src={membersIcon}/><span>Пользователи</span></NavLink></MenuItem>
+                    {/* <MenuItem><NavLink onClick={linkClick} to="/main/users"><img alt="Пользователи " src={membersIcon}/><span>Пользователи</span></NavLink></MenuItem> */}
                     <MenuItem><NavLink onClick={linkClick} to="/main/statistics"><img alt="Статистика" src={statsIcon}/><span>Статистика</span></NavLink></MenuItem>
-                    <MenuItem><NavLink onClick={linkClick} to="/main/settings"><img alt="Настройки" src={settingsIcon}/><span>Настройки</span></NavLink></MenuItem>
+                    {/* <MenuItem><NavLink onClick={linkClick} to="/main/settings"><img alt="Настройки" src={settingsIcon}/><span>Настройки</span></NavLink></MenuItem> */}
                 </MenuList>
             </Nav> 
-        </div>
- 
+        </NavSection>
     )
 }
 

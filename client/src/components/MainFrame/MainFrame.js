@@ -8,6 +8,7 @@ import SideNav from '../SideNav/SideNav'
 import TopPanel from '../TopPanel/TopPanel'
 
 import MyPollsPage from '../../pages/MyPollsPage/MyPollsPage'
+import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 
 
 import backgroundImg from './general-bg.jpg'
@@ -71,6 +72,7 @@ const MainFrame = ({location}) => {
                                 <Route path="/main/users" render={() => <Demo text="Users"/>}/>
                                 <Route path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
                                 <Route path="/main/settings" render={() => <Demo text="Settings"/>}/>
+                                <Route path="/main/profile" render={() => <ProfilePage/>}/>
                             </Switch>
                         {/* </CSSTransition>
                     </TransitionGroup>

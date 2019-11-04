@@ -274,8 +274,10 @@ const RegistrationForm = () => {
                     <option value="female">Женский</option>
                 </select>
             </TwoInOneLine>
+
             <Input aria-label="Страна" type="text" placeholder="Страна"/>
             <Input aria-label="Город" type="text" placeholder="Город"/>
+            
             <TwoInOneLine colWidth="30">
                 <Input aria-label="Код телефона" type="tel" placeholder="+996"/>
                 <Input aria-label="Телефон без кода страны" type="tel" placeholder="Номер телефона"/>

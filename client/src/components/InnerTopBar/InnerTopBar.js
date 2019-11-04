@@ -169,11 +169,11 @@ const InnerTopBar = ({titleText}) => {
 
             <Filters>
                 <div className="item sort">
-                    <img src={sortIcon}/><span>Сортировка</span>
+                    <img alt="Сортировка" src={sortIcon}/><span>Сортировка</span>
                 </div>
 
                 <div className="item filter">
-                    <img src={filterIcon}/><span>Фильтры</span>
+                    <img alt ="Фильтровать" src={filterIcon}/><span>Фильтры</span>
                 </div>
             </Filters>
 
