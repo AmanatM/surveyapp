@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import setMetaTheme from '../../utils/setThemeColor'
+
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import backgroundImg  from '../../assets/imgs/survapp-bg1.jpg'
 import styled from 'styled-components'
@@ -44,10 +47,11 @@ const Info = styled.div`
 `
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
     setMetaTheme('#091211')
     
+
     return (
         <LoginSection>
             <Container>
@@ -67,4 +71,10 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default withRouter(connect(mapStateToProps, null)(LoginPage))

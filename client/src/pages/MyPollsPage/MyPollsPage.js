@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -40,8 +40,12 @@ const PollsContainer = styled.table`
                 flex-wrap: wrap;
                 justify-content: space-around;
                 align-items: flex-start;
-                border-bottom: 1px solid grey;
+                border-bottom: 1px solid #9e9e9e;
                 padding: 20px 0;
+
+                &:last-child {
+                    border-bottom: none;
+                }
 
             }
 

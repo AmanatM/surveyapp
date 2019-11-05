@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, Redirect} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
+
 
 import AuthButton from '../../elements/AuthButton'
 import facebookLogo from '../../assets/imgs/facebook-icon.svg'
 import googleLogo from '../../assets/imgs/google-icon.svg'
 import refreshIcon from '../../assets/imgs/refresh-icon.svg'
+
+import { loginUser } from '../../reducers/user'
+
 
 const Form = styled.form`
     max-width: 100%;
@@ -90,13 +97,39 @@ const Divider = styled.div`
     }
 `
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+
+        if(username !== '' && password !== '') {
+
+            let loginUser = {
+                username,
+                password
+            }
+
+            props.loginUser(loginUser)
+            props.history.push('/main/my-polls')
+
+
+        } else {
+          alert('Don\'t leave fields empty')
+        }
+    }
+
 
     return (
         <main>
-            <Form >
-                <Input aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
-                <Input aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
+            <Form onSubmit={handleLogin}>
+                
+                {props.user ? <Redirect to="/main/my-polls"/> : null}
+
+                <Input value={username} onChange={(e) => setUsername(e.target.value)} aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
+                <Input value={password}  onChange={(e) => setPassword(e.target.value)} aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
                 <div className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></div>
                 <AuthButton red type="submit">Войти</AuthButton>
                 <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
@@ -105,10 +138,17 @@ const LoginForm = () => {
                 <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial>
 
                 <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
+
             </Form>
         </main>
 
     )
 }
 
-export default LoginForm
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default withRouter(connect(mapStateToProps, {loginUser})(LoginForm))

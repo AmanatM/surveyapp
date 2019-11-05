@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import setMetaTheme from '../../utils/setThemeColor'
+
 //import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
@@ -10,6 +12,8 @@ import TopPanel from '../TopPanel/TopPanel'
 
 import MyPollsPage from '../../pages/MyPollsPage/MyPollsPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
+
+import NotFound from '../../components/NotFound/NotFound'
 
 
 import backgroundImg from './general-bg.jpg'
@@ -55,9 +59,11 @@ const Content = styled.div`
 
 const Demo = ({text}) => (<div style={{color:'white', margin: '20px'}}>{text}</div>)
 
-const MainFrame = ({location}) => {
+const MainFrame = (props) => {
 
     setMetaTheme('#283e37')
+
+
 
     return (
         <MainFrameSection>
@@ -68,14 +74,20 @@ const MainFrame = ({location}) => {
                 {/* <section >
                     <TransitionGroup >
                         <CSSTransition key={location.key} timeout={{ enter: 300, exit: 300 }} classNames={'fade'}> */}
-                            <Switch location={location}>
+                            <Switch location={props.location}>
+
+                                {/* {!props.user ? props.history.push('/login'): null} */}
+
                                 <Route path="/main/my-polls" render={() => <MyPollsPage/>}/>
                                 <Route path="/main/all-polls" render={() => <Demo text="All Polls"/>}/>
                                 <Route path="/main/create-poll" render={() => <Demo text="Create Polls"/>}/>
-                                <Route path="/main/users" render={() => <Demo text="Users"/>}/>
                                 <Route path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
-                                <Route path="/main/settings" render={() => <Demo text="Settings"/>}/>
+                                {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
+                                {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
                                 <Route path="/main/profile" render={() => <ProfilePage/>}/>
+
+                                <Route render={() => <NotFound/>}/>
+
                             </Switch>
                         {/* </CSSTransition>
                     </TransitionGroup>
@@ -87,4 +99,10 @@ const MainFrame = ({location}) => {
     )
 }
 
-export default withRouter(MainFrame)
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default withRouter(connect(mapStateToProps, null)(MainFrame))

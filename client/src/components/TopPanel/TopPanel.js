@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { logoutUser } from '../../reducers/user'
 
 import notificationIcon from './notification-icon.svg'
 import profilePhoto from '../../assets/imgs/demo-profile-img.jpg'
@@ -249,12 +252,17 @@ const Profile = styled.div`
 
 `
 
-const TopPanel = () => {
+const TopPanel = (props) => {
 
     const [ profileActive, setProfileActive] = useState(false)
     let profileClassName = profileActive ? 'active' : ''
 
     const profileMouseLeave = () => setProfileActive(false)
+
+    const logout = () => {
+        props.logoutUser()
+        props.history.push('/login')
+    }
 
     return (
         <TopPanelSection>
@@ -280,8 +288,8 @@ const TopPanel = () => {
                 <div className="submenu">
                     <ul>
                         <li><Link to="/main/profile">Профиль</Link></li>
-                        <li><Link>Тех. Поддержка</Link></li>
-                        <li><Link>Выйти</Link></li>
+                        <li><a>Тех. Поддержка</a></li>
+                        <li onClick={logout}>Выйти</li>
                     </ul>
                 </div>
             </Profile>
@@ -290,4 +298,4 @@ const TopPanel = () => {
     )
 }
 
-export default TopPanel
+export default withRouter(connect(null , {logoutUser})(TopPanel))
