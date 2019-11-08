@@ -91,10 +91,21 @@ const Statistics = styled.div`
         flex-direction: column;
         justify-content: space-around;
 
+        @media screen and (max-width: 400px){
+            h3 {
+                margin-bottom: 10px;
+            }
+        }
+
         p {
             font-weight: bold;
             font-size: .85em;
             display: flex;
+            align-items: center;
+
+            @media screen and (max-width: 400px){
+                margin: 7px 0;
+            }
 
             span {
                 margin-left: auto;
@@ -116,7 +127,6 @@ const Statistics = styled.div`
         justify-content: center;
         
         div.diagram {
-            margin-right: auto;
             min-width: 100px;
         }
         
