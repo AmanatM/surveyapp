@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -6,6 +6,9 @@ import InnerTopBar from '../../components/InnerTopBar/InnerTopBar'
 import MainContainer from '../../elements/MainContainer'
 import profileImg from '../../assets/imgs/demo-profile-img.jpg'
 import threedots from './threedots-icon.svg'
+
+import { connect } from 'react-redux'
+import { changePage } from '../../reducers/currentPage'
 
 
 const PollsContainer = styled.table`
@@ -297,7 +300,7 @@ const Poll = ({children ,id}) => {
     )
 }
 
-const MyPollsPage = () => {
+const MyPollsPage = (props) => {
 
     const mockPolls = [
         {
@@ -320,7 +323,13 @@ const MyPollsPage = () => {
     ]
 
 
+    useEffect(() => {
+        props.changePage('Мои опросы')
 
+        return () => {
+            props.changePage('')
+        }
+    }, [])
     
 
     return (
@@ -367,4 +376,6 @@ const MyPollsPage = () => {
     )
 }
 
-export default MyPollsPage
+
+
+export default connect(null, {changePage})(MyPollsPage)

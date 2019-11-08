@@ -266,7 +266,7 @@ const TopPanel = (props) => {
 
     return (
         <TopPanelSection>
-            <h3>Опросы</h3>
+            <h3>{props.currentPage}</h3>
 
             <SearchBox>
                 <form>
@@ -298,4 +298,11 @@ const TopPanel = (props) => {
     )
 }
 
-export default withRouter(connect(null , {logoutUser})(TopPanel))
+
+const mapStateToProps = (state) => {
+    return {
+        currentPage: state.currentPage
+    }
+}
+
+export default withRouter(connect(mapStateToProps , {logoutUser})(TopPanel))

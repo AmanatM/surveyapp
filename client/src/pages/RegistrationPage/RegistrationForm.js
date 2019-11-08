@@ -6,6 +6,8 @@ import AuthButton from '../../elements/AuthButton'
 import facebookLogo from '../../assets/imgs/facebook-icon.svg'
 import googleLogo from '../../assets/imgs/google-icon.svg'
 
+import PassWordInput from '../../elements/PasswordInput/PasswordInput'
+
 
 const Form = styled.form`
     max-width: 100%;
@@ -137,123 +139,6 @@ const TwoInOneLine = styled.div`
 
 `
 
-const Eye = styled.div`
-    width: 20px;
-    height: 20px;
-    border: solid 2px #3E3E3E;
-    border-radius:  75% 15%;
-    position: relative;
-    transform: rotate(45deg);
-    pointer-events: none;
-    transition: all .3s;
-
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 7px;
-        height: 7px;
-        border: solid 2px #3E3E3E;
-        border-radius: 50%;
-        left: 2px;
-        top: 2px;
-        opacity: 1;
-        transition: all .3s;
-
-    }
-
-    &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 25px;
-        height: 3px;
-        transition: all .2s;
-        background-color: #3E3E3E;
-        right: -4px;
-        top: 7px;
-        transform: rotate(70deg);
-        transition: all .2s;
-        opacity: 0;
-    }
-
-    &.invisible {
-        &:before {
-            opacity: 0;
-        }
-
-        &:after {
-            opacity: 1;
-        }
-    }
-`
-const PasswordVisibilityToggler = ({toggle, eyeClass}) => {
-
-    return (
-        <button onClick={toggle} aria-label="password visibiliy toggle">
-            <Eye className={eyeClass}></Eye>
-        </button>
-    )
-}
-
-
-const PassWordInput = ({placeholder}) => {
-
-    const [ visible, setVisible ] = useState(false)
-
-    const toggle = (e) => {
-        e.preventDefault()
-        setVisible(!visible)
-    }
-
-    const eyeClass = visible ? '' : 'invisible'
-    const inputType = visible ? 'text' : 'password'
-
-
-    return (
-        <PasswordContainer>
-            <Input aria-label={placeholder} type={inputType} autoComplete="new-password" placeholder={placeholder}/><PasswordVisibilityToggler toggle={toggle} eyeClass={eyeClass}/>
-        </PasswordContainer>
-    )
-}
-
-
-
-const PasswordContainer = styled.div`
-
-    display: flex;
-    align-items: center;
-
-
-    input {
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        width: 80%;
-        height: 40px;
-    }
-    
-    button {
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-        outline: none;
-        border-radius: 8px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-        background-color: #e9e9e9;
-
-        min-width: 50px;
-        width: 20%;
-        text-align: center;
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 15px;
-        height: 40px;
-
-    }
-`
-
-
-
-
 const RegistrationForm = () => {
 
     return (
@@ -283,8 +168,13 @@ const RegistrationForm = () => {
                 <Input aria-label="Телефон без кода страны" type="tel" placeholder="Номер телефона"/>
             </TwoInOneLine>
 
-            <PassWordInput placeholder="Пароль"/>
-            <PassWordInput placeholder="Подтвердите пароль"/>
+            <PassWordInput bgColor="#E9E9E9">
+                <Input aria-label="Парль" autoComplete="new-password" placeholder="Пароль"/>
+            </PassWordInput>
+
+            <PassWordInput bgColor="#E9E9E9">
+                <Input aria-label="Повторите паоль" autoComplete="new-password" placeholder="Повторите пароль"/>
+            </PassWordInput>
 
 
             <SubmitButton red type="submit">Продолжить</SubmitButton>

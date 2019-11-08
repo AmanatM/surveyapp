@@ -1,3 +1,5 @@
+import loginService from '../services/user'
+ 
 const reducer = (state = null, action) => {
     switch(action.type) {
         case 'LOGIN':
@@ -46,6 +48,20 @@ export const loginUser = (credentials) => {
         type: 'LOGIN',
         data: credentials
     }
+
+    // return async (dispatch) => {
+    //     const loggedUser = await loginService.login(credentials)
+
+    //     window.sessionStorage.setItem(
+    //         'loggedUser', JSON.stringify(loggedUser)
+    //     ) 
+
+    //     dispatch({
+    //         type: 'LOGIN',
+    //         data: loggedUser
+    //     })
+    // }
+
 }
 
 export const logoutUser = () => {

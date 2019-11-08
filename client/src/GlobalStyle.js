@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     cursor: pointer;
+    outline: none
   }
 
   a {

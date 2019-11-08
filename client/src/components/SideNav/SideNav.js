@@ -17,7 +17,7 @@ const NavSection = styled.div`
 const Nav = styled.nav`
     background-color: #EDEDED;
     min-width: 255px;
-    height: 100vh;
+    height: 100%;
     position: relative;
     top: 0;
     left: 0;
@@ -229,7 +229,7 @@ const SideNav = () => {
                     <MenuItem><NavLink onClick={linkClick} to="/main/create-poll"><img alt="Создать Опрос" src={bulbIcon}/><span>Создать опрос</span></NavLink></MenuItem>
                     {/* <MenuItem><NavLink onClick={linkClick} to="/main/users"><img alt="Пользователи " src={membersIcon}/><span>Пользователи</span></NavLink></MenuItem> */}
                     <MenuItem><NavLink onClick={linkClick} to="/main/statistics"><img alt="Статистика" src={statsIcon}/><span>Статистика</span></NavLink></MenuItem>
-                    {/* <MenuItem><NavLink onClick={linkClick} to="/main/settings"><img alt="Настройки" src={settingsIcon}/><span>Настройки</span></NavLink></MenuItem> */}
+                    { <MenuItem><NavLink onClick={linkClick} to="/main/profile"><img alt="Профиль" src={settingsIcon}/><span>Профиль</span></NavLink></MenuItem> }
                 </MenuList>
             </Nav> 
         </NavSection>
