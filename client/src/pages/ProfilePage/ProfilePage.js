@@ -79,15 +79,6 @@ const Statistics = styled.div`
     padding: 15px 30px;
     display: flex;
 
-    @media screen and (max-width: 1160px) {
-        margin-bottom: 20px;
-        justify-content: center;
-        
-        div.diagram {
-            margin-right: auto;
-            min-width: 100px;
-        }
-    }
 
     div.diagram {
         width: 150px;
@@ -96,29 +87,43 @@ const Statistics = styled.div`
 
     div.text_data {
 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        p {
+            font-weight: bold;
+            font-size: .85em;
             display: flex;
-            flex-direction: column;
-            justify-content: space-around;
 
-            p {
-                font-weight: bold;
-                font-size: .85em;
-                display: flex;
-
-                span {
-                    margin-left: auto;
-                    padding-left: 20px;
-                }
-
-                &.my_polls {
-                    color: #00AC65;
-                }
-
-                &.passed_polls {
-                    color: #1488C8;
-                }
+            span {
+                margin-left: auto;
+                padding-left: 20px;
             }
+
+            &.my_polls {
+                color: #00AC65;
+            }
+
+            &.passed_polls {
+                color: #1488C8;
+            }
+        }
     }
+
+    @media screen and (max-width: 1160px) {
+        margin-bottom: 20px;
+        justify-content: center;
+        
+        div.diagram {
+            margin-right: auto;
+            min-width: 100px;
+        }
+        
+
+        
+    }
+
 `
 
 const ProfilePersonalData = styled.div`
@@ -398,9 +403,9 @@ const MyPollsPage = (props) => {
         gender: 'Мужской'
     }
 
-    const [ editMode, setEditMode ] = useState(true)
+    const [ editMode, setEditMode ] = useState(false)
     const [ userData, setUserData ] = useState(fromServer)
-    const [ passwordChangeMode, setPasswordChangeMode] = useState(true)
+    const [ passwordChangeMode, setPasswordChangeMode] = useState(false)
 
     const saveProfileData = () => {
         setEditMode(false)
