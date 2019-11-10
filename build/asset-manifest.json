@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.js": "/static/js/main.51f4455f.chunk.js",
-    "main.js.map": "/static/js/main.51f4455f.chunk.js.map",
+    "main.js": "/static/js/main.89c568ec.chunk.js",
+    "main.js.map": "/static/js/main.89c568ec.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.030f8fb7.js",
     "runtime-main.js.map": "/static/js/runtime-main.030f8fb7.js.map",
-    "static/js/2.cb2dafaa.chunk.js": "/static/js/2.cb2dafaa.chunk.js",
-    "static/js/2.cb2dafaa.chunk.js.map": "/static/js/2.cb2dafaa.chunk.js.map",
+    "static/js/2.216f8af9.chunk.js": "/static/js/2.216f8af9.chunk.js",
+    "static/js/2.216f8af9.chunk.js.map": "/static/js/2.216f8af9.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1853f5e3d1558cfa7a9878c8aa96c2bf.js": "/precache-manifest.1853f5e3d1558cfa7a9878c8aa96c2bf.js",
+    "precache-manifest.1444a788fabd5333051834275edf2f1c.js": "/precache-manifest.1444a788fabd5333051834275edf2f1c.js",
     "service-worker.js": "/service-worker.js",
+    "static/media/404.svg": "/static/media/404.c1eb98ce.svg",
     "static/media/bulb-icon.svg": "/static/media/bulb-icon.43b32b5f.svg",
     "static/media/demo-profile-img.jpg": "/static/media/demo-profile-img.9164eb02.jpg",
+    "static/media/demo_user.jpg": "/static/media/demo_user.4af26b26.jpg",
     "static/media/facebook-icon.svg": "/static/media/facebook-icon.8cda0158.svg",
     "static/media/filter-icon.svg": "/static/media/filter-icon.d184a890.svg",
     "static/media/general-bg.jpg": "/static/media/general-bg.d33ff396.jpg",
     "static/media/google-icon.svg": "/static/media/google-icon.8d124e45.svg",
     "static/media/logo-dark.svg": "/static/media/logo-dark.5c673b72.svg",
     "static/media/logo.svg": "/static/media/logo.fe84ffc3.svg",
+    "static/media/logo_pure.svg": "/static/media/logo_pure.c44769df.svg",
     "static/media/members-icon.svg": "/static/media/members-icon.cb427b10.svg",
     "static/media/notification-icon.svg": "/static/media/notification-icon.a85be627.svg",
     "static/media/person-icon.svg": "/static/media/person-icon.bb555c68.svg",
@@ -31,7 +34,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.030f8fb7.js",
-    "static/js/2.cb2dafaa.chunk.js",
-    "static/js/main.51f4455f.chunk.js"
+    "static/js/2.216f8af9.chunk.js",
+    "static/js/main.89c568ec.chunk.js"
   ]
 }
