@@ -12,6 +12,7 @@ import TopPanel from '../TopPanel/TopPanel'
 
 import MyPollsPage from '../../pages/MyPollsPage/MyPollsPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
+import AllPolls from '../../pages/AllPolls/AllPolls'
 
 import NotFound from '../../components/NotFound/NotFound'
 
@@ -63,8 +64,6 @@ const MainFrame = (props) => {
 
     setMetaTheme('#283e37')
 
-
-
     return (
         <MainFrameSection>
             <SideNav/>
@@ -78,15 +77,15 @@ const MainFrame = (props) => {
 
                                 {/* {!props.user ? props.history.push('/login'): null} */}
 
-                                <Route path="/main/my-polls" render={() => <MyPollsPage/>}/>
-                                <Route path="/main/all-polls" render={() => <Demo text="All Polls"/>}/>
-                                <Route path="/main/create-poll" render={() => <Demo text="Create Polls"/>}/>
-                                <Route path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
+                                <Route exact path="/main/my-polls" render={() => <MyPollsPage/>}/>
+                                <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
+                                <Route exact path="/main/create-poll" render={() => <Demo text="Create Polls"/>}/>
+                                <Route exact path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
                                 {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
                                 {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
                                 <Route path="/main/profile" render={() => <ProfilePage/>}/>
 
-                                <Route render={() => <NotFound/>}/>
+                                <Route render={() => <NotFound windowed={true}/>}/>
 
                             </Switch>
                         {/* </CSSTransition>

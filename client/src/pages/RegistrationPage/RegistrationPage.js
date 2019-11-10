@@ -16,7 +16,7 @@ import logo  from '../../assets/imgs/logo.svg'
 
 const RegistrationSection = styled.section`
     min-height: 100vh;
-    background: url(${backgroundImg}) #3F414A;
+    background: url(${backgroundImg}) #1d2f33;
     background-position: center;
     background-size: cover;
     color: white;

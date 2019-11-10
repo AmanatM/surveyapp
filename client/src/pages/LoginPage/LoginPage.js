@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import setMetaTheme from '../../utils/setThemeColor'
 
@@ -15,8 +15,10 @@ import PageFooter from '../../components/Footer'
 import Loginform from './LoginForm'
 
 
+
+
 const LoginSection = styled.section`
-    background: url(${backgroundImg}) #3F414A;
+    background: url(${backgroundImg}) #091211;
     min-height: 100vh;
     background-size: cover;
     color: white;
@@ -58,13 +60,14 @@ const LoginPage = (props) => {
 
                 <Link to="/"><Logo alt="surveyapp logo" src={logo}/></Link>
 
-                <Info>
-                    <div >Create your <br/>Own Surveys</div>
-                    <div> <b>OR</b> </div>
-                    <div>Answer <br/> someone else's <br/> questions  </div>
-                </Info>
+                        <Info>
+                            <div >Create your <br/>Own Surveys</div>
+                            <div> <b>OR</b> </div>
+                            <div>Answer <br/> someone else's <br/> questions  </div>
+                        </Info>
 
                 <Loginform/>
+                
             </Container>
             <PageFooter/>
         </LoginSection>

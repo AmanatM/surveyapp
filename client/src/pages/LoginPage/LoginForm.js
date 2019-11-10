@@ -22,17 +22,25 @@ const Form = styled.form`
     margin: 0 auto;
     margin-top: 30px;
 
-    div.forgotPass {
+    .forgotPass {
         font-size: .8em;
         display: flex;
         justify-content: flex-end;
         align-content: center;
         margin: 7px;
         cursor: pointer;
+    
 
         img {
             width: 12px;
             margin-left: 4px;
+            transition: all .2s;
+        }
+
+        &:hover {
+            img {
+                transform: rotate(90deg);
+            }
         }
     }
 
@@ -102,6 +110,7 @@ const LoginForm = (props) => {
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
 
+
     const handleLogin = (e) => {
         e.preventDefault()
 
@@ -130,7 +139,7 @@ const LoginForm = (props) => {
 
                 <Input value={username} onChange={(e) => setUsername(e.target.value)} aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
                 <Input value={password}  onChange={(e) => setPassword(e.target.value)} aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
-                <div className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></div>
+                <Link to="/recover-password" className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></Link>
                 <AuthButton red type="submit">Войти</AuthButton>
                 <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
                 <Divider><div>OR</div></Divider>

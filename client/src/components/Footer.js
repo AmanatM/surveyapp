@@ -5,6 +5,7 @@ const Footer = styled.footer`
     text-align: center;
     padding: 20px 0;
     width: 100%;
+    color: white;
     
     ul {
         display: flex;
@@ -28,7 +29,7 @@ const PageFooter = () => {
     return (
         <Footer>
             <ul>
-                <li><a href="https://neobis.kg" className="green">Neobis.kg</a></li>
+                <li><a target="_blank" href="https://neobis.kg" className="green">Neobis.kg</a></li>
                 <li>ASU design</li>
                 <li>2019</li>
             </ul>

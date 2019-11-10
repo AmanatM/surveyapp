@@ -15,6 +15,8 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 import MainFrame from './components/MainFrame/MainFrame'
 import MainPage from './pages/MainPage'
+import RecoverPasswordPage from './pages/RecoverPasswordPage/RecoverPasswordPage'
+import NotFound from './components/NotFound/NotFound'
 
 
 
@@ -35,8 +37,9 @@ const App = (props) => {
               <Route path="/main" render={() => <MainFrame/>}/>   
               <Route exact path="/login" render={() => <LoginPage/>}/>
               <Route exact path="/registration" render={() => <RegistrationPage/>}/>  
+              <Route exact path="/recover-password" render={() => <RecoverPasswordPage/>}/>
 
-              {/* {props.user ? <Redirect to="/main/my-polls"/> : <Redirect to="/login"/> } */}
+              <Route render={() => <NotFound/>}/>
 
             </Switch>
 
