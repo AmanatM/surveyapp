@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import setMetaTheme from '../../utils/setThemeColor'
 
-//import { TransitionGroup, CSSTransition } from "react-transition-group"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 
@@ -13,6 +13,7 @@ import TopPanel from '../TopPanel/TopPanel'
 import MyPollsPage from '../../pages/MyPollsPage/MyPollsPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import AllPolls from '../../pages/AllPolls/AllPolls'
+import CreatePollPage from '../../pages/CreatePollPage/CreatePollPage'
 
 import NotFound from '../../components/NotFound/NotFound'
 
@@ -70,28 +71,16 @@ const MainFrame = (props) => {
             <Content>
                 <TopPanel/>
 
-                {/* <section >
-                    <TransitionGroup >
-                        <CSSTransition key={location.key} timeout={{ enter: 300, exit: 300 }} classNames={'fade'}> */}
-                            <Switch location={props.location}>
-
-                                {/* {!props.user ? props.history.push('/login'): null} */}
-
-                                <Route exact path="/main/my-polls" render={() => <MyPollsPage/>}/>
-                                <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
-                                <Route exact path="/main/create-poll" render={() => <Demo text="Create Polls"/>}/>
-                                <Route exact path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
-                                {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
-                                {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
-                                <Route path="/main/profile" render={() => <ProfilePage/>}/>
-
-                                <Route render={() => <NotFound windowed={true}/>}/>
-
-                            </Switch>
-                        {/* </CSSTransition>
-                    </TransitionGroup>
-                </section> */}
-
+                    <Switch>
+                        <Route exact path="/main/my-polls" render={() => <MyPollsPage/>}/>
+                        <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
+                        <Route exact path="/main/create-poll" render={() => <CreatePollPage/>}/>
+                        <Route exact path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
+                        {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
+                        {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
+                        <Route path="/main/profile" render={() => <ProfilePage/>}/>
+                        <Route render={() => <NotFound windowed={true}/>}/>
+                    </Switch>
 
             </Content>
         </MainFrameSection>

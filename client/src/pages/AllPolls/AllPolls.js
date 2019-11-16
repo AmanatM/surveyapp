@@ -105,6 +105,10 @@ const AllPolls = (props) => {
 
     useEffect(() => {
         props.changePage('Опросы')
+
+        return () => {
+            props.changePage('')
+        }
     }, [])
 
     const mockPolls = [
