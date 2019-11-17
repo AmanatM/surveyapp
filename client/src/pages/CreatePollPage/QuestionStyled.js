@@ -8,11 +8,20 @@ const QuestionStyled = styled.div`
         display: flex;
         align-items: center;
 
+        @media screen and (max-width: 540px) {
+            flex-wrap: wrap;
+        }
+
         p {
             margin-right: 15px;
             color: #5F76FF;
             font-weight: bold;
-            margin-bottom: 10px;
+            white-space: nowrap;
+
+            @media screen and (max-width: 540px) {
+                margin-bottom: 15px;
+            }
+
         }
 
         ul {
@@ -31,6 +40,10 @@ const QuestionStyled = styled.div`
                     font-size: .85em;
                     border-radius: 10px;
 
+                    &:focus {
+                        background: #7488ff;
+                    }
+
                     &.active {
                         background-color: #5F76FF;
                     }
@@ -38,13 +51,34 @@ const QuestionStyled = styled.div`
             }
 
             @media screen and (max-width: 540px) {
-                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
 
                 li {
                     width: 40%;
+                    margin: 0 5px;
                     margin-bottom: 20px;
+
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
                 }
             }   
+
+            @media screen and (max-width: 370px) {
+                flex-wrap: wrap;
+
+                li {
+                    text-align: center;
+                    margin: 0;
+                    margin-bottom: 20px;
+                }
+            }
         }
     }
 

@@ -20,6 +20,8 @@ const FormStyled = styled.form`
     }
 
     textarea.poll_description {
+        font-family: inherit;
+        color: #6A6A6A;
         border: none;
         background-color: #DEDEDE;
         border-radius: 10px;
