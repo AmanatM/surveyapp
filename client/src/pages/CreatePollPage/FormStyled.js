@@ -41,7 +41,7 @@ const FormStyled = styled.form`
         width: 100%;
 
         @media screen and (max-width: 1000px){
-            bottom: 40px;
+            bottom: 60px;
             left: 20px;
         }
 
@@ -50,8 +50,10 @@ const FormStyled = styled.form`
             overflow-x: scroll;
             margin-right: 115px;
             display: flex;
+            margin-right: 420px;
 
-            @media screen and (max-width: 1000px){ 
+
+            @media screen and (max-width: 1000px) { 
                 margin-right: 40px;
             }
 
@@ -90,6 +92,37 @@ const FormStyled = styled.form`
                 }
             }
         }
+    }
+
+    .save_buttons {
+        position: absolute;
+        bottom: 30px;
+        right: 60px;
+
+        @media screen and (max-width: 1000px){
+            bottom: 12px;
+            right: 20px;
+
+        }
+
+        button {
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 7px 2px;
+            font-weight: bold;
+            font-size: .85em;
+
+            &.save_local {
+                background-color: #ffc107;
+                margin-right: 10px;
+            }
+
+            &.save {
+                background-color: #29CC97;
+            }
+        }
+
     }
 
 `

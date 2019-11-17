@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 const QuestionStyled = styled.div`
 
+    padding-bottom: 40px;
+
     .question_types {
         margin-top: 20px;
         display: flex;
@@ -41,7 +43,7 @@ const QuestionStyled = styled.div`
                     border-radius: 10px;
 
                     &:focus {
-                        background: #7488ff;
+                        background: #5F76FF;
                     }
 
                     &.active {
@@ -58,6 +60,8 @@ const QuestionStyled = styled.div`
                     width: 40%;
                     margin: 0 5px;
                     margin-bottom: 20px;
+                    text-align: center;
+
 
 
                     &:first-child {
@@ -97,6 +101,45 @@ const QuestionStyled = styled.div`
         outline: none;
         &::placeholder {
             color: #6A6A6A;
+        }
+    }
+
+    .options {
+        
+        ul {
+            li {
+                list-style: none;
+                margin-bottom: 15px;
+
+                input {
+                    background-color: #8F9FF9;
+                    border-radius: 10px;
+                    color: white;
+                    outline: none;
+                    border: none;
+                    font-weight: bold;
+                    padding: 5px 20px;
+
+                    &::placeholder {
+                        color: white;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                }
+
+                &.add {
+
+                    button {
+                        background-color: #5F76FF;
+                        border-radius: 10px;
+                        color: white;
+                        outline: none;
+                        border: none;
+                        font-weight: bold;
+                        padding: 5px 20px;
+                    }
+                }
+            }
         }
     }
 `

@@ -3,12 +3,13 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { changePage } from '../../reducers/currentPage'
+import { notify } from '../../reducers/popUp'
 
 
 import MainContainer from '../../elements/MainContainer'
 
 import FormStyled from './FormStyled'
-import QuestionStyled from './QuestionStyled'
+import Question from './Question'
 
 
 const CreatePollPageSection = styled(MainContainer)`
@@ -19,71 +20,12 @@ const CreatePollPageSection = styled(MainContainer)`
 
     @media screen and (max-width: 1000px){
         padding: 40px 20px;
+        padding-bottom: 80px;
     }
 `
 
 
-const Question = ({question, setQuestions, questions, activeQuestion}) => {
-
-    const typeChange = (e) => {
-
-        let type = e.target.id
-
-        let newQuestion = {
-            ...question,
-            type: type      
-        }
-
-        let newQuestions = questions.map(questionObj => questionObj.number === activeQuestion + 1 ? newQuestion : questionObj)
-        
-        setQuestions(newQuestions)
-    }
-
-    const nameChange = (e) => {
-        let newQuestion = {
-            ...question,
-            name: e.target.value
-        }
-
-        let newQuestions = questions.map(questionObj => questionObj.number === activeQuestion + 1 ? newQuestion : questionObj)
-
-        setQuestions(newQuestions)
-    }
-
-    if(question) {
-
-        return (
-            <QuestionStyled>
-                <div className="images_section"></div>
-                <div className="question_types">
-                    <p>Тип ответа:</p>
-                    <ul>
-                        <li><button id="option" onClick={typeChange} className={question.type === 'option' ? 'active' : ''}>Вариант</button></li>
-                        <li><button id="text" onClick={typeChange} className={question.type === 'text' ? 'active' : ''}>Текст</button></li>
-                        <li><button id="date" onClick={typeChange} className={question.type === 'date' ? 'active' : ''}>Дата</button></li>
-                        <li><button id="time" onClick={typeChange} className={question.type === 'time' ? 'active' : ''}>Время</button></li>
-                    </ul>
-                </div>
-                <input onChange={nameChange} value={question.name} className="question_name" type="text" aria-label="Введите вопрос" placeholder="Введите вопрос"/>
-            </QuestionStyled>
-        )
-    } else {
-        return null
-    }
-
-}
-
-
 const CreatePollPage = (props) => {
-
-    useEffect(() => {
-        props.changePage('Создать опрос')
-        addQuestion()
-
-        return () => {
-            props.changePage('')
-        }
-    }, [])
 
     const [ questions, setQuestions ] = useState([])
 
@@ -91,6 +33,33 @@ const CreatePollPage = (props) => {
         name: '',
         description: ''
     })
+
+
+    useEffect(() => {
+        props.changePage('Создать опрос')
+        addQuestion()
+
+
+        if(window.localStorage.getItem('questions')) {
+
+            props.notify({
+                heading: 'Внимание',
+                timed: false,
+                text: 'Данные опроса автоматически заполнены с последнего локального сохранения.',
+                type: 'info'
+            })
+
+            setQuestions(JSON.parse(localStorage.getItem('questions')))
+            setPoll(JSON.parse(localStorage.getItem('poll')))
+        }
+
+
+        return () => {
+            props.changePage('')
+            props.notify('')
+        }
+    }, [])
+
 
     const [ activeQuestion, setActiveQuestion ] = useState(0)
 
@@ -106,13 +75,33 @@ const CreatePollPage = (props) => {
             name: '',
             images: [],
             type: 'option',
-            answers: [
-                'Ответ 1',
-                'Ответ 2'
-            ]
+            options: []
         }
 
         setQuestions([...questions, defaultQuestion])
+    }
+
+    const handleLoad = () => {
+
+        const saveLocally = () => {
+            window.localStorage.setItem('questions', JSON.stringify(questions))
+            window.localStorage.setItem('poll', JSON.stringify(poll))
+
+            props.notify({
+                heading: 'Успешно сохраненно',
+                text: 'Данные успешно сохранены в локальном хранилище'
+            })
+        }
+        
+        props.notify({
+            heading: 'Ваши данные будут сохранены',
+            timed: false,
+            text: 'Данные опроса будут сохранены локально, их можно будет загрузить при повторном посещении данной страницы(Только с токого же устройства)',
+            type: 'confirmation',
+            okButtonText: 'Сохранить',
+            ifOkFunction: saveLocally
+        })
+
     }
 
     return (
@@ -131,9 +120,15 @@ const CreatePollPage = (props) => {
                         <li onClick={addQuestion}><button>+</button></li>
                     </ul>
                 </div>
+
+                <div className="save_buttons">
+                    <button onClick={handleLoad} className="save_local">Сохранть в черновик</button>
+                    <button className="save">Опубликовать</button>
+                </div>
+
             </FormStyled>
         </CreatePollPageSection>
     )
 }
 
-export default connect(null, { changePage })(CreatePollPage)
+export default connect(null, { changePage, notify })(CreatePollPage)

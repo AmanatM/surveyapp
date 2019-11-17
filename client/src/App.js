@@ -18,6 +18,8 @@ import MainPage from './pages/MainPage'
 import RecoverPasswordPage from './pages/RecoverPasswordPage/RecoverPasswordPage'
 import NotFound from './components/NotFound/NotFound'
 
+import PopUp from './components/PopUp/PopUp'
+
 
 
 
@@ -30,6 +32,7 @@ const App = (props) => {
     return (
       <div className="App">
         <GlobalStyle/>
+        <PopUp/>
           <Router>
             <Switch>
               
