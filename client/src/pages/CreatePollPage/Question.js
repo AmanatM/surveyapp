@@ -6,14 +6,11 @@ const Question = ({question, setQuestions, questions, activeQuestion}) => {
 
     const typeChange = (e) => {
         let type = e.target.id
-
         let newQuestion = {
             ...question,
             type: type      
         }
-
         let newQuestions = questions.map(questionObj => questionObj.number === activeQuestion + 1 ? newQuestion : questionObj)
-        
         setQuestions(newQuestions)
     }
 

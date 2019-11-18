@@ -28,6 +28,7 @@ const CreatePollPageSection = styled(MainContainer)`
 const CreatePollPage = (props) => {
 
     const [ questions, setQuestions ] = useState([])
+    console.log(questions)
 
     const [ poll, setPoll ] = useState({
         name: '',
@@ -81,6 +82,21 @@ const CreatePollPage = (props) => {
         setQuestions([...questions, defaultQuestion])
     }
 
+    const deleteQuestion = (index) => {
+        
+        let newQuestions = [
+            ...questions.slice(0, index),
+            ...questions.slice(index+1)
+        ]
+        let newCounter = 1
+
+        newQuestions.forEach((question) => {
+            question.number = newCounter++
+        })
+
+        setQuestions(newQuestions)
+    }
+
     const handleLoad = () => {
 
         const saveLocally = () => {
@@ -115,9 +131,17 @@ const CreatePollPage = (props) => {
 
                 <div className="question_numbers">
                     <ul>
-                        {questions.map((question, index) => <li key={index} className={activeQuestion === index ? 'active' : ''} onClick={() => setActiveQuestion(index)}><button>{index+1}</button></li>)}
+                        {questions.map((question, index) => 
 
-                        <li onClick={addQuestion}><button>+</button></li>
+                            <div key={index} className="number_container">
+                                <li className={activeQuestion === index ? 'active' : ''} onClick={() => setActiveQuestion(index)}>
+                                    <button>{index+1}</button>
+                                </li>
+                                <button onClick={() => deleteQuestion(index)} className={`delete_question ${activeQuestion === index ? 'active' : ''}`}>x</button>
+                            </div>
+                        )}
+
+                        <div className="number_container"><li onClick={addQuestion}><button>+</button></li></div>
                     </ul>
                 </div>
 

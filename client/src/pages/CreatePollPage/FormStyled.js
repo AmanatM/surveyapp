@@ -49,6 +49,7 @@ const FormStyled = styled.form`
             max-width: 100%;
             overflow-x: scroll;
             margin-right: 115px;
+            height: 45px;
             display: flex;
             margin-right: 420px;
 
@@ -57,14 +58,44 @@ const FormStyled = styled.form`
                 margin-right: 40px;
             }
 
+            div.number_container {
+
+                position: relative;
+                display: flex;
+                align-items: flex-end;
+                margin-right: 13px;
+
+                
+                button.delete_question {
+                        position: absolute;
+                        top: 0px;
+                        right: -7px;
+                        width: 20px;
+                        height: 20px;
+                        color: white;
+                        z-index: 999;
+                        background-color: white;
+                        border-radius: 50%;
+                        display: none;
+
+
+                        &.active {
+                            display: block;
+                        }   
+                    }
+            }
+
             li {
                 cursor: pointer;
                 list-style: none;
-                color: white;
                 background-color: rgba(95, 118, 255, 0.66);
                 font-weight: bold;
                 border-radius: 10px;
-                margin-right: 6px;
+                position: relative;
+                max-width: 35px;
+                max-height: 35px;
+
+
     
 
                 &.active {
@@ -78,17 +109,21 @@ const FormStyled = styled.form`
                     font-size: 1em;
                     width: 35px;
                     min-width: 35px;
+                    max-width: 35px;
                     min-height: 35px;
+                    max-height: 35px;
                     height: 35px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     border-radius: 10px;
+                    color: white;
 
 
                     &:focus {
                         background: #5F76FF;
                     }
+
                 }
             }
         }
