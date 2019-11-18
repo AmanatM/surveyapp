@@ -95,6 +95,7 @@ const CreatePollPage = (props) => {
         })
 
         setQuestions(newQuestions)
+        setActiveQuestion(-1) // To unfocus from active question(to prevent accidental deletion) 
     }
 
     const handleLoad = () => {
@@ -137,7 +138,7 @@ const CreatePollPage = (props) => {
                                 <li className={activeQuestion === index ? 'active' : ''} onClick={() => setActiveQuestion(index)}>
                                     <button>{index+1}</button>
                                 </li>
-                                <button onClick={() => deleteQuestion(index)} className={`delete_question ${activeQuestion === index ? 'active' : ''}`}>x</button>
+                                <button onClick={() => deleteQuestion(index)} className={`delete_question ${activeQuestion === index ? 'active' : ''}`}></button>
                             </div>
                         )}
 

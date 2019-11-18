@@ -76,12 +76,33 @@ const FormStyled = styled.form`
                         z-index: 999;
                         background-color: white;
                         border-radius: 50%;
+                        text-align: center;
                         display: none;
 
-
                         &.active {
-                            display: block;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: center;
                         }   
+
+                        &::before, &::after {
+                            content: '';
+                            position: absolute;
+                            left: 9.5px;
+                            height: 14px;
+                            width: 1px;
+                            background-color: black;
+                        }
+
+                        &::before {
+                            transform: rotate(45deg);
+                        }
+
+                        &::after {
+                            transform: rotate(-45deg);
+                        }
+
                     }
             }
 
