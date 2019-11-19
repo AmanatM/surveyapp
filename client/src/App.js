@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react'
 import GlobalStyle from './GlobalStyle' 
-import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { initUser } from './reducers/user'
-
-
-// import {
-//   BrowserRouter as Router,
-//   Route, Link, Redirect, withRouter
-// } from 'react-router-dom'
 
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage'

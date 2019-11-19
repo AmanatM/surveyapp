@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const FormStyled = styled.form`
     input.poll_name {
-        color: #6A6A6A;
+        color: #353535;
         background: transparent;
         border: none;
         border-bottom: 1px solid #6A6A6A;
@@ -41,7 +41,7 @@ const FormStyled = styled.form`
         width: 100%;
 
         @media screen and (max-width: 1000px){
-            bottom: 60px;
+            bottom: 80px;
             left: 20px;
         }
 
@@ -51,7 +51,7 @@ const FormStyled = styled.form`
             margin-right: 115px;
             height: 45px;
             display: flex;
-            margin-right: 420px;
+            margin-right: 480px;
 
 
             @media screen and (max-width: 1000px) { 
@@ -84,6 +84,14 @@ const FormStyled = styled.form`
                             flex-wrap: wrap;
                             justify-content: center;
                             align-items: center;
+
+                            &:focus {
+                                background-color: grey;
+
+                                &::before, &::after {
+                                    background-color: white;
+                                }
+                            }
                         }   
 
                         &::before, &::after {
@@ -158,8 +166,21 @@ const FormStyled = styled.form`
         @media screen and (max-width: 1000px){
             bottom: 12px;
             right: 20px;
-
         }
+
+
+        @media screen and (max-width: 390px) {
+            bottom: 0px;
+            margin-left: 20px;
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+
+            button {
+                margin: 10px 0;
+            }
+        }   
+
 
         button {
             color: white;
@@ -176,6 +197,12 @@ const FormStyled = styled.form`
 
             &.save {
                 background-color: #29CC97;
+            }
+
+            &.reset {
+                background-color: #f44336;
+                margin-right: 10px;
+
             }
         }
 

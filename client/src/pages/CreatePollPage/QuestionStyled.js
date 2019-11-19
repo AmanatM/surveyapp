@@ -88,7 +88,7 @@ const QuestionStyled = styled.div`
 
     input.question_name {
 
-        color: #6A6A6A;
+        color: #353535;
         background: transparent;
         border: none;
         border-bottom: 1px solid #6A6A6A;
@@ -107,9 +107,13 @@ const QuestionStyled = styled.div`
     .options {
         
         ul {
+
+            
             li {
                 list-style: none;
                 margin-bottom: 15px;
+                display: flex;
+                align-items: center;
 
                 input {
                     background-color: #8F9FF9;
@@ -119,12 +123,52 @@ const QuestionStyled = styled.div`
                     border: none;
                     font-weight: bold;
                     padding: 5px 20px;
+                    margin-right: 10px;
+                    flex: auto 1 1;
+                    max-width: 300px;
+
+                    @media screen and (max-width: 330px) {
+                        padding: 5px 5px;
+                    }
 
                     &::placeholder {
                         color: white;
                         font-weight: bold;
                         text-align: center;
                     }
+                }
+
+                .delete_option {
+                    width: 30px;
+                    height: 30px;
+                    min-width: 30px;
+                    min-height: 30px;
+                    position: relative;
+                    color: white;
+                    z-index: 999;
+                    background-color: white;
+                    border-radius: 50%;
+                    text-align: center;
+                    border: 1px solid black;
+                    display: flex;
+
+                        &::before, &::after {
+                            content: '';
+                            position: absolute;
+                            left: 13.5px;
+                            top: 4px;
+                            height: 20px;
+                            width: 2px;
+                            background-color: black;
+                        }
+
+                        &::before {
+                            transform: rotate(45deg);
+                        }
+
+                        &::after {
+                            transform: rotate(-45deg);
+                        }
                 }
 
                 &.add {

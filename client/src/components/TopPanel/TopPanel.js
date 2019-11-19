@@ -276,7 +276,7 @@ const TopPanel = (props) => {
             </SearchBox>
 
             <Notification>
-                <img src={notificationIcon}/>
+                <img alt="Уведомления" src={notificationIcon}/>
             </Notification>
 
             <Divider/>

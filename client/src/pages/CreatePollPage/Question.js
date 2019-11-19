@@ -32,6 +32,22 @@ const Question = ({question, setQuestions, questions, activeQuestion}) => {
         setQuestions(newQuestions)
     }
 
+    const deleteOption = (index) => {
+
+        let newOptions = [
+            ...question.options.slice(0, index),
+            ...question.options.slice(index+1)
+        ]
+
+        let newQuestion = {
+            ...question,
+            options: newOptions
+        }
+
+        let newQuestions = questions.map(questionObj => questionObj.number === activeQuestion + 1 ? newQuestion : questionObj)
+        setQuestions(newQuestions)
+    }
+
 
 
     const optionChange = (e, index) => {
@@ -67,7 +83,11 @@ const Question = ({question, setQuestions, questions, activeQuestion}) => {
                 {question.type === 'option' ? (
                     <div className="options">
                         <ul>
-                            {question.options.map((option, index) => <li key={index}><input placeholder={`Вариант ответа ${index+1}`} onChange={(e) => optionChange(e, index)} value={option}/></li>)}
+                            {question.options.map((option, index) =>
+                                 <li key={index}>
+                                     <input placeholder={`Вариант ответа ${index+1}`} onChange={(e) => optionChange(e, index)} value={option}/>
+                                     <button onClick={() => deleteOption(index)} className="delete_option"></button>
+                                 </li>)}
                             <li className="add"><button onClick={addOption}>ДОБАВИТЬ ВАРИАНТ ОТВЕТА</button></li>
                         </ul>
 

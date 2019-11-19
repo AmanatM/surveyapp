@@ -22,13 +22,16 @@ const CreatePollPageSection = styled(MainContainer)`
         padding: 40px 20px;
         padding-bottom: 80px;
     }
+
+    @media screen and (max-width: 400px) {
+        padding-bottom: 120px;
+    }   
 `
 
 
 const CreatePollPage = (props) => {
 
     const [ questions, setQuestions ] = useState([])
-    console.log(questions)
 
     const [ poll, setPoll ] = useState({
         name: '',
@@ -121,6 +124,34 @@ const CreatePollPage = (props) => {
 
     }
 
+    const handleReset = () => {
+
+        const resetPoll = () => {
+            setQuestions([])
+            setPoll({
+                name: '',
+                description: ''
+            })
+            window.localStorage.removeItem('questions')
+            window.localStorage.removeItem('poll')
+
+            props.notify({
+                heading: 'Опрос сброшен!',
+                text: 'Ваши данные об опросе успешно сброшенны',
+                ifOkFunction: resetPoll
+            })
+        }
+
+        props.notify({
+            heading: 'Вы уверены?',
+            text: 'Ваши данные об опросе будут удалены',
+            type: 'confirmation',
+            ifOkFunction: resetPoll
+        })
+
+
+    }
+
     return (
         <CreatePollPageSection>
             <FormStyled onSubmit={handleSubmit}>
@@ -147,6 +178,7 @@ const CreatePollPage = (props) => {
                 </div>
 
                 <div className="save_buttons">
+                    <button onClick={handleReset} className="reset">Сбросить</button>
                     <button onClick={handleLoad} className="save_local">Сохранть в черновик</button>
                     <button className="save">Опубликовать</button>
                 </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import  styled from 'styled-components'
 import { connect } from 'react-redux'
 import { changePage } from '../../reducers/currentPage'
@@ -109,6 +109,7 @@ const AllPolls = (props) => {
         return () => {
             props.changePage('')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const mockPolls = [
@@ -171,7 +172,7 @@ const AllPolls = (props) => {
                         {mockPolls.map(poll => 
                             <PollTrCustom key={poll.id}>
                                 <td className="poll_details">
-                                    <img src={poll.user.userAvatar}/>
+                                    <img alt="Аватар пользователя" src={poll.user.userAvatar}/>
                                     <p><Link>{poll.title}</Link></p>
                                 </td>
 
