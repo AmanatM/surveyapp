@@ -9,9 +9,13 @@ const TakePollPageStyled = styled.div`
     flex-direction: column;
     align-items: center;
 
+ 
+
     .poll_heading {
         text-align: center;
         margin-bottom: 40px;
+        padding-top: 40px;
+
     }
 
     .poll_author {
@@ -25,9 +29,13 @@ const TakePollPageStyled = styled.div`
     .question_numbers {
 
         margin-bottom: 20px;
+        width: 100%;
 
         ul {
             display: flex;
+            overflow-x: scroll;
+            max-width: 100%;
+            justify-content: center;
 
             li {
                 list-style: none;

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const QuestionStyled = styled.div`
     margin-top: 20px;
-
     max-width: 100%;
 
     h1 {
@@ -12,14 +11,17 @@ const QuestionStyled = styled.div`
         text-align: center;
     }
 
+    & > div {
+        
+    }
+
     div.options {
 
         max-width: 100%;
-        min-width: 350px;
+        width: 350px;
         margin-top: 30px;
 
         ul {
-
 
             li {
 
@@ -34,6 +36,7 @@ const QuestionStyled = styled.div`
                     background-color: #8A9AF4;
                     padding: 8px 15px;
                     border-radius: 10px;
+                    max-width: 100%;
                     width: 100%;
                     font-size: .9em;
                     font-weight: bold;
@@ -89,25 +92,46 @@ const QuestionStyled = styled.div`
                 height: 40px;
                 font-weight: bold;
                 text-align: center;
+
+                &[type=number]::-webkit-inner-spin-button, 
+                &[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
             }
 
             &.day {
 
                 width: 100px;
-                
+
+                label {
+                    
+                }
                 input {
                     width: 50px;
+
+                    @media screen and (max-width: 620px) {
+                        width: 100%;
+                    }
                 }
             }   
 
             &.month {
                 margin: 0 70px;
 
+                @media screen and (max-width: 620px) {
+                    margin: 0 10px;
+                }
+
                 .wrapper {
                     position: relative;
+                    padding-bottom: 200px;
 
                     p {
                         color: white;
+                        cursor: pointer;
                         background-color: #828282;
                         border: none;
                         padding: 10px 25px;
@@ -119,21 +143,39 @@ const QuestionStyled = styled.div`
                         position: relative;
                         z-index: 10;
 
+                        @media screen and (max-width: 620px) {
+                            width: 110px;
+                            padding: 10px 5px;
+                        }
+
                     }
 
                     ul {
+                        position: absolute;
                         width: 150px;
-                        position: relative;
                         z-index: 5;
-                        top: 0;
+                        top: -100px;
                         left: 0;
                         width: 150px;
                         display: flex;
                         flex-direction: column;
                         background-color: #8A9AF4;
-                        padding-top: 40px;
-                        top: -40px;
                         border-radius: 16px;
+                        z-index: 999;
+                        visibility: hidden;
+                        transition: all .2s;
+                        opacity: 0;
+
+                        &.active {
+                            visibility: visible;
+                            opacity: 1;
+
+                        }
+
+
+                        @media screen and (max-width: 620px) {
+                            width: 110px;
+                        }
                         
                         li {
 
@@ -163,7 +205,14 @@ const QuestionStyled = styled.div`
                                     border-bottom-right-radius: 16px;
                                 }
                                    
+                            }
+
+                            &:first-of-type {
+                                button {
+                                    border-top-left-radius: 16px;
+                                    border-top-right-radius: 16px;
                                 }
+                            }
                         }
                     }
 
@@ -182,6 +231,50 @@ const QuestionStyled = styled.div`
             }
 
         }
+
+    }
+
+    div.time {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+
+        .divider {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 0 10px;
+            padding-bottom: 5px;
+        }
+
+        .time_item {
+
+            input {
+                color: white;
+                background-color: #828282;
+                border: none;
+                padding: 10px;
+                max-width: 100%;
+                width: 50px;
+                outline: none;
+                border-radius: 10px;
+                font-weight: bold;
+                text-align: center;
+
+                &::placeholder {
+                    color: #cbcbcb;
+                }
+            }
+
+        }
+
 
     }
 `
