@@ -173,7 +173,7 @@ const AllPolls = (props) => {
                             <PollTrCustom key={poll.id}>
                                 <td className="poll_details">
                                     <img alt="Аватар пользователя" src={poll.user.userAvatar}/>
-                                    <p><Link>{poll.title}</Link></p>
+                                    <p><Link to={`/main/all-polls/${poll.id}`}>{poll.title}</Link></p>
                                 </td>
 
                                 <td className="user">{poll.user.name} {poll.user.surname}</td>

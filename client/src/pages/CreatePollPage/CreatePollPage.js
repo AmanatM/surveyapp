@@ -72,7 +72,10 @@ const CreatePollPage = (props) => {
         e.preventDefault()
     }
 
+
+
     const addQuestion = (e) => {
+
 
         const defaultQuestion = {
             number: questions.length + 1,
@@ -81,7 +84,7 @@ const CreatePollPage = (props) => {
             type: 'option',
             options: []
         }
-
+        
         setQuestions([...questions, defaultQuestion])
     }
 
@@ -127,13 +130,16 @@ const CreatePollPage = (props) => {
     const handleReset = () => {
 
         const resetPoll = () => {
+
             setQuestions([])
             setPoll({
                 name: '',
                 description: ''
             })
+
             window.localStorage.removeItem('questions')
             window.localStorage.removeItem('poll')
+
 
             props.notify({
                 heading: 'Опрос сброшен!',

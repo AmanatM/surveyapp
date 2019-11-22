@@ -10,6 +10,7 @@ const MainContainer = styled.main`
     color: #353C64;
     width: 100%;
     max-width: 1400px;
+    position: relative;
 
     @media screen and (max-width: 760px) {
         margin: 20px 0;

@@ -14,6 +14,7 @@ import MyPollsPage from '../../pages/MyPollsPage/MyPollsPage'
 import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import AllPolls from '../../pages/AllPolls/AllPolls'
 import CreatePollPage from '../../pages/CreatePollPage/CreatePollPage'
+import TakePollPage from '../../pages/TakePollPage/TakePollPage'
 
 import NotFound from '../../components/NotFound/NotFound'
 
@@ -74,12 +75,14 @@ const MainFrame = (props) => {
                     <Switch>
                         <Route exact path="/main/my-polls" render={() => <MyPollsPage/>}/>
                         <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
+                        <Route exact path="/main/all-polls/:id" render={({match}) => <TakePollPage id={match.params.id}/>}/>
                         <Route exact path="/main/create-poll" render={() => <CreatePollPage/>}/>
                         <Route exact path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
-                        {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
-                        {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
                         <Route path="/main/profile" render={() => <ProfilePage/>}/>
                         <Route render={() => <NotFound windowed={true}/>}/>
+
+                        {/* <Route path="/main/users" render={() => <Demo text="Users"/>}/> */}
+                        {/* <Route path="/main/settings" render={() => <Demo text="Settings"/>}/> */}
                     </Switch>
 
             </Content>

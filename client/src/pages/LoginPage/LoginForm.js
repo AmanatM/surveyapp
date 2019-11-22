@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-
+import { notify } from '../../reducers/popUp'
 
 import AuthButton from '../../elements/AuthButton'
 import facebookLogo from '../../assets/imgs/facebook-icon.svg'
@@ -107,6 +107,13 @@ const Divider = styled.div`
 
 const LoginForm = (props) => {
 
+    useEffect(() => {
+
+        return () => {
+            props.notify('')
+        }
+    }, [])
+
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
 
@@ -126,7 +133,11 @@ const LoginForm = (props) => {
 
 
         } else {
-          alert('Don\'t leave fields empty')
+          props.notify({
+              heading: 'Не оставляйте поля пустыми!!',
+              type: 'error',
+              text: 'Повторите попытку'
+          })
         }
     }
 
@@ -160,4 +171,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, {loginUser})(LoginForm))
+export default withRouter(connect(mapStateToProps, {loginUser, notify})(LoginForm))

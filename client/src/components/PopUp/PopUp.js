@@ -62,6 +62,7 @@ const PopUpStyled = styled.div`
             padding: 3px 5px;
             border-radius: 6px;
             margin: 20px 15px;
+            margin-bottom: 0;
             background-color: #fff;
             transition: all .2s;
 
