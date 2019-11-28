@@ -58,7 +58,7 @@ async function wait(stallTime = 2000) {
 const getPoll = async (id) => {
     
     let data = await mockPolls.find(poll => poll.id === +(id))
-    await wait(0)
+    await wait(500)
     return(data)
 
 }

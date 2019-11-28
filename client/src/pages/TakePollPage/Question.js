@@ -4,7 +4,8 @@ import QuestionStyled from './QustionStyled'
 
 
 
-const TypeOption = ({question}) => {
+const TypeOption = ({question, setAnswers, answers}) => {
+
     return (
         <div className="options">
             <ul>
@@ -16,25 +17,38 @@ const TypeOption = ({question}) => {
     )
 }
 
-const TypeText = () => {
+const TypeText = ({question, setAnswers, answers, activeQuestion}) => {
+
+
+    const changeText = (e) => {
+        let currentAnswer = {...answers[activeQuestion-1], userResponse: e.target.value}
+
+        let newAnswers = [
+            ...answers.slice(0, activeQuestion-1),
+            currentAnswer,
+            ...answers.slice(activeQuestion)
+
+        ]
+
+        setAnswers(newAnswers)
+
+    }
+
     return (
         <div className="text">
-            <textarea placeholder="Введите ответ">
-            </textarea>
+            <textarea placeholder="Введите ответ" onChange={changeText} value={answers[activeQuestion-1].userResponse}></textarea>
         </div>
     )
 }
 
-const TypeDate = () => {
+const TypeDate = ({question, setAnswers, answers}) => {
 
     const months = [
         'Январь',
         'Ферварль',
         'Март',
         'Апрель',
-        'Март',
-        'Апрель',
-        'Май',
+        'Мая',
         'Июнь',
         'Июль',
         'Август',
@@ -82,7 +96,7 @@ const TypeDate = () => {
     )
 }
 
-const TypeTime = () => {
+const TypeTime = ({question, setAnswers, answers}) => {
     return (
         <div className="time">
             <div className="time_item hours">
@@ -102,34 +116,34 @@ const TypeTime = () => {
 
 
 
-const Input = ({type, question}) => {
+const Input = ({type, question, setAnswers, answers, activeQuestion}) => {
     switch(type) {
 
         case 'option':
-            return <TypeOption question={question}/>
+            return <TypeOption question={question} setAnswers={setAnswers} answers={answers} activeQuestion={activeQuestion}/>
 
 
         case 'text':
-            return <TypeText/>
+            return <TypeText setAnswers={setAnswers} answers={answers} activeQuestion={activeQuestion}/>
 
 
         case 'date':
-            return <TypeDate/>
+            return <TypeDate setAnswers={setAnswers} answers={answers} activeQuestion={activeQuestion}/>
 
 
         case 'time':
-            return <TypeTime/>
+            return <TypeTime setAnswers={setAnswers} answers={answers} activeQuestion={activeQuestion}/>
     }
 }
 
 
-const Question = ({question}) => {
+const Question = ({question, setAnswers, answers, activeQuestion}) => {
 
     if(question) {
         return (
             <QuestionStyled>
                 <h1>{question.name}</h1>
-                <Input type={question.type} question={question}/>
+                <Input activeQuestion={activeQuestion} setAnswers={setAnswers} answers={answers} type={question.type} question={question}/>
             </QuestionStyled>
         )
     }

@@ -59,7 +59,8 @@ const QuestionStyled = styled.div`
             padding: 10px;
             font-size: .9em;
             outline: none;
-            width: 100%;
+            max-width: 100%;
+            width: 400px;
 
             &::placeholder {
                 color: #6A6A6A;

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import Loader from 'react-loader-spinner'
+
 import { changePage } from '../../reducers/currentPage'
 
 
@@ -19,8 +21,22 @@ const MainContainerCustom = styled(MainContainer)`
 const TakePollPage = (props) => {
 
     const [ poll, setPoll ] = useState(null)
-    const [ activeQuestion, setActiveQuestion ] = useState(2)
-    console.log(activeQuestion)
+    const [ activeQuestion, setActiveQuestion ] = useState(1)
+    const [ answers, setAnswers ] = useState({})
+
+    useEffect(() => {
+        if(poll) {
+            setAnswers([
+                ...poll.questions.map(question => {
+                    return {
+                        questionNumber: question.number,
+                        userResponse: ''
+                    }
+                })
+            ])
+        }
+    }, [poll])
+
 
     const getQuestionByNumber = (number) => {
         if(poll) {
@@ -41,19 +57,15 @@ const TakePollPage = (props) => {
 
         getPoll(props.id).then((poll) => {
             setPoll(poll)
-            setQuestion(poll.questions.find(question => +question.number === activeQuestion))
+            if(poll) {
+                setQuestion(poll.questions.find(question => +question.number === activeQuestion))
+            }
         })
-
 
         return () => {
             props.changePage('')
         }
     }, [])
-
-
-    const handleNumberClick = (number) => {
-        changeActiveQuestion(number)
-    }
 
 
     const QuestionInstructions = ({type}) => {
@@ -72,7 +84,6 @@ const TakePollPage = (props) => {
     }
     
 
-    
     if(poll) {
         return (
             <MainContainerCustom>
@@ -85,7 +96,7 @@ const TakePollPage = (props) => {
                                     
                             {poll.questions.map((question) => (
 
-                                <li key={question.number}><button onClick={() => handleNumberClick(question.number)} className={activeQuestion === question.number ? 'active' : ''} >{question.number}</button></li>
+                                <li key={question.number}><button onClick={() => changeActiveQuestion(question.number)} className={activeQuestion === question.number ? 'active' : ''} >{question.number}</button></li>
             
                             ))}
 
@@ -93,7 +104,7 @@ const TakePollPage = (props) => {
                     </div>
 
                     <QuestionInstructions type={question ? question.type : null}/>
-                    <Question question={question}/>
+                    <Question activeQuestion={activeQuestion} question={question} setAnswers={setAnswers} answers={answers}/>
 
                     <div className="switch_buttons">
                         <button disabled={activeQuestion === 1 ? true : false} 
@@ -116,8 +127,8 @@ const TakePollPage = (props) => {
     }
 
     return (
-        <MainContainer>
-            <p>Loading...</p>
+        <MainContainer style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Loader type="TailSpin" color="#5f76ff" height={100} width={100}/>
         </MainContainer>
     )
 
