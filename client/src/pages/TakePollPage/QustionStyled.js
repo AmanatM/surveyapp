@@ -40,6 +40,14 @@ const QuestionStyled = styled.div`
                     width: 100%;
                     font-size: .9em;
                     font-weight: bold;
+
+                    &:active {
+                        background: #5F76FF;
+                    }
+
+                    &.active {
+                        background-color: #5F76FF; 
+                    }
                 }
             }
         }

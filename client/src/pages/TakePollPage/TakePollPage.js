@@ -21,8 +21,9 @@ const MainContainerCustom = styled(MainContainer)`
 const TakePollPage = (props) => {
 
     const [ poll, setPoll ] = useState(null)
-    const [ activeQuestion, setActiveQuestion ] = useState(1)
+    const [ activeQuestion, setActiveQuestion ] = useState(3)
     const [ answers, setAnswers ] = useState({})
+    console.log(answers)
 
     useEffect(() => {
         if(poll) {

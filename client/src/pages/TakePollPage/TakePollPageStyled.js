@@ -68,6 +68,7 @@ const TakePollPageStyled = styled.div`
     .question_instructions {
         color: #828282;
         font-weight: bold;
+        text-align: center;
     }
 
     .switch_buttons {
