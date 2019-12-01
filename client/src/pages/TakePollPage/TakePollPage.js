@@ -10,6 +10,7 @@ import { changePage } from '../../reducers/currentPage'
 import MainContainer from '../../elements/MainContainer'
 import getPoll from '../../services/polls'
 import TakePollPageStyled from './TakePollPageStyled'
+import FinalScreen from './FinalScreen'
 
 import Question from './Question'
 
@@ -21,9 +22,26 @@ const MainContainerCustom = styled(MainContainer)`
 const TakePollPage = (props) => {
 
     const [ poll, setPoll ] = useState(null)
-    const [ activeQuestion, setActiveQuestion ] = useState(3)
+    const [ activeQuestion, setActiveQuestion ] = useState(1)
     const [ answers, setAnswers ] = useState({})
-    console.log(answers)
+
+    const [ pollPassed, setPollPassed ] = useState(false)
+
+
+    useEffect(() => {
+        props.changePage('Текущий опрос')
+
+        getPoll(props.id).then((poll) => {
+            setPoll(poll)
+            if(poll) {
+                setQuestion(poll.questions.find(question => +question.number === activeQuestion))
+            }
+        })
+
+        return () => {
+            props.changePage('')
+        }
+    }, [])
 
     useEffect(() => {
         if(poll) {
@@ -53,20 +71,7 @@ const TakePollPage = (props) => {
     const [ question, setQuestion ] = useState(getQuestionByNumber(activeQuestion))
 
 
-    useEffect(() => {
-        props.changePage('Текущий опрос')
 
-        getPoll(props.id).then((poll) => {
-            setPoll(poll)
-            if(poll) {
-                setQuestion(poll.questions.find(question => +question.number === activeQuestion))
-            }
-        })
-
-        return () => {
-            props.changePage('')
-        }
-    }, [])
 
 
     const QuestionInstructions = ({type}) => {
@@ -83,12 +88,21 @@ const TakePollPage = (props) => {
                 return null;
         }
     }
+
+    const handleNextSubmit = () => {
+        if(activeQuestion < poll.questions.length) {
+            changeActiveQuestion(activeQuestion + 1)
+        } else {
+            setPollPassed(true)
+        }
+    }
     
 
     if(poll) {
         return (
             <MainContainerCustom>
-                <TakePollPageStyled>
+
+                {pollPassed ? ( <FinalScreen poll={poll}></FinalScreen>) : (<TakePollPageStyled>
                     <h1 className="poll_heading">{poll.name}</h1>
                     <p className="poll_author">{poll.author}</p>
 
@@ -115,13 +129,16 @@ const TakePollPage = (props) => {
                             Назад
                         </button>
 
-                        <button onClick={() => activeQuestion < poll.questions.length ? changeActiveQuestion(activeQuestion + 1) : false} 
+                        <button onClick={handleNextSubmit} 
                                 className={`next ${activeQuestion === poll.questions.length ? 'submit' : ''}`}>
 
                             {activeQuestion === poll.questions.length ? 'Заврешить' : 'Далее'}
                         </button>
                     </div>
-                </TakePollPageStyled>
+                </TakePollPageStyled>)}
+                
+
+               
 
             </MainContainerCustom>
         )  
