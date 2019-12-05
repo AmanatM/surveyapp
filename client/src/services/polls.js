@@ -65,7 +65,21 @@ const mockPollList = [
 const mockPollsStat = [
     {
         id: 34543,
-        countries: ['Кыргызстан', 'Россия', 'Казахстан'],
+        countries: [
+            {
+                name: 'Кыргызстан',
+                number: 45
+            }, 
+
+            {
+                name: 'Россия',
+                number: 34
+            },       
+            {
+                name: 'Казахстан',
+                number: 14
+            }, 
+        ],
         ages: '',
         maleNumber: '32',
         femaleNumber: '12'
@@ -73,7 +87,18 @@ const mockPollsStat = [
 
     {
         id: 98762,
-        countries: ['Кыргызстан', 'Казахстан'],
+        countries: [
+            {
+                name: 'Кыргызстан',
+                number: 29
+            }, 
+
+            {
+                name: 'Россия',
+                number: 34
+            }, 
+            
+        ],
         ages: '',
         maleNumber: '40',
         femaleNumber: '52'

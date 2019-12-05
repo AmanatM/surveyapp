@@ -455,7 +455,7 @@ const MyPollsPage = (props) => {
                         <ReactMinimalPieChart
                             animate={true}
                             animationDuration={500}
-                            animationEasing="ease-out"
+                            animationEasing="ease-in-out"
                             cx={50}
                             cy={50}
                             data={[

@@ -13,6 +13,7 @@ const MainContainerCustom = styled(MainContainer)`
     background-color: #EDEDED;
     position: relative;
 
+
     h1 {
         text-align: center;
     }
@@ -47,9 +48,26 @@ const Stats = styled.div`
     display: flex;
     position: relative;
 
+
+
     @media screen and (max-width: 980px) {
-        position: absolute;
-        display: none;
+
+        .stats_content {
+            background-color: #fff;
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            color: white;
+            background-color: rgba(0, 0, 0, .6);
+
+        }
+
+        .inactive {
+            color: white;
+        }
+
     }
 
     .inactive {
@@ -63,8 +81,50 @@ const Stats = styled.div`
         transform: translateX(-50%) translateY(-50%);
     }
 
-    .stats_content {
 
+
+    .stats_content {
+        width: 100%;
+
+        h5 {
+            margin-bottom: 10px;
+        }
+
+        .info_box {
+            background-color: #DEDEDE;
+            width: 100%;
+            padding: 10px;
+        
+        }
+        .country {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            ul {
+
+                margin-right: 20%;
+
+                li {
+                    list-style: none;
+                    font-size: .9em;
+                    color: #353C64;
+                    font-weight: bold;
+                    display: flex;
+                    width: 150px;
+                    margin: 10px 0;
+
+                    .country_name {
+                        margin-right: auto;
+                    }
+                }
+            }
+
+            .diagram {
+                width: 150px;
+            }
+        }
     }
 `
 
@@ -73,13 +133,24 @@ const StatisticsPage = () => {
     const [ pollList, setPollList ] = useState([])
     const [ activeStats, setActiveStats ] = useState(null)
     const [ loading, setLoading] = useState(false)
+    const [ chartData, setChartData ] = useState(null)
+
+    let windowWidth = window.innerWidth
+
 
 
     useEffect(() => {
         getPollList().then((list) => {
             setPollList(list)
         }) 
+
+        // getPollStatsById(34543).then((poll) => {
+        //     setLoading(false)
+        //     setActiveStats(poll)
+        // })
+
     }, [])
+
 
     const handlePollClick = (id) => {
 
@@ -88,11 +159,27 @@ const StatisticsPage = () => {
 
         getPollStatsById(id).then((poll) => {
             setLoading(false)
-            setActiveStats(poll)
-
+            setActiveStats(poll)  
         })
-
     }
+
+    let colors = ['#F12B2C', '#676666', '#00AA8B', '#e91e63', '#03a9f4']
+
+    let forData = []
+    if(activeStats) {
+        activeStats.countries.map((country, index) => {
+            let obj = {
+                title: country.name,
+                value: country.number,
+                color: colors[index],
+                percentage: country.number / 100
+            }
+            forData.push(obj)
+        })
+    }
+
+
+    console.log(forData)
 
     return (
         <MainContainerCustom>
@@ -124,17 +211,40 @@ const StatisticsPage = () => {
 
 
                 <Stats className="column">
-                    {!activeStats ? (loading ? null : <h1 className="inactive">Выберите опрос</h1>) : (
+                    {!activeStats ? (loading ? null : (windowWidth > 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
                         <div className="stats_content">
                             <h5>Страны</h5>
-                            <div className="country">
-                                {activeStats.countries.map((country) => (
-                                    <p>{country}</p>
-                                ))}
+                            <div className="country info_box">
+                                <ul>
+                                    <li><div className="country_name">Все страны: </div> <div className="country_number">{activeStats.countries.length}</div></li>
+                                    {activeStats.countries.map((country, index) => (
+                                        <li style={{color: colors[index]}} key={index}><div className="country_name">{country.name}:</div><div className="country_number">{country.number}</div></li>
+                                    ))}
+                                </ul>
+
+                                <div className="diagram">
+                                    <ReactMinimalPieChart
+                                        data={forData}
+                                        style={{
+                                            height: '100%',
+                                            width: '100%'
+                                        }}
+                                        animate={true}
+                                        animationDuration={500}
+                                        animationEasing="ease-in-out"
+                                        label
+                                        labelStyle={{
+                                            fill: '#dedede',
+                                            fontFamily: 'sans-serif',
+                                            fontSize: '13px'
+                                        }}
+                                    />
+                                </div>
+
                             </div>
 
                             <h5>Возрастной рейтинг</h5>
-                            <h5>Показатели по принадлежности к полуСтраны</h5>
+                            <h5>Показатели по принадлежности к полу</h5>
                         </div>
                     )} 
                     {loading ? <Loader className="loader" type="ThreeDots" color="#5f76ff" height={100} width={100}/> : null}

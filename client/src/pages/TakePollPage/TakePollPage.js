@@ -146,7 +146,7 @@ const TakePollPage = (props) => {
 
     return (
         <MainContainer style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Loader type="TailSpin" color="#5f76ff" height={100} width={100}/>
+            <Loader type="Grid" color="#5f76ff" height={100} width={100}/>
         </MainContainer>
     )
 
