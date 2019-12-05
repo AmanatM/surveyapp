@@ -15,6 +15,7 @@ import ProfilePage from '../../pages/ProfilePage/ProfilePage'
 import AllPolls from '../../pages/AllPolls/AllPolls'
 import CreatePollPage from '../../pages/CreatePollPage/CreatePollPage'
 import TakePollPage from '../../pages/TakePollPage/TakePollPage'
+import StatisticsPage from '../../pages/StatisticsPage/StatisticsPage'
 
 import NotFound from '../../components/NotFound/NotFound'
 
@@ -38,26 +39,6 @@ const Content = styled.div`
         padding: 20px 10px;
     }
 
-
-/* 
-        .fade-enter {
-            opacity: 0.01;
-        }
-
-        .fade-enter.fade-enter-active {
-            opacity: 1;
-            transition: opacity 300ms ease-in;
-        }
-
-        .fade-exit {
-            opacity: 1;
-        }
-
-        .fade-exit.fade-exit-active {
-            opacity: 0.01;
-            transition: opacity 300ms ease-in;
-        } */
-
 `
 
 const Demo = ({text}) => (<div style={{color:'white', margin: '20px'}}>{text}</div>)
@@ -77,7 +58,7 @@ const MainFrame = (props) => {
                         <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
                         <Route exact path="/main/all-polls/:id" render={({match}) => <TakePollPage id={match.params.id}/>}/>
                         <Route exact path="/main/create-poll" render={() => <CreatePollPage/>}/>
-                        <Route exact path="/main/statistics" render={() => <Demo text="Statistics"/>}/>
+                        <Route exact path="/main/statistics" render={() => <StatisticsPage/>}/>
                         <Route path="/main/profile" render={() => <ProfilePage/>}/>
                         <Route render={() => <NotFound windowed={true}/>}/>
 

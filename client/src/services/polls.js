@@ -47,15 +47,54 @@ let mockPolls = [
       }
 ]
 
+const mockPollList = [
+    {
+        id: 34543,
+        name: 'Устроить вечеринку?',
+        nickname: 'neobisov',
+        createDate: '10 Мая, 2019'
+    },
+    {
+        id: 98762,
+        name: ' Во что покарсить стену?',
+        nickname: 'neobisov',
+        createDate: '8 Марта, 2019'
+    },
+]
+
+const mockPollsStat = [
+    {
+        id: 34543,
+        countries: ['Кыргызстан', 'Россия', 'Казахстан'],
+        ages: '',
+        maleNumber: '32',
+        femaleNumber: '12'
+    },
+
+    {
+        id: 98762,
+        countries: ['Кыргызстан', 'Казахстан'],
+        ages: '',
+        maleNumber: '40',
+        femaleNumber: '52'
+    }
+]
+
 
 // This is the simulaton of fecth
 
-async function wait(stallTime = 2000) {
+async function wait(stallTime = 500) {
     await new Promise(resolve => setTimeout(resolve, stallTime));
 }
 
+export const getPollList = async () => {
+    let data = await mockPollList
+    await wait(0)
+    return(data)
+}
 
-const getPoll = async (id) => {
+
+export const getPoll = async (id) => {
     
     let data = await mockPolls.find(poll => poll.id === +(id))
     await wait(500)
@@ -63,4 +102,10 @@ const getPoll = async (id) => {
 
 }
 
-export default  getPoll 
+export const getPollStatsById = async (id) => {
+    let data = await mockPollsStat.find(poll => poll.id === +(id))
+    await wait(500)
+    return(data)
+}
+
+export default getPoll 
