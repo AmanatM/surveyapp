@@ -21,7 +21,7 @@ const StatsStyled = styled.div`
             background-color: #fff;
             position: fixed;
             height: 100vh;
-            padding-top: 60px;
+            padding-top: 80px;
             padding-left: 15px;
             padding-right: 15px;
             top: 0;
