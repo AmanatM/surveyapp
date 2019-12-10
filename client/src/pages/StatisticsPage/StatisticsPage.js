@@ -48,7 +48,7 @@ const StatisticsPage = () => {
     const [ pollList, setPollList ] = useState([])
     const [ activeStats, setActiveStats ] = useState(null)
     const [ loading, setLoading] = useState(false)
-    const [ chartData, setChartData ] = useState(null)
+
 
     let windowWidth = window.innerWidth
 
@@ -58,12 +58,6 @@ const StatisticsPage = () => {
         getPollList().then((list) => {
             setPollList(list)
         }) 
-
-        // getPollStatsById(34543).then((poll) => {
-        //     setLoading(false)
-        //     setActiveStats(poll)
-        // })
-
     }, [])
 
 
@@ -77,6 +71,8 @@ const StatisticsPage = () => {
             setActiveStats(poll)  
         })
     }
+
+
 
     let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a']
 
@@ -124,8 +120,11 @@ const StatisticsPage = () => {
 
 
                 <StatsStyled className="column">
-                    {!activeStats ? (loading ? null : (windowWidth > 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
-                        <div className="stats_content">
+                    {!activeStats ? (loading ? null : (windowWidth < 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
+                        <div className="stats_content" onClick={() => setActiveStats()}>
+                            <button className="close_stats">
+                                Закрыть
+                            </button>
                             <h5>Страны</h5>
                             <div className="country info_box">
                                 <ul>
@@ -172,9 +171,31 @@ const StatisticsPage = () => {
 
                             <h5>Показатели по принадлежности к полу</h5>
                             <div className="gender info_box">
-                                <ul>
+                                <div className="content">
+
+                                    <div className="data_container">
                                     
-                                </ul>
+                                        <div className="data">
+                                            <h5>Мужчины</h5>
+                                            <div className="amount">{activeStats.maleNumber}</div>
+                                            <div className="percent">{Math.round(+activeStats.maleNumber / (+activeStats.maleNumber + +activeStats.femaleNumber) * 100)}%</div>
+                                        </div>
+
+                                        <div className="data">
+                                            <h5>Женщины</h5>
+                                            <div className="amount">{activeStats.femaleNumber}</div>
+                                            <div className="percent">{Math.round(+activeStats.femaleNumber / (+activeStats.maleNumber + +activeStats.femaleNumber) * 100)}%</div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="total">
+                                        <h5>Всего:</h5>
+                                        <div className="total">
+                                            {+activeStats.maleNumber + +activeStats.femaleNumber}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
