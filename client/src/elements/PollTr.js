@@ -71,7 +71,7 @@ const PollTr = styled.tr`
 
                 &:hover {
 
-                    background: #5F76FF;
+                    background: #8A9AF4;
                 
                     img {
                         filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(5281%) hue-rotate(65deg) brightness(121%) contrast(109%);
@@ -84,6 +84,7 @@ const PollTr = styled.tr`
 
         div.menu_content {
             display: none;
+            z-index: 99;
 
             
             li {
@@ -99,7 +100,7 @@ const PollTr = styled.tr`
 
         div.toggle_btn {
 
-                background: #5F76FF;
+                background: #8A9AF4;
                 
                 img {
                     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(5281%) hue-rotate(65deg) brightness(121%) contrast(109%);
@@ -111,31 +112,37 @@ const PollTr = styled.tr`
             div.menu_content {
                 display: block;
                 position: absolute;
-                background: #5F76FF;
+                background: #8A9AF4;
                 color: #EDEDED;
                 z-index: 19;
                 border-radius: 10px 0px 10px 10px;
                 padding: 3px;
-
                 left: -116px;
-                bottom: -66px;
+                bottom: -80px;
 
 
 
 
                 li {
                     border-bottom: 1px solid #EDEDED;
-                    padding: 3px 0;
+                    padding: 5px 0;
 
                     &:last-child {
                         border-bottom: none;
                     }
                 }
 
+                @media screen and (max-width: 820px) {
+                    border-radius: 10px 0px 10px 10px;
+                    left: -28px;
+                    bottom: -83px;
+
+                }
+
                 @media screen and (max-width: 780px) {
-                    border-radius: 0px 10px 10px 10px;
-                    left: 35px;
-                    bottom: -110px;
+                    border-radius: 10px 0px 10px 10px;
+                    left: -19px;
+                    bottom: -98px;
 
                     li {
                         padding: 7px 0;
@@ -143,8 +150,8 @@ const PollTr = styled.tr`
                 }
 
                 @media screen and (max-width: 600px) {
-                    left: 45px;
-                    bottom: -120px;
+                    left: -94px;
+                    bottom: -100px;
                 }
 
             }

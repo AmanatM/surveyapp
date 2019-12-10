@@ -22,12 +22,24 @@ const Form = styled.form`
     margin: 0 auto;
     margin-top: 30px;
 
+    .login_btn {
+        margin-top: 30px;
+    }
+
+    .extra_functions {
+        display: flex;
+        align-content: center;
+        padding: 0 25px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
     .forgotPass {
         font-size: .8em;
         display: flex;
         justify-content: flex-end;
         align-content: center;
-        margin: 7px;
+
         cursor: pointer;
     
 
@@ -46,8 +58,10 @@ const Form = styled.form`
 
     div.createAcc {
         font-size: .8em;
-        margin-top: 4px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-right: auto;
     }
 `
 
@@ -150,12 +164,19 @@ const LoginForm = (props) => {
 
                 <Input value={username} onChange={(e) => setUsername(e.target.value)} aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
                 <Input value={password}  onChange={(e) => setPassword(e.target.value)} aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
-                <Link to="/recover-password" className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></Link>
-                <AuthButton red type="submit">Войти</AuthButton>
-                <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
-                <Divider><div>OR</div></Divider>
-                <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Войти через Facebook</div></AuthSocial>
-                <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial>
+                <AuthButton className="login_btn" red type="submit">Войти</AuthButton>
+
+                <div className="extra_functions">
+                    <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>
+                    <Link to="/recover-password" className="forgotPass">Забыли пароль? <img src={refreshIcon} alt=""/></Link>
+                </div>
+
+                {/* <Divider><div>OR</div></Divider> */}
+            
+
+                
+                {/* <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Войти через Facebook</div></AuthSocial>
+                <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Войти через Google</div></AuthSocial> */}
 
                 <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
 

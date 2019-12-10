@@ -102,6 +102,10 @@ const Divider = styled.div`
 
     div {
         margin: 0 20px;
+        font-size: .8em;
+        font-family: 'Arial',sans-serif;
+        font-weight: normal;
+        white-space: nowrap;
     }
 
     &::before, &::after {
@@ -148,6 +152,7 @@ const RegistrationForm = () => {
                 <p><small>Справшиватйе и отвечайте</small></p>
             </FormTitle>
 
+            <Input aria-label="Никнэйм" require type="text" autoComplete="false" placeholder="Никнэйм"/>
             <Input aria-label="Электронная почта" require type="email" autoComplete="false" placeholder="Email почта"/>
             <Input aria-label="Имя" type="text" autoComplete="false" placeholder="Имя"/>
             <Input aria-label="Фамилия" type="text" autoComplete="false" placeholder="Фамилия"/>
@@ -178,11 +183,12 @@ const RegistrationForm = () => {
 
 
             <SubmitButton red type="submit">Продолжить</SubmitButton>
-            <Divider><div>ИЛИ</div></Divider>
+            <Divider><div>Уже есть аккунт? <b><Link to="/login">Войти</Link></b></div></Divider>
 
-            <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Зарегестрироваться с помощью Facebook</div></AuthSocial>
-            <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Зарегестрироваться с помощью Google</div></AuthSocial>
-            <Agreement>Уже есть аккунт? <b><Link to="/login">Войти</Link></b></Agreement>
+            {/* <AuthSocial blue><img src={facebookLogo} alt="facebook logo"/><div>Зарегестрироваться с помощью Facebook</div></AuthSocial>
+            <AuthSocial red><img src={googleLogo} alt="google logo"/><div>Зарегестрироваться с помощью Google</div></AuthSocial> */}
+            
+          
             <Agreement>Продолжая, вы соглашаетесь с <b>Условиями<br/> использования</b> и Политикой <br/> конфиденциальности Survey App</Agreement>
         </Form>
     )

@@ -9,6 +9,7 @@ import filterIcon from './filter-icon.svg'
 const BarSection = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 20px;
 
     @media screen and (max-width: 1060px)    {
         flex-wrap: wrap;
@@ -127,9 +128,8 @@ const SearchBox = styled.div`
 const Filters = styled.div`
 
     display: flex;
-    margin: auto;
     font-weight: bold;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: .75em;
 
     .item {
@@ -147,13 +147,13 @@ const Filters = styled.div`
 `
 
 
-const InnerTopBar = ({titleText}) => {
+const InnerTopBar = () => {
 
     return (
         
         <BarSection>
-           <h4>{titleText}</h4>
 
+{/* 
            <HashField>
                <div>Отдых</div>
                <div>Мероприятие</div>
@@ -165,16 +165,16 @@ const InnerTopBar = ({titleText}) => {
                     <input aria-label="Поиск" id="searchPolls" type="text" placeholder="Введи ник или тег . Например: @neobis или $tag"/>
                     <button>Поиск</button>
                 </form>
-            </SearchBox> 
+            </SearchBox>  */}
 
             <Filters>
                 <div className="item sort">
                     <img alt="Сортировка" src={sortIcon}/><span>Сортировка</span>
                 </div>
 
-                <div className="item filter">
+                {/* <div className="item filter">
                     <img alt ="Фильтровать" src={filterIcon}/><span>Фильтры</span>
-                </div>
+                </div> */}
             </Filters>
 
         </BarSection>

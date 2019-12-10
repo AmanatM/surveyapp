@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import ReactMinimalPieChart from 'react-minimal-pie-chart'
 import { getPollList, getPollStatsById } from '../../services/polls'
 import Loader from 'react-loader-spinner'
+import { changePage } from '../../reducers/currentPage'
+
 
 
 import MainContainer from '../../elements/MainContainer'
@@ -43,15 +46,23 @@ const MainContainerCustom = styled(MainContainer)`
 
 
 
-const StatisticsPage = () => {
+const StatisticsPage = (props) => {
 
     const [ pollList, setPollList ] = useState([])
     const [ activeStats, setActiveStats ] = useState(null)
     const [ loading, setLoading] = useState(false)
+    const [ windowWidth, setWindowWidth ] = useState(window.innerWidth) 
 
 
-    let windowWidth = window.innerWidth
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
 
+
+    useEffect(() => {
+        props.changePage('Статистика')
+        return () => {
+            props.changePage('')
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -120,12 +131,13 @@ const StatisticsPage = () => {
 
 
                 <StatsStyled className="column">
-                    {!activeStats ? (loading ? null : (windowWidth < 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
-                        <div className="stats_content" onClick={() => setActiveStats()}>
-                            <button className="close_stats">
+                    {!activeStats ? (loading ? null : (windowWidth > 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
+                        <div className="stats_content" >
+                            <button className="close_stats" onClick={() => setActiveStats()}>
                                 Закрыть
                             </button>
                             <h5>Страны</h5>
+                            {windowWidth}
                             <div className="country info_box">
                                 <ul>
                                     <li><div className="country_name">Cтраны: </div> <div className="country_number">{activeStats.countries.length}</div></li>
@@ -207,4 +219,4 @@ const StatisticsPage = () => {
     )
 }
 
-export default StatisticsPage
+export default connect(null, {changePage})(StatisticsPage)

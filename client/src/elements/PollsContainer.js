@@ -49,7 +49,6 @@ const PollsContainer = styled.table`
         td.poll_details {
             width: 79%;
             order: -1;
-
         }
 
 
