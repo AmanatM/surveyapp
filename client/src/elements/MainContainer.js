@@ -7,6 +7,7 @@ const MainContainer = styled.main`
     border-radius: 7px;
     min-height: 85vh;
     margin: 20px auto;
+    margin-bottom: 0;
     color: #353C64;
     width: 100%;
     max-width: 1400px;

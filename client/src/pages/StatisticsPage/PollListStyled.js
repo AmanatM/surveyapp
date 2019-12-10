@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 const PollListStyled = styled.div`
     background-color: #fff;
     flex: 1 0 50%;
@@ -22,7 +23,6 @@ const PollListStyled = styled.div`
         width: 100%;
         border-collapse: collapse;
 
-
         thead {
             td {
                 color: #353C64;
@@ -44,6 +44,15 @@ const PollListStyled = styled.div`
                 height: 10px;
                 cursor: pointer;
                 transition: all .2s;
+                outline: none;
+
+                &.active {
+                    background-color: #DEDEDE;
+                }
+
+                &:focus {
+                    background-color: #DEDEDE;
+                }
 
                 @media (pointer: fine) {
                     &:hover {

@@ -79,6 +79,14 @@ const mockPollsStat = [
                 name: 'Казахстан',
                 number: 14
             }, 
+            {
+                name: 'Монголоия',
+                number: 10
+            }, 
+            {
+                name: 'США',
+                number: 20
+            }, 
         ],
         ages: '',
         maleNumber: '32',

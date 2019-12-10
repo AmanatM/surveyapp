@@ -5,9 +5,9 @@ import { getPollList, getPollStatsById } from '../../services/polls'
 import Loader from 'react-loader-spinner'
 
 
-
 import MainContainer from '../../elements/MainContainer'
 import PollListStyled from './PollListStyled'
+import StatsStyled from './StatsStyled'
 
 const MainContainerCustom = styled(MainContainer)`
     background-color: #EDEDED;
@@ -42,91 +42,6 @@ const MainContainerCustom = styled(MainContainer)`
 `
 
 
-const Stats = styled.div`
-    background-color: #fff;
-    flex: 0 1 50%;
-    display: flex;
-    position: relative;
-
-
-
-    @media screen and (max-width: 980px) {
-
-        .stats_content {
-            background-color: #fff;
-            position: absolute;
-            top: -20%;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-            color: white;
-            background-color: rgba(0, 0, 0, .6);
-
-        }
-
-        .inactive {
-            color: white;
-        }
-
-    }
-
-    .inactive {
-        margin: auto;
-    }
-
-    .loader {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-    }
-
-
-
-    .stats_content {
-        width: 100%;
-
-        h5 {
-            margin-bottom: 10px;
-        }
-
-        .info_box {
-            background-color: #DEDEDE;
-            width: 100%;
-            padding: 10px;
-        
-        }
-        .country {
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            ul {
-
-                margin-right: 20%;
-
-                li {
-                    list-style: none;
-                    font-size: .9em;
-                    color: #353C64;
-                    font-weight: bold;
-                    display: flex;
-                    width: 150px;
-                    margin: 10px 0;
-
-                    .country_name {
-                        margin-right: auto;
-                    }
-                }
-            }
-
-            .diagram {
-                width: 150px;
-            }
-        }
-    }
-`
 
 const StatisticsPage = () => {
 
@@ -163,7 +78,7 @@ const StatisticsPage = () => {
         })
     }
 
-    let colors = ['#F12B2C', '#676666', '#00AA8B', '#e91e63', '#03a9f4']
+    let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a']
 
     let forData = []
     if(activeStats) {
@@ -178,8 +93,6 @@ const StatisticsPage = () => {
         })
     }
 
-
-    console.log(forData)
 
     return (
         <MainContainerCustom>
@@ -197,7 +110,7 @@ const StatisticsPage = () => {
                         </thead>
                         <tbody>
                             {pollList.map(poll => (
-                                <tr onClick={() => handlePollClick(poll.id)} key={poll.id}>
+                                <tr tabIndex="0" className={activeStats ? (activeStats.id === poll.id ? 'active' : '') : ''} onClick={() => handlePollClick(poll.id)} key={poll.id}>
 
                                     <td className="name">{poll.name}</td>
                                     <td className="nickname">{poll.nickname}</td>
@@ -210,13 +123,13 @@ const StatisticsPage = () => {
                 </PollListStyled>
 
 
-                <Stats className="column">
+                <StatsStyled className="column">
                     {!activeStats ? (loading ? null : (windowWidth > 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
                         <div className="stats_content">
                             <h5>Страны</h5>
                             <div className="country info_box">
                                 <ul>
-                                    <li><div className="country_name">Все страны: </div> <div className="country_number">{activeStats.countries.length}</div></li>
+                                    <li><div className="country_name">Cтраны: </div> <div className="country_number">{activeStats.countries.length}</div></li>
                                     {activeStats.countries.map((country, index) => (
                                         <li style={{color: colors[index]}} key={index}><div className="country_name">{country.name}:</div><div className="country_number">{country.number}</div></li>
                                     ))}
@@ -232,23 +145,42 @@ const StatisticsPage = () => {
                                         animate={true}
                                         animationDuration={500}
                                         animationEasing="ease-in-out"
-                                        label
+                                        label={false}
                                         labelStyle={{
                                             fill: '#dedede',
                                             fontFamily: 'sans-serif',
-                                            fontSize: '13px'
+                                            fontSize: '9px'
                                         }}
                                     />
                                 </div>
 
                             </div>
 
+      
+
                             <h5>Возрастной рейтинг</h5>
+                            <div className="age info_box">
+                                <h5>Интервал от:</h5>
+                                <ul>
+                                    <li>10-20: NnN%</li>
+                                    <li>20-30: NnN%</li>
+                                    <li>30-40: NnN%</li>
+                                    <li>40-50: NnN%</li>
+                                </ul>
+                            </div>
+
+
                             <h5>Показатели по принадлежности к полу</h5>
+                            <div className="gender info_box">
+                                <ul>
+                                    
+                                </ul>
+                            </div>
+
                         </div>
                     )} 
                     {loading ? <Loader className="loader" type="ThreeDots" color="#5f76ff" height={100} width={100}/> : null}
-                </Stats>
+                </StatsStyled>
             </div>
         </MainContainerCustom>
     )
