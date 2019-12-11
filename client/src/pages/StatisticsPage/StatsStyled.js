@@ -17,8 +17,9 @@ const StatsStyled = styled.div`
 
     @media screen and (max-width: 980px) {
 
+
         .stats_content {
-            background-color: #fff;
+            background-color: #EDEDED;
             position: fixed;
             height: 100vh;
             padding-top: 80px;

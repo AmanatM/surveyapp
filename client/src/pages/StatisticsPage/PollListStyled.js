@@ -11,6 +11,7 @@ const PollListStyled = styled.div`
 
     @media screen and (max-width: 980px) {
         margin-right: 0;
+        background-color: #EDEDED;
     }
 
     @media screen and (max-width: 650px) {
