@@ -130,7 +130,7 @@ const StatisticsPage = (props) => {
                 </PollListStyled>
 
 
-                <StatsStyled className="column"  style={!activeStats ? {backgroundColor: '#EDEDED'} : {}}>
+                <StatsStyled className="column"  style={!activeStats ? (windowWidth < 980 ? {backgroundColor: '#EDEDED'} : {})  : {}}>
                     {!activeStats ? (loading ? null : (windowWidth > 980 ? <h1 className="inactive">Выберите опрос</h1> : null)) : (
                         <div className="stats_content" >
                             <button className="close_stats" onClick={() => setActiveStats()}>
