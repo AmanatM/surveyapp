@@ -85,7 +85,7 @@ const StatisticsPage = (props) => {
 
 
 
-    let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a']
+    let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a', '#795548']
 
     let forData = []
     if(activeStats) {
@@ -137,7 +137,6 @@ const StatisticsPage = (props) => {
                                 Закрыть
                             </button>
                             <h5>Страны</h5>
-                            {windowWidth}
                             <div className="country info_box">
                                 <ul>
                                     <li><div className="country_name">Cтраны: </div> <div className="country_number">{activeStats.countries.length}</div></li>

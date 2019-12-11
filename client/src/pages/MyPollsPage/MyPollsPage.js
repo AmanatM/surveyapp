@@ -13,6 +13,8 @@ import { changePage } from '../../reducers/currentPage'
 import PollsContainer from '../../elements/PollsContainer'
 import PollTr from '../../elements/PollTr'
 
+import { getMyPollList } from '../../services/polls'
+
 const PollsContainerCustom = styled(PollsContainer)`
 
     @media screen and (max-width: 820px) {
@@ -95,25 +97,14 @@ const Poll = ({children }) => {
 
 const MyPollsPage = (props) => {
 
-    const mockPolls = [
-        {
-            id: 1238919,
-            title: 'Устроить вечеринку?',
-            publishedBy: 'Нео Бисов',
-            createdDate: '1 Апреля, 2019',
-            createdTime: '16:30',
-            rating: 1000
-        },
+    const [ pollList, setPollList ] = useState([])
+    console.log(pollList)
 
-        {
-            id: 89767389,
-            title: 'Во что покарсить стену?',
-            publishedBy: 'Нео Бисов',
-            createdDate: '2 Апреля, 2019',
-            createdTime: '12:40',
-            rating: 918
-        }
-    ]
+    useEffect(() => {
+        getMyPollList().then((data) => {
+            setPollList(data)
+        })
+    }, [])
 
 
     useEffect(() => {
@@ -141,7 +132,7 @@ const MyPollsPage = (props) => {
  
 
                 <tbody>
-                    {mockPolls.map(poll => 
+                    {pollList.map(poll => 
 
                     <Poll key={poll.id} id={poll.id}>
 

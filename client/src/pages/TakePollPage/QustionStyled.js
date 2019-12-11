@@ -69,6 +69,7 @@ const QuestionStyled = styled.div`
             outline: none;
             max-width: 100%;
             width: 400px;
+            font-family: inherit;
 
             &::placeholder {
                 color: #6A6A6A;

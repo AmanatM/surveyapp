@@ -8,7 +8,7 @@ import { changePage } from '../../reducers/currentPage'
 
 
 import MainContainer from '../../elements/MainContainer'
-import getPoll from '../../services/polls'
+import { getPoll } from '../../services/polls'
 import TakePollPageStyled from './TakePollPageStyled'
 import FinalScreen from './FinalScreen'
 

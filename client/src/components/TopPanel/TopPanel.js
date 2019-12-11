@@ -196,16 +196,16 @@ const Profile = styled.div`
     &.active {
 
         img {
-            border-color: #5F76FF;
+            border-color: #8A9AF4;
         }   
 
         div.submenu {
             display: block;
             position: absolute;
-            background-color: #5F76FF; 
+            background-color: #8A9AF4; 
             padding: 10px 15px;
             z-index: 15;
-            border-radius: 38px 0px 38px 38px;
+            border-radius: 20px 0px 20px 20px;
             bottom: -210%;
             left: -20px;
             text-align: center;
@@ -240,10 +240,10 @@ const Profile = styled.div`
 
             div.submenu {
                 padding: 20px;
-                border-radius: 38px;
+                border-radius: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                bottom: -285%;
+                bottom: -260%;
 
             }
 
@@ -288,7 +288,7 @@ const TopPanel = (props) => {
                 <div className="submenu">
                     <ul>
                         <li><Link to="/main/profile">Профиль</Link></li>
-                        <li><a>Тех. Поддержка</a></li>
+                        <li><a style={{whiteSpace: 'nowrap'}}>Тех. Поддержка</a></li>
                         <li onClick={logout}>Выйти</li>
                     </ul>
                 </div>
