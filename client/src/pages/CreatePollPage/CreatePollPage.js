@@ -12,6 +12,8 @@ import FormStyled from './FormStyled'
 import Question from './Question'
 
 
+import { postPoll, postQuestions } from '../../services/polls'
+
 const CreatePollPageSection = styled(MainContainer)`
     padding: 30px 60px;
     background-color: #EDEDED;
@@ -34,7 +36,7 @@ const CreatePollPage = (props) => {
     const [ questions, setQuestions ] = useState([])
 
     const [ poll, setPoll ] = useState({
-        name: '',
+        title: '',
         description: ''
     })
 
@@ -70,12 +72,30 @@ const CreatePollPage = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        let data = {
+            title: poll.title,
+            description: poll.description,
+            owner: '2',
+            duration: '00:10:00',
+            s_type: 'public'
+        }
+
+        postPoll(data)
+        .then((res)=> {
+            let pollId = res.id 
+            
+
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
     }
 
 
 
     const addQuestion = (e) => {
-
 
         const defaultQuestion = {
             number: questions.length + 1,
@@ -133,7 +153,7 @@ const CreatePollPage = (props) => {
 
             setQuestions([])
             setPoll({
-                name: '',
+                title: '',
                 description: ''
             })
 
@@ -161,7 +181,7 @@ const CreatePollPage = (props) => {
     return (
         <CreatePollPageSection>
             <FormStyled onSubmit={handleSubmit}>
-                <input value={poll.name} onChange={(e) => setPoll({...poll, name: e.target.value} )} className="poll_name" placeholder="Название опроса"/>
+                <input value={poll.title} onChange={(e) => setPoll({...poll, title: e.target.value} )} className="poll_name" placeholder="Название опроса"/>
                 <textarea value={poll.description} onChange={(e) => setPoll({...poll, description: e.target.value} )} rows="3" className="poll_description" placeholder="Введите описание"></textarea>
 
 

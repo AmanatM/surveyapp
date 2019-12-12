@@ -1,5 +1,4 @@
-// import axios from 'axios'
-// const baseUrl = 'https://neobis-survey-app.herokuapp.com/api/v1/'
+import axios from 'axios'
 
 
 const mockMyPolls = [
@@ -212,5 +211,34 @@ export const getPollStatsById = async (id) => {
     let data = await mockPollsStat.find(poll => poll.id === +(id))
     await wait(500)
     return(data)
+}
+
+const baseUrl = 'https://neobis-survey-app.herokuapp.com/api/v1'
+
+export const postPoll = async (poll) => {
+
+    let forToken = window.sessionStorage.getItem('loggedUser')
+    let new_token = forToken.replace('"', '').replace('"', '')
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${new_token}`
+    }
+      
+    let res = await axios.post(`${baseUrl}/survey/create/`, poll, {headers})
+    return res.data
+}
+
+export const postQuestions = async (questions) => {
+    let forToken = window.sessionStorage.getItem('loggedUser')
+    let new_token = forToken.replace('"', '').replace('"', '')
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${new_token}`
+    }
+
+    let res = await axios.post(`${baseUrl}/answer/create/`, questions, {headers})
+    return res.data
+
 }
 

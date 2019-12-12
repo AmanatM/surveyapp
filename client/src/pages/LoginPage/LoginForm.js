@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { Link, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Loader from 'react-loader-spinner'
+
 
 import { notify } from '../../reducers/popUp'
 
@@ -10,6 +12,8 @@ import AuthButton from '../../elements/AuthButton'
 import facebookLogo from '../../assets/imgs/facebook-icon.svg'
 import googleLogo from '../../assets/imgs/google-icon.svg'
 import refreshIcon from '../../assets/imgs/refresh-icon.svg'
+
+import { login } from '../../services/user'
 
 import { loginUser } from '../../reducers/user'
 
@@ -131,19 +135,40 @@ const LoginForm = (props) => {
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
 
+    const [ loading, setLoading ] = useState(false)
+    console.log(username, password)
+
 
     const handleLogin = (e) => {
         e.preventDefault()
 
         if(username !== '' && password !== '') {
 
-            let loginUser = {
+            let data = {
                 username,
                 password
             }
+            setLoading(true)
 
-            props.loginUser(loginUser)
-            props.history.push('/main/my-polls')
+
+            login(data)
+            .then((res)=> {
+                setLoading(false)
+                props.loginUser(res.token)
+                props.history.push('/main/my-polls')
+            })
+            .catch((err) => {
+
+                setLoading(false)
+
+                props.notify({
+                    heading: 'Ошибка',
+                    type: 'error',
+                    text: 'Повторите попытку'
+                })
+            })
+
+
 
 
         } else {
@@ -164,7 +189,11 @@ const LoginForm = (props) => {
 
                 <Input value={username} onChange={(e) => setUsername(e.target.value)} aria-label="Никнэйм" type="text" autoComplete="username" placeholder="Никнэйм"/>
                 <Input value={password}  onChange={(e) => setPassword(e.target.value)} aria-label="Пароль" type="password" autoComplete="current-password" placeholder="Пароль"/>
-                <AuthButton className="login_btn" red type="submit">Войти</AuthButton>
+                <AuthButton disabled={loading ? true : false} className="login_btn" red type="submit">
+                    {!loading ? 'Войти' : <Loader
+                        type="TailSpin" color="#ffffff" height={15} width={15}
+                    />}
+                </AuthButton>
 
                 <div className="extra_functions">
                     <div className="createAcc"><Link to="/registration">Создать аккаунт</Link></div>

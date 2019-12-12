@@ -13,6 +13,11 @@ let AuthButton = styled.button`
     align-items: center;
     margin: 2px 0;
     border-radius: 0px;
+
+    &:disabled {
+        background: grey;
+        cursor: not-allowed;
+    }
 `
 
 export default AuthButton
