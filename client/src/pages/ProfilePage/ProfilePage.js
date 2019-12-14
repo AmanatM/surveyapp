@@ -11,6 +11,8 @@ import MainContainer from '../../elements/MainContainer'
 import PasswordInput from '../../elements/PasswordInput/PasswordInput'
 import scorePassword from '../../utils/scorePassword'
 
+import noAvatarImg from '../../assets/imgs/no-avatar.png'
+
 const MainContainerStyled = styled(MainContainer)`
     display: flex;
     @media screen and (max-width: 1160px) {
@@ -188,6 +190,9 @@ const InputGroup = styled.div`
         border-radius: 21px;
         padding: 5px 10px;
         font-weight: bold;
+        &:disabled {
+            background-color: grey;
+        }
     }
 
     @media screen and (max-width: 570px) {
@@ -400,23 +405,25 @@ const MyPollsPage = (props) => {
         }
     }, [])
 
-    const fromServer = {
-        username: 'neobisov',
-        name: 'Нео',
-        surname: 'Бисов',
-        myPolls: 1,
-        passedPolls: 3,
-        birthDate: '11 мая 1988 года',
-        email: 'neobisov@neo.bis',
-        phone: '+8-800 5553535',
-        country: 'Кыргызстан',
-        city: 'Бишкек',
-        gender: 'Мужской'
-    }
+   
 
     const [ editMode, setEditMode ] = useState(false)
-    const [ userData, setUserData ] = useState(fromServer)
+    const [ userData, setUserData ] = useState({})
     const [ passwordChangeMode, setPasswordChangeMode] = useState(false)
+    const [ userDataUpdated, setUserDataUpdated ] = useState({})
+
+    useEffect(() => {
+        if(editMode) {
+            setUserDataUpdated(userData)
+        }
+    }, [editMode])
+
+    useEffect(() => {
+        let userFromStorage = window.sessionStorage.getItem('user')
+        if(userFromStorage) {
+            setUserData(JSON.parse(userFromStorage))
+        }
+    }, [])
 
     const saveProfileData = () => {
         setEditMode(false)
@@ -424,8 +431,13 @@ const MyPollsPage = (props) => {
 
     const toggleGender = (e) => {
         e.preventDefault()
-        let male = userData.gender === 'Мужской' ? true : false
-        setUserData({...userData, gender: male ? 'Женский' : 'Мужской' })
+        if(userData.gender) {
+            let male = userData.gender === 'male' ? true : false
+
+            setUserData({...userData, gender: userData.gender === 'male' ? 'female' : 'male'})
+            console.log(userData.gender)
+        }
+
     }
 
     return (
@@ -435,7 +447,7 @@ const MyPollsPage = (props) => {
                 <ProfileBaseInfo>
                     <h2>{userData.name} {userData.surname}</h2>
                     <div className="avatar">
-                        <img src={profileImg}/> 
+                        <img src={noAvatarImg}/> 
                     </div>
 
                     <h3>Никнэйм</h3>
@@ -516,17 +528,17 @@ const MyPollsPage = (props) => {
                     <form>  
                         <InputGroup>
                                 <label>Имя</label>
-                                <input disabled={!editMode} type="text" value={userData.name} onChange={(e) => setUserData({...userData, name: e.target.value})}/>
+                                <input disabled={!editMode} type="text" value={userData.first_name} onChange={(e) => setUserData({...userData, first_name: e.target.value})}/>
                             </InputGroup>
 
                             <InputGroup>
                                 <label>Фамилия</label>
-                                <input disabled={!editMode} type="text" value={userData.surname} onChange={(e) => setUserData({...userData, surname: e.target.value})}/>
+                                <input disabled={!editMode} type="text" value={userData.last_name} onChange={(e) => setUserData({...userData, last_name: e.target.value})}/>
                             </InputGroup>
 
                             <InputGroup>
                                 <label>Дата рождения</label>
-                                <input disabled={!editMode} type="text" value={userData.birthDate} onChange={(e) => setUserData({...userData, birthDate: e.target.value})}/>
+                                <input disabled={!editMode} type="text" value={userData.birth_date} onChange={(e) => setUserData({...userData, birth_date: e.target.value})}/>
                             </InputGroup>
 
                             <InputGroup>
@@ -546,12 +558,12 @@ const MyPollsPage = (props) => {
 
                             <InputGroup>
                                 <label>Город</label>
-                                <input disabled={!editMode} type="text" value={userData.city} onChange={(e) => setUserData({...userData, city: e.target.value})}/>
+                                <input disabled={!editMode} type="text" value={userData.city ? userData.city : ''} onChange={(e) => setUserData({...userData, city: e.target.value})}/>
                             </InputGroup>
 
                             <InputGroup>
                                 <label>Пол: {userData.gender}</label>
-                                <button onClick={toggleGender} className="toggle_gender" disabled={!editMode}>Изменить</button>
+                                <button onClick={toggleGender} value={userData.gender} className="toggle_gender" disabled={!editMode}>Изменить: {userData.gender} </button>
                             </InputGroup>
                         </form>
                         
@@ -594,7 +606,7 @@ const MyPollsPage = (props) => {
                 <div className="buttons">
 
                     {editMode ? null : <Button onClick={() => setEditMode(true)} color="#29CC97">Редактировать</Button>} 
-                    {editMode ? <Button onClick={() => {setEditMode(false); setUserData(fromServer)}} color="#6D6D6D">Отменить</Button> : null} 
+                    {editMode ? <Button onClick={() => {setEditMode(false)}} color="#6D6D6D">Отменить</Button> : null} 
                     {editMode ?  <Button onClick={saveProfileData} color="#3A71FF">Сохранить</Button> : null} 
                     
                 </div>
@@ -606,4 +618,11 @@ const MyPollsPage = (props) => {
     )
 }
 
-export default connect(null, {changePage})(MyPollsPage)
+const mapStateToProps = (state) => {
+
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {changePage})(MyPollsPage)

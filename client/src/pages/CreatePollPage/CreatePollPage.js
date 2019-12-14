@@ -10,6 +10,7 @@ import MainContainer from '../../elements/MainContainer'
 
 import FormStyled from './FormStyled'
 import Question from './Question'
+import Loader from 'react-loader-spinner'
 
 
 import { postPoll, postQuestions } from '../../services/polls'
@@ -19,6 +20,7 @@ const CreatePollPageSection = styled(MainContainer)`
     background-color: #EDEDED;
     position: relative;
     overflow-x: hidden;
+
 
     @media screen and (max-width: 1000px){
         padding: 40px 20px;
@@ -34,6 +36,7 @@ const CreatePollPageSection = styled(MainContainer)`
 const CreatePollPage = (props) => {
 
     const [ questions, setQuestions ] = useState([])
+    const [ loading, setLoading ] = useState(false)
 
     const [ poll, setPoll ] = useState({
         title: '',
@@ -72,23 +75,49 @@ const CreatePollPage = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
 
         let data = {
             title: poll.title,
             description: poll.description,
-            owner: '2',
-            duration: '00:10:00',
-            s_type: 'public'
+            s_type: 'public',
+            question_list: questions
         }
 
-        postPoll(data)
+        let formattedQuestions = data.question_list
+
+        formattedQuestions.forEach((item) => {
+            delete item.number
+        })
+
+
+        let dataToSend = {
+            ...data,
+            question_list: formattedQuestions
+        }
+
+        console.log(dataToSend)
+        
+
+        postPoll(dataToSend)
         .then((res)=> {
-            let pollId = res.id 
-            
+            setLoading(false)
+            props.notify({
+                heading: 'Опрос успешно создан',
+                type: 'success',
+                text: 'Опрос был создан успешно, его можно увидеть на странице Мои опросы'
+            })
 
         })
         .catch((err) => {
+            setLoading(false)
+
             console.log(err)
+            props.notify({
+                heading: 'Ошибка',
+                type: 'error',
+                text: 'Что-то пошло не так, попробуйте еще раз'
+            })
         })
 
     }
@@ -99,17 +128,19 @@ const CreatePollPage = (props) => {
 
         const defaultQuestion = {
             number: questions.length + 1,
-            name: '',
-            images: [],
-            type: 'option',
-            options: []
+            title: '',
+            q_type: 'one_choice',
+            answer_list: [
+
+            ]
         }
         
         setQuestions([...questions, defaultQuestion])
     }
 
-    const deleteQuestion = (index) => {
-        
+    const deleteQuestion = (index, e) => {
+        console.log(e)
+
         let newQuestions = [
             ...questions.slice(0, index),
             ...questions.slice(index+1)
@@ -124,8 +155,8 @@ const CreatePollPage = (props) => {
         setActiveQuestion(-1) // To unfocus from active question(to prevent accidental deletion) 
     }
 
-    const handleLoad = () => {
-
+    const handleLoad = (e) => {
+        e.preventDefault()
         const saveLocally = () => {
             window.localStorage.setItem('questions', JSON.stringify(questions))
             window.localStorage.setItem('poll', JSON.stringify(poll))
@@ -147,8 +178,8 @@ const CreatePollPage = (props) => {
 
     }
 
-    const handleReset = () => {
-
+    const handleReset = (e) => {
+        e.preventDefault()
         const resetPoll = () => {
 
             setQuestions([])
@@ -178,6 +209,7 @@ const CreatePollPage = (props) => {
 
     }
 
+
     return (
         <CreatePollPageSection>
             <FormStyled onSubmit={handleSubmit}>
@@ -192,21 +224,21 @@ const CreatePollPage = (props) => {
                         {questions.map((question, index) => 
 
                             <div key={index} className="number_container">
-                                <li className={activeQuestion === index ? 'active' : ''} onClick={() => setActiveQuestion(index)}>
-                                    <button>{index+1}</button>
+                                <li className={activeQuestion === index ? 'active' : ''} >
+                                    <button onClick={(e) => {e.preventDefault(); setActiveQuestion(index)}}>{index+1}</button>
                                 </li>
-                                <button onClick={() => deleteQuestion(index)} className={`delete_question ${activeQuestion === index ? 'active' : ''}`}></button>
+                                <button onClick={(e) => {e.preventDefault(); deleteQuestion(index, e)}} className={`delete_question ${activeQuestion === index ? 'active' : ''}`}></button>
                             </div>
                         )}
 
-                        <div className="number_container"><li onClick={addQuestion}><button>+</button></li></div>
+                        <div className="number_container"><li><button onClick={(e) => { e.preventDefault(); addQuestion()}} className="button">+</button></li></div>
                     </ul>
                 </div>
 
                 <div className="save_buttons">
                     <button onClick={handleReset} className="reset">Сбросить</button>
                     <button onClick={handleLoad} className="save_local">Сохранть в черновик</button>
-                    <button className="save">Опубликовать</button>
+                    <button className="save" disabled={loading} onClick={handleSubmit}>{loading ? <Loader color="#ffffff" width={15} height={15}/> : 'Опубликовать'}</button>
                 </div>
 
             </FormStyled>
@@ -214,4 +246,10 @@ const CreatePollPage = (props) => {
     )
 }
 
-export default connect(null, { changePage, notify })(CreatePollPage)
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { changePage, notify })(CreatePollPage)

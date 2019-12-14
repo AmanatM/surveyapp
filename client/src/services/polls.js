@@ -1,27 +1,5 @@
 import axios from 'axios'
 
-
-const mockMyPolls = [
-    {
-        id: 876325162,
-        title: 'Устроить вечеринку?',
-        publishedBy: 'Нео Бисов',
-        createdDate: '1 Апреля, 2019',
-        createdTime: '16:30',
-        rating: 1000
-    },
-
-    {
-        id: 37629431,
-        title: 'Во что покарсить стену?',
-        publishedBy: 'Нео Бисов',
-        createdDate: '2 Апреля, 2019',
-        createdTime: '12:40',
-        rating: 918
-    }
-]
-
-
 const mockAllPolls = [
     {
         id: 1047810,
@@ -175,17 +153,68 @@ const mockPollsStat = [
 ]
 
 
-// This is the simulaton of fecth
-
+// This is the simulaton of fetching
 async function wait(stallTime = 500) {
     await new Promise(resolve => setTimeout(resolve, stallTime));
 }
 
-export const getMyPollList = async () => {
-    let data = await mockMyPolls
-    await wait(0)
-    return(data)
+
+
+let url = 'https://neobis-survey-app.herokuapp.com/api/v1/survey'
+//const url = 'https://b6465aa0.ngrok.io/api/v1/survey'
+
+
+let token = ''
+let userId = ''
+
+
+export const getPollStatsById = async (id) => {
+
+
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
+
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+
+    let res = await axios.get(`${url}/statistics/18/`, { headers })
+    return(res.data)
+
 }
+
+export const postPoll = async (poll) => {
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
+
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+    let res = await axios.post(`${url}/create/`, poll, {headers})
+    return res.data
+}
+
+
+export const getMyPollList = async (offset) => {
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
+
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+    let res = await axios.get(`${url}/list/?limit=7&offset=${offset}`,  { headers })
+    return(res.data)
+}
+
 
 export const getAllPolls = async () => {
     let data = await mockAllPolls
@@ -204,41 +233,6 @@ export const getPoll = async (id) => {
     let data = await mockPolls.find(poll => poll.id === +(id))
     await wait(500)
     return(data)
-
-}
-
-export const getPollStatsById = async (id) => {
-    let data = await mockPollsStat.find(poll => poll.id === +(id))
-    await wait(500)
-    return(data)
-}
-
-const baseUrl = 'https://neobis-survey-app.herokuapp.com/api/v1'
-
-export const postPoll = async (poll) => {
-
-    let forToken = window.sessionStorage.getItem('loggedUser')
-    let new_token = forToken.replace('"', '').replace('"', '')
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${new_token}`
-    }
-      
-    let res = await axios.post(`${baseUrl}/survey/create/`, poll, {headers})
-    return res.data
-}
-
-export const postQuestions = async (questions) => {
-    let forToken = window.sessionStorage.getItem('loggedUser')
-    let new_token = forToken.replace('"', '').replace('"', '')
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${new_token}`
-    }
-
-    let res = await axios.post(`${baseUrl}/answer/create/`, questions, {headers})
-    return res.data
 
 }
 

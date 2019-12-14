@@ -14,7 +14,6 @@ import googleLogo from '../../assets/imgs/google-icon.svg'
 import refreshIcon from '../../assets/imgs/refresh-icon.svg'
 
 import { login } from '../../services/user'
-
 import { loginUser } from '../../reducers/user'
 
 import { Form, Input, AuthSocial, Agreement, Divider} from './LoginFormStyled'
@@ -51,8 +50,9 @@ const LoginForm = (props) => {
             
             login(data)
             .then((res)=> {
+                console.log(res)
                 setLoading(false)
-                props.loginUser(res.token)
+                props.loginUser(res)
                 props.history.push('/main/my-polls')
             })
             .catch((err) => {

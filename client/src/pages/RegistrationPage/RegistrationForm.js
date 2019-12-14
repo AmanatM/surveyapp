@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 
-import facebookLogo from '../../assets/imgs/facebook-icon.svg'
-import googleLogo from '../../assets/imgs/google-icon.svg'
+// import facebookLogo from '../../assets/imgs/facebook-icon.svg'
+// import googleLogo from '../../assets/imgs/google-icon.svg'
 import PassWordInput from '../../elements/PasswordInput/PasswordInput'
 
 import Loader from 'react-loader-spinner'
@@ -37,11 +37,12 @@ const RegistrationForm = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ flag, setFlag ] = useState(globeIcon)
 
-    const [ inputData, handleInputChange ] = useInputChange()
+    const [ inputData, handleInputChange ] = useInputChange({gender: 'male'})
     const [ country, setCountry ] = useState('AF')
     const [ dialCode, setDialCode] = useState('')
     const [ phone, setPhone] = useState('')
     const [ city, setCity ] = useState('')
+
 
     useEffect(() => {
         axios.get(`https://api.ipdata.co?api-key=94ad779a265d3957a6af4449f3dcbf1543de2dc55843fb41f249b359`)
@@ -58,7 +59,6 @@ const RegistrationForm = (props) => {
         setFlag(globeIcon)
 
         let finded = phoneList.find(item => item.dial_code === dialCode)
-        console.log(finded)
 
         axios.get(`https://restcountries.eu/rest/v2/alpha/${finded.code}`)
         .then((res) => {
@@ -101,14 +101,14 @@ const RegistrationForm = (props) => {
 
         register(dataToSend)
         .then((res) => {
-            setLoading(false)
             console.log(res)
+            setLoading(false)
             props.notify({
                 heading: 'Пользователь создан',
                 type: 'success',
-                text: 'Пользователь упешно создван!'
+                text: 'Пользователь упешно создан!'
             })
-            props.loginUser(res.token)
+            props.loginUser(res)
             props.history.push('/main/profile')
 
         })
@@ -121,7 +121,7 @@ const RegistrationForm = (props) => {
                 text: 'Повторите попытку'
             })
         })
-        console.log(dataToSend)
+
     }
 
     const handleDialCode = (e) => {
@@ -142,7 +142,7 @@ const RegistrationForm = (props) => {
 
             <TwoInOneLine colWidth="50">
                 <div>
-                <Input id="date" onChange={handleInputChange} required aria-label="Дата" type="date" placeholder="Дата рождения*"/>
+                <Input id="birth_date" onChange={handleInputChange} required aria-label="Дата" type="date" placeholder="Дата рождения*"/>
                 <select id="gender" onChange={handleInputChange} aria-label="Пол">
                     <option value="male">Мужской</option>
                     <option value="female">Женский</option>
@@ -157,7 +157,7 @@ const RegistrationForm = (props) => {
                 ))}
             </select>
 
-            <Input aria-label="Город" value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="Город*"/>
+            <Input aria-label="Город" value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="Город"/>
             
   
             <TwoInOneLine className="country" colWidth="30">

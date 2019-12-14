@@ -174,7 +174,7 @@ const FormStyled = styled.form`
             margin-left: 20px;
             height: 80px;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
 
             button {
                 margin: 10px 0;
@@ -197,6 +197,13 @@ const FormStyled = styled.form`
 
             &.save {
                 background-color: #29CC97;
+
+            &:disabled {
+                background-color: grey;
+                min-width: 100px;
+                cursor: not-allowed;
+            }
+
             }
 
             &.reset {

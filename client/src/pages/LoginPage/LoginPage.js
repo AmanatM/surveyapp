@@ -15,8 +15,6 @@ import PageFooter from '../../components/Footer'
 import Loginform from './LoginForm'
 
 
-
-
 const LoginSection = styled.section`
     background: url(${backgroundImg}) #091211;
     min-height: 100vh;

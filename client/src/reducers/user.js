@@ -10,6 +10,9 @@ const reducer = (state = null, action) => {
 
         case 'INITUSER':
             return action.data
+            
+        case  'SET_USER_DATA':
+            return action.data
 
         default:
             return state
@@ -17,17 +20,17 @@ const reducer = (state = null, action) => {
     }
 }
 
-
 export const initUser = () => {
 
-    const loggedUserJSON = window.sessionStorage.getItem('loggedUser')
+    const userFromSessionStorage = window.sessionStorage.getItem('user')
 
-    if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON)
+    if (userFromSessionStorage) {
+
+        let loggedUser = JSON.parse(userFromSessionStorage)
 
         return {
             type: 'INITUSER',
-            data: user
+            data: loggedUser
         }
     }
 
@@ -38,10 +41,11 @@ export const initUser = () => {
  
 }
 
+
 export const loginUser = (credentials) => {
 
     window.sessionStorage.setItem(
-        'loggedUser', JSON.stringify(credentials)
+        'user', JSON.stringify(credentials)
     ) 
 
     return {

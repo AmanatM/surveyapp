@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { logoutUser } from '../../reducers/user'
 
 import notificationIcon from './notification-icon.svg'
-import profilePhoto from '../../assets/imgs/demo-profile-img.jpg'
+import noAvatarImg from '../../assets/imgs/no-avatar.png'
 
 
 const TopPanelSection = styled.div`
@@ -207,7 +207,7 @@ const Profile = styled.div`
             z-index: 15;
             border-radius: 20px 0px 20px 20px;
             bottom: -210%;
-            left: -20px;
+            right: 20px;
             text-align: center;
 
             li {
@@ -241,9 +241,11 @@ const Profile = styled.div`
             div.submenu {
                 padding: 20px;
                 border-radius: 20px;
-                left: 50%;
+                left: 20%;
+                right: 0;
                 transform: translateX(-50%);
                 bottom: -260%;
+                min-width: 155px;
 
             }
 
@@ -282,8 +284,8 @@ const TopPanel = (props) => {
             <Divider/>
 
             <Profile className={profileClassName} onMouseLeave={profileMouseLeave} onClick={() => setProfileActive(!profileActive)}>
-                <p>Нео Бисов</p>
-                <img alt="Фото профиля" src={profilePhoto}/>
+                <p>{props.user ? props.user.first_name + ' ' + props.user.last_name : ''}</p>
+                <img alt="Фото профиля" src={noAvatarImg}/>
 
                 <div className="submenu">
                     <ul>
@@ -301,7 +303,8 @@ const TopPanel = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentPage: state.currentPage
+        currentPage: state.currentPage,
+        user: state.user
     }
 }
 

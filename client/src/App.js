@@ -21,7 +21,9 @@ const App = (props) => {
 
     useEffect(() => {
       props.initUser()
+
     }, [])
+
 
     return (
       <div className="App">

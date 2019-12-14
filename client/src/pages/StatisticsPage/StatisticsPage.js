@@ -52,6 +52,7 @@ const StatisticsPage = (props) => {
     const [ activeStats, setActiveStats ] = useState(null)
     const [ loading, setLoading] = useState(false)
     const [ windowWidth, setWindowWidth ] = useState(window.innerWidth) 
+    console.log(activeStats)
 
 
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
@@ -77,25 +78,29 @@ const StatisticsPage = (props) => {
         setLoading(true)
         setActiveStats(null)
 
-        getPollStatsById(id).then((poll) => {
+        getPollStatsById(id)
+        .then((res) => {
             setLoading(false)
-            setActiveStats(poll)  
+            setActiveStats(res.statistics)
+        })
+        .catch((err) => {
+            console.log(err)
         })
     }
 
 
 
-    let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a', '#795548']
+    let colors = ['#F12B2C', '#ff9800', '#00AA8B', '#e91e63', '#03a9f4', '#8bc34a', '#795548', '#607d8b']
 
     let forData = []
     if(activeStats) {
-        activeStats.countries.map((country, index) => {
+        activeStats.countries_list.map((country, index) => {
             let obj = {
-                title: country.name,
-                value: country.number,
-                color: colors[index],
-                percentage: country.number / 100
+                title: country.title,
+                value: country.amount,
+                color: colors[index]
             }
+
             forData.push(obj)
         })
     }
@@ -139,9 +144,9 @@ const StatisticsPage = (props) => {
                             <h5>Страны</h5>
                             <div className="country info_box">
                                 <ul>
-                                    <li><div className="country_name">Cтраны: </div> <div className="country_number">{activeStats.countries.length}</div></li>
-                                    {activeStats.countries.map((country, index) => (
-                                        <li style={{color: colors[index]}} key={index}><div className="country_name">{country.name}:</div><div className="country_number">{country.number}</div></li>
+                                    <li><div className="country_name">Cтраны: </div> <div className="country_number">{activeStats.countries_list.length}</div></li>
+                                    {activeStats.countries_list.map((country, index) => (
+                                        <li style={{color: colors[index]}} key={index}><div className="country_name">{country.title}:</div><div className="country_number">{country.amount}</div></li>
                                     ))}
                                 </ul>
 
@@ -172,10 +177,9 @@ const StatisticsPage = (props) => {
                             <div className="age info_box">
                                 <h5>Интервал от:</h5>
                                 <ul>
-                                    <li>10-20: NnN%</li>
-                                    <li>20-30: NnN%</li>
-                                    <li>30-40: NnN%</li>
-                                    <li>40-50: NnN%</li>
+                                    {activeStats.age_list.map((item) => (
+                                        <li key={item.title}><b>{item.title}</b>: <i>{item.percentage}%</i></li>
+                                    ))}
                                 </ul>
                             </div>
 
@@ -187,15 +191,15 @@ const StatisticsPage = (props) => {
                                     <div className="data_container">
                                     
                                         <div className="data">
-                                            <h5>Мужчины</h5>
-                                            <div className="amount">{activeStats.maleNumber}</div>
-                                            <div className="percent">{Math.round(+activeStats.maleNumber / (+activeStats.maleNumber + +activeStats.femaleNumber) * 100)}%</div>
+                                            <h5>{activeStats.gender_list[0].title === 'male' ? 'Мужчины' : 'Женщины'}</h5>
+                                            <div className="amount">{activeStats.gender_list[0].amount}</div>
+                                            <div className="percent">{activeStats.gender_list[0].percentage}%</div>
                                         </div>
 
                                         <div className="data">
-                                            <h5>Женщины</h5>
-                                            <div className="amount">{activeStats.femaleNumber}</div>
-                                            <div className="percent">{Math.round(+activeStats.femaleNumber / (+activeStats.maleNumber + +activeStats.femaleNumber) * 100)}%</div>
+                                            <h5>{activeStats.gender_list[1].title === 'female' ? 'Мужчины' : 'Женщины'}</h5>
+                                            <div className="amount">{activeStats.gender_list[1].amount}</div>
+                                            <div className="percent">{activeStats.gender_list[1].percentage}%</div>
                                         </div>
 
                                     </div>
@@ -203,7 +207,7 @@ const StatisticsPage = (props) => {
                                     <div className="total">
                                         <h5>Всего:</h5>
                                         <div className="total">
-                                            {+activeStats.maleNumber + +activeStats.femaleNumber}
+                                            {+activeStats.gender_list[0].amount + +activeStats.gender_list[1].amount}
                                         </div>
                                     </div>
                                 </div>
