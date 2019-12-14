@@ -26,7 +26,26 @@ export const Form = styled.form`
         font-family: inherit;
         background-color: #E9E9E9;
         height: 44px;
+        appearance: none;
+        padding-left: 20px;
     }
+
+    .country {
+        position: relative;
+
+        .flag {
+            border-radius: 50%;
+            width: 30px !important;
+            height: 30px;
+            object-fit: cover;
+            position: absolute;
+            z-index: 9;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 5px;
+        }
+    }
+
 `
 
 export const FormTitle = styled.div`
@@ -125,18 +144,23 @@ export const Agreement = styled.p`
 
 export const TwoInOneLine = styled.div`
 
-    display: flex;
-    align-content: center;    
-    *{
+  
+    div {
+        display: flex;
+        align-content: center;  
 
-        &:first-child {
+        * {
+            &:first-child {
             width: ${props => props.colWidth}%;
         }
 
         &:last-child {
             width: calc(${props => 100 - +(props.colWidth)}% - 10px);
             margin-left: 10px;
+            }
         }
+
+
     }
 
 `
