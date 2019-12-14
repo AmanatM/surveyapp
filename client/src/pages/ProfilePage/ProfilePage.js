@@ -142,6 +142,7 @@ const ProfilePersonalData = styled.div`
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 30px;
+    margin-top: 30px;
     
     h3 {
         text-align: center;
@@ -450,7 +451,7 @@ const MyPollsPage = (props) => {
                 </ProfileBaseInfo>
 
 
-                <Statistics>
+                {/* <Statistics>
                     <div className="diagram">
                         <ReactMinimalPieChart
                             animate={true}
@@ -504,7 +505,7 @@ const MyPollsPage = (props) => {
                         <p className="passed_polls">Пройденые опросы: <span>{userData.passedPolls}</span></p>
 
                     </div>
-                </Statistics>
+                </Statistics> */}
 
             </FirstCol>
 

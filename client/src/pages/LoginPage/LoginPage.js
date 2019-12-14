@@ -52,7 +52,6 @@ const Info = styled.div`
 const LoginPage = (props) => {
 
     setMetaTheme('#091211')
-    
 
     return (
         <LoginSection>

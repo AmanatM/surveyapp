@@ -1,171 +1,80 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import axios from 'axios'
 
-import AuthButton from '../../elements/AuthButton'
 import facebookLogo from '../../assets/imgs/facebook-icon.svg'
 import googleLogo from '../../assets/imgs/google-icon.svg'
-
 import PassWordInput from '../../elements/PasswordInput/PasswordInput'
 
+import Loader from 'react-loader-spinner'
+import { notify } from '../../reducers/popUp'
 
-const Form = styled.form`
-    max-width: 100%;
-    width: 440px;
-    display: flex;
-    padding: 20px;
-    color: #373737;
-    background-color: #fff;
-    flex-direction: column;
-    border-radius: 8px;
-    margin: 0 auto;
+import { Form, FormTitle, SubmitButton, AuthSocial, Input, Divider, Agreement, TwoInOneLine} from './RegistrationFormStyled'
+import { useInputChange } from '../../utils/useInputChange'
 
-    select {
-        font-size: inherit;
-        border: none;
-        margin: 5px 0;
-        border-radius: 8px;
-        font-family: inherit;
-        background-color: #E9E9E9;
-        height: 44px;
-    }
-`
+import countryList from './CountryList'
 
-const FormTitle = styled.div`
-        text-align: center;
-        padding-bottom: 15px;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #E9E9E9;
 
-        h2 {
-            font-weight: normal;
+
+
+const RegistrationForm = (props) => {
+
+    useEffect(() => {
+        return () => {
+            props.notify('')
         }
+    }, [])
 
-`
 
-const SubmitButton = styled(AuthButton)`
-    margin-top: 10px;
-    @media screen and (max-width: 425px)  {
-        padding: 15px;
+
+    const [ inputData, handleInputChange ] = useInputChange()
+    const [ country, setCountry ] = useState('')
+    console.log(inputData)
+    console.log(country)
+
+    useEffect(() => {
+        axios.get('http://ip-api.com/json')
+        .then((res) => {
+            setCountry(res.data.countryCode)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(inputData)
     }
-`
-
-const AuthSocial = styled(AuthButton)`
-    padding: 5px 5px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-
-    img {
-        width: 30px;
-    }
-
-    div {
-        margin: auto;
-        position: relative;
-        left: -13.5px;
-        padding-left: 30px;
-    }
-
-    @media screen and (max-width: 425px)  {
-        padding: 10px;
-    }
-
-
-`
-
-
-const Input = styled.input`
-    font-size: inherit;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 8px;
-    font-family: inherit;
-    background-color: #E9E9E9;
-    outline: none;
-
-    &[type="date"] {
-        &:placeholder {
-
-        }
-    }
-`
-
-const Divider = styled.div`
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    display: flex;
-    color: black;
-    align-items: center;
-    margin-top: 20px;
-
-    div {
-        margin: 0 20px;
-        font-size: .8em;
-        font-family: 'Arial',sans-serif;
-        font-weight: normal;
-        white-space: nowrap;
-    }
-
-    &::before, &::after {
-        width: 100%;
-        content: '';
-        font-weight: normal;
-        display: flex;
-        height: 1px;
-        background-color: black;
-    }
-`
-
-const Agreement = styled.p`
-    font-family: 'Arial', sans-serif;
-    font-size: .8em;
-    text-align: center;
-    margin-top: 20px;
-`
-
-const TwoInOneLine = styled.div`
-
-    display: flex;
-    align-content: center;    
-    *{
-
-        &:first-child {
-            width: ${props => props.colWidth}%;
-        }
-
-        &:last-child {
-            width: calc(${props => 100 - +(props.colWidth)}% - 10px);
-            margin-left: 10px;
-        }
-    }
-
-`
-
-const RegistrationForm = () => {
 
     return (
-        <Form >
+        <Form onSubmit={handleSubmit}>
             <FormTitle>
                 <h2>Новый пользователь</h2>
                 <p><small>Справшиватйе и отвечайте</small></p>
             </FormTitle>
 
-            <Input aria-label="Никнэйм" require type="text" autoComplete="false" placeholder="Никнэйм"/>
-            <Input aria-label="Электронная почта" require type="email" autoComplete="false" placeholder="Email почта"/>
-            <Input aria-label="Имя" type="text" autoComplete="false" placeholder="Имя"/>
-            <Input aria-label="Фамилия" type="text" autoComplete="false" placeholder="Фамилия"/>
+            <Input id="username" onChange={handleInputChange} aria-label="Никнэйм" require type="text" autoComplete="false" placeholder="Никнэйм"/>
+            <Input id="email" onChange={handleInputChange} aria-label="Электронная почта" require type="email" autoComplete="false" placeholder="Email почта"/>
+            <Input id="first_name" onChange={handleInputChange} aria-label="Имя" type="text" autoComplete="false" placeholder="Имя"/>
+            <Input id="last_name" onChange={handleInputChange} aria-label="Фамилия" type="text" autoComplete="false" placeholder="Фамилия"/>
 
             <TwoInOneLine colWidth="50">
-                <Input aria-label="Дата" type="date" placeholder="Дата рождения"/>
-                <select aria-label="Пол">
+                <Input id="date" onChange={handleInputChange} aria-label="Дата" type="date" placeholder="Дата рождения"/>
+                <select id="gender" onChange={handleInputChange} aria-label="Пол">
                     <option value="male">Мужской</option>
                     <option value="female">Женский</option>
                 </select>
             </TwoInOneLine>
 
-            <Input aria-label="Страна" type="text" placeholder="Страна"/>
+            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)} aria-label="Страна" type="text" placeholder="Страна">
+                {countryList.map((item) => (
+                    <option key={item.code} value={item.code}>{item.name}</option>
+                ))}
+            </select>
+
             <Input aria-label="Город" type="text" placeholder="Город"/>
             
             <TwoInOneLine colWidth="30">
@@ -174,11 +83,11 @@ const RegistrationForm = () => {
             </TwoInOneLine>
 
             <PassWordInput bgColor="#E9E9E9">
-                <Input aria-label="Парль" autoComplete="new-password" placeholder="Пароль"/>
+                <Input id="password" onChange={handleInputChange} aria-label="Парль" autoComplete="new-password" placeholder="Пароль"/>
             </PassWordInput>
 
             <PassWordInput bgColor="#E9E9E9">
-                <Input aria-label="Повторите паоль" autoComplete="new-password" placeholder="Повторите пароль"/>
+                <Input id="confirm_password" onChange={handleInputChange} aria-label="Повторите паоль" autoComplete="new-password" placeholder="Повторите пароль"/>
             </PassWordInput>
 
 
@@ -194,4 +103,4 @@ const RegistrationForm = () => {
     )
 }
 
-export default RegistrationForm
+export default connect(null, { notify })(RegistrationForm)

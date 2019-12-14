@@ -17,111 +17,8 @@ import { login } from '../../services/user'
 
 import { loginUser } from '../../reducers/user'
 
+import { Form, Input, AuthSocial, Agreement, Divider} from './LoginFormStyled'
 
-const Form = styled.form`
-    max-width: 100%;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-top: 30px;
-
-    .login_btn {
-        margin-top: 30px;
-    }
-
-    .extra_functions {
-        display: flex;
-        align-content: center;
-        padding: 0 25px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    .forgotPass {
-        font-size: .8em;
-        display: flex;
-        justify-content: flex-end;
-        align-content: center;
-
-        cursor: pointer;
-    
-
-        img {
-            width: 12px;
-            margin-left: 4px;
-            transition: all .2s;
-        }
-
-        &:hover {
-            img {
-                transform: rotate(90deg);
-            }
-        }
-    }
-
-    div.createAcc {
-        font-size: .8em;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        margin-right: auto;
-    }
-`
-
-const Input = styled.input`
-    font-size: inherit;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 8px;
-    font-family: inherit;
-`
-
-const AuthSocial = styled(AuthButton)`
-    padding: 3px 5px;
-    border-radius: 8px;
-
-    img {
-        width: 30px;
-    }
-
-    div {
-        margin: auto;
-        position: relative;
-        left: -13.5px;
-    }
-
-`
-
-const Agreement = styled.p`
-    font-family: 'Arial', sans-serif;
-    font-size: .8em;
-    text-align: center;
-    margin-top: 20px;
-`
-
-const Divider = styled.div`
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-
-    div {
-        margin: 0 20px;
-    }
-
-    &::before, &::after {
-        
-        width: 100%;
-        content: '';
-        font-weight: normal;
-        display: flex;
-        height: 1px;
-        background-color: white;
-    }
-`
 
 const LoginForm = (props) => {
 
@@ -130,13 +27,13 @@ const LoginForm = (props) => {
         return () => {
             props.notify('')
         }
+
     }, [])
 
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
 
     const [ loading, setLoading ] = useState(false)
-    console.log(username, password)
 
 
     const handleLogin = (e) => {
@@ -150,7 +47,8 @@ const LoginForm = (props) => {
             }
             setLoading(true)
 
-
+            props.notify('')
+            
             login(data)
             .then((res)=> {
                 setLoading(false)
@@ -164,7 +62,7 @@ const LoginForm = (props) => {
                 props.notify({
                     heading: 'Ошибка',
                     type: 'error',
-                    text: 'Повторите попытку'
+                    text: `${err.response.status === 401 ? 'Ошибка авторизации' : 'Что-то пошло не так'}` 
                 })
             })
 

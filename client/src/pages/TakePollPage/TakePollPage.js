@@ -136,9 +136,6 @@ const TakePollPage = (props) => {
                         </button>
                     </div>
                 </TakePollPageStyled>)}
-                
-
-               
 
             </MainContainerCustom>
         )  
