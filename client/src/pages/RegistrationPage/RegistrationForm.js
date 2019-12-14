@@ -35,9 +35,9 @@ const RegistrationForm = (props) => {
     console.log(country)
 
     useEffect(() => {
-        axios.get('http://ip-api.com/json')
+        axios.get(`https://api.ipdata.co?api-key=94ad779a265d3957a6af4449f3dcbf1543de2dc55843fb41f249b359`)
         .then((res) => {
-            setCountry(res.data.countryCode)
+            setCountry(res.data.country_code)
         })
         .catch((err) => {
             console.log(err)
