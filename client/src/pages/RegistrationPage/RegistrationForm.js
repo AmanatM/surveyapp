@@ -135,14 +135,14 @@ const RegistrationForm = (props) => {
                 <p><small>Справшиватйе и отвечайте</small></p>
             </FormTitle>
 
-            <Input id="username" onChange={handleInputChange} aria-label="Никнэйм" required type="text" autoComplete="false" placeholder="Никнэйм"/>
-            <Input id="email" onChange={handleInputChange} aria-label="Электронная почта" required type="email" autoComplete="false" placeholder="Email почта"/>
-            <Input id="first_name" onChange={handleInputChange} aria-label="Имя" type="text" required autoComplete="false" placeholder="Имя"/>
-            <Input id="last_name" onChange={handleInputChange} aria-label="Фамилия" type="text" required autoComplete="false" placeholder="Фамилия"/>
+            <Input id="username" onChange={handleInputChange} aria-label="Никнэйм" required type="text" autoComplete="false" placeholder="Никнэйм*"/>
+            <Input id="email" onChange={handleInputChange} aria-label="Электронная почта" required type="email" autoComplete="false" placeholder="Email почта*"/>
+            <Input id="first_name" onChange={handleInputChange} aria-label="Имя" type="text" required autoComplete="false" placeholder="Имя*"/>
+            <Input id="last_name" onChange={handleInputChange} aria-label="Фамилия" type="text" required autoComplete="false" placeholder="Фамилия*"/>
 
             <TwoInOneLine colWidth="50">
                 <div>
-                <Input id="date" onChange={handleInputChange} required aria-label="Дата" type="date" placeholder="Дата рождения"/>
+                <Input id="date" onChange={handleInputChange} required aria-label="Дата" type="date" placeholder="Дата рождения*"/>
                 <select id="gender" onChange={handleInputChange} aria-label="Пол">
                     <option value="male">Мужской</option>
                     <option value="female">Женский</option>
@@ -151,13 +151,13 @@ const RegistrationForm = (props) => {
 
             </TwoInOneLine>
 
-            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)} aria-label="Страна" required type="text" placeholder="Страна">
+            <select id="country" value={country} onChange={(e) => setCountry(e.target.value)} aria-label="Страна" required type="text" placeholder="Страна*">
                 {countryList.map((item) => (
                     <option key={item.code} value={item.code}>{item.name}</option>
                 ))}
             </select>
 
-            <Input aria-label="Город" value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="Город"/>
+            <Input aria-label="Город" value={city} onChange={(e) => setCity(e.target.value)} type="text" placeholder="Город*"/>
             
   
             <TwoInOneLine className="country" colWidth="30">
@@ -168,18 +168,18 @@ const RegistrationForm = (props) => {
                             <option key={item.code} value={item.dial_code}>{item.code}: {item.dial_code}</option>
                         ))}
                     </select>
-                    <Input value={phone} onChange={(e) => setPhone(e.target.value)} required aria-label="Телефон без кода страны" type="tel" placeholder="Номер телефона"/>
+                    <Input value={phone} onChange={(e) => setPhone(e.target.value)} required aria-label="Телефон без кода страны" type="tel" placeholder="Номер телефона*"/>
 
                 </div>
  
             </TwoInOneLine>
 
             <PassWordInput bgColor="#E9E9E9">
-                <Input required id="password" onChange={handleInputChange} aria-label="Парль" autoComplete="new-password" placeholder="Пароль"/>
+                <Input required id="password" onChange={handleInputChange} aria-label="Парль" autoComplete="new-password" placeholder="Пароль*"/>
             </PassWordInput>
 
             <PassWordInput bgColor="#E9E9E9">
-                <Input required id="confirm_password" onChange={handleInputChange} aria-label="Повторите паоль" autoComplete="new-password" placeholder="Повторите пароль"/>
+                <Input required id="confirm_password" onChange={handleInputChange} aria-label="Повторите паоль" autoComplete="new-password" placeholder="Повторите пароль*"/>
             </PassWordInput>
 
 
