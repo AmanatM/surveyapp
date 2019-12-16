@@ -60,48 +60,58 @@ const PaginatorStyled = styled.div`
     }
 `
 
-const Paginator = ({offset, setOffset, getMyPollList, setPollList}) => {
+const Paginator = ({count, offset, setOffset, getMyPollList, setPollList}) => {
 
     const [ loading, setLoading ] = useState(false)
     
     
     const handleBackward = () => {
 
-        setLoading(true)
+        //setLoading(true)
 
-        getMyPollList(offset + 7)
-        .then((res) => {
-            console.log(res)
-            setLoading(false)
-            setPollList(res.results)
-            setOffset(offset + 7)
+        if(offset > 0) {
 
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            getMyPollList(offset - 7)
+            .then((res) => {
+                console.log(res)
+                setLoading(false)
+                setPollList(res.results)
+                setOffset(offset - 7)
+    
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+
     }
 
     const handleForward = () => {
+
+        if(offset + 7 < count) {
+            setLoading(true)
+            getMyPollList()
+    
+    
+            getMyPollList(offset + 7)
+            .then((res) => {
+                console.log(res)
+                setLoading(false)
+                setPollList(res.results)
+                setOffset(offset + 7)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
         
-        setLoading(true)
-        getMyPollList()
 
-
-        getMyPollList()
-        .then((res) => {
-            console.log(res)
-            setLoading(false)
-            setPollList(res.results)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
     }
 
     return (
         <PaginatorStyled>
-            <div className="data">Text</div>
+            <div className="data">{offset} - {offset + 7} из {count}</div>
 
             <div className="buttons">
                 <button disabled={loading}> <img className="left" onClick={handleBackward} src={arrow_left}/></button>

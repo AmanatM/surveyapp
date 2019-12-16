@@ -38,6 +38,7 @@ const CreatePollPage = (props) => {
     const [ questions, setQuestions ] = useState([])
     const [ loading, setLoading ] = useState(false)
 
+
     const [ poll, setPoll ] = useState({
         title: '',
         description: ''
@@ -76,6 +77,7 @@ const CreatePollPage = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
+        props.notify('')
 
         let data = {
             title: poll.title,
@@ -213,7 +215,7 @@ const CreatePollPage = (props) => {
     return (
         <CreatePollPageSection>
             <FormStyled onSubmit={handleSubmit}>
-                <input value={poll.title} onChange={(e) => setPoll({...poll, title: e.target.value} )} className="poll_name" placeholder="Название опроса"/>
+                <input value={poll.title} onChange={(e) => {props.notify(''); setPoll({...poll, title: e.target.value} )}} className="poll_name" placeholder="Название опроса"/>
                 <textarea value={poll.description} onChange={(e) => setPoll({...poll, description: e.target.value} )} rows="3" className="poll_description" placeholder="Введите описание"></textarea>
 
 
@@ -237,7 +239,7 @@ const CreatePollPage = (props) => {
 
                 <div className="save_buttons">
                     <button onClick={handleReset} className="reset">Сбросить</button>
-                    <button onClick={handleLoad} className="save_local">Сохранть в черновик</button>
+                    <button onClick={handleLoad} className="save_local">Сохранить в черновик</button>
                     <button className="save" disabled={loading} onClick={handleSubmit}>{loading ? <Loader color="#ffffff" width={15} height={15}/> : 'Опубликовать'}</button>
                 </div>
 

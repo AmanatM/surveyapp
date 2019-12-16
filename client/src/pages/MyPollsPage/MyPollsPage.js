@@ -137,9 +137,10 @@ const MyPollsPage = (props) => {
 
     const [ pollList, setPollList ] = useState([])
     const [ loading, setLoading ] = useState(true)
-    console.log(pollList)
-
+    const [ count, setCount ] = useState(null)
     const [ offset, setOffset ] = useState(0)
+
+    console.log('Count: ' + count,'Offset:' + offset)
 
 
     useEffect(() => {
@@ -151,6 +152,7 @@ const MyPollsPage = (props) => {
             setPollList(data.results)
             console.log(data)
             setLoading(false)
+            setCount(data.count)
 
         })
         .catch((err) => {
@@ -256,7 +258,7 @@ const MyPollsPage = (props) => {
                 ) : null}
 
                 {pollList.length === 0 ? null : (
-                    <Paginator offset={offset} setPollList={setPollList} getMyPollList={getMyPollList} setOffset={setOffset}></Paginator>
+                    <Paginator count={count} offset={offset} setPollList={setPollList} getMyPollList={getMyPollList} setOffset={setOffset}></Paginator>
                 )}
 
                 
