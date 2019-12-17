@@ -258,7 +258,7 @@ const MyPollsPage = (props) => {
                 ) : null}
 
                 {pollList.length === 0 ? null : (
-                    <Paginator count={count} offset={offset} setPollList={setPollList} getMyPollList={getMyPollList} setOffset={setOffset}></Paginator>
+                    <Paginator setLoading={setLoading} count={count} offset={offset} setPollList={setPollList} getMyPollList={getMyPollList} setOffset={setOffset}></Paginator>
                 )}
 
                 

@@ -138,12 +138,10 @@ const Notification = styled.div`
     }
 
     @media screen and (max-width: 780px) {
-        width: 40%;
+        width: 100%;
         margin: 0;
         display: flex;
         
-
-
         img {
             margin: auto;
             min-width: 25px;
@@ -179,6 +177,7 @@ const Profile = styled.div`
 
     p {
         margin-right: 20px;
+        margin-left: 20px;
     }
 
     img {
@@ -223,13 +222,15 @@ const Profile = styled.div`
         margin: 0;
         display: flex;
         min-width: 0;
+        margin-left: auto;
 
         p {
-            display: none;
+            white-space: nowrap;
         }
 
+
         img {
-            margin: auto;
+
         }
 
         &:hover {
@@ -241,11 +242,11 @@ const Profile = styled.div`
             div.submenu {
                 padding: 20px;
                 border-radius: 20px;
-                left: 20%;
-                right: 0;
+                right: -50px;
                 transform: translateX(-50%);
-                bottom: -260%;
+                bottom: -120px;
                 min-width: 155px;
+                max-width: 160px;
 
             }
 
@@ -272,16 +273,16 @@ const TopPanel = (props) => {
 
             <SearchBox>
                 <form>
-                    <input aria-label="Поиск" type="text" placeholder="Искать. Введите запрос или тег"/>
+                    <input aria-label="Поиск" type="text" placeholder="Поиск"/>
                     <button>Поиск</button>
                 </form>
             </SearchBox>
 
-            <Notification>
+            {/* <Notification>
                 <img alt="Уведомления" src={notificationIcon}/>
-            </Notification>
+            </Notification> */}
 
-            <Divider/>
+            {/* <Divider/> */}
 
             <Profile className={profileClassName} onMouseLeave={profileMouseLeave} onClick={() => setProfileActive(!profileActive)}>
                 <p>{props.user ? props.user.first_name + ' ' + props.user.last_name : ''}</p>
@@ -290,7 +291,7 @@ const TopPanel = (props) => {
                 <div className="submenu">
                     <ul>
                         <li><Link to="/main/profile">Профиль</Link></li>
-                        <li><a style={{whiteSpace: 'nowrap'}}>Тех. Поддержка</a></li>
+                        <li><a href="mailto: mailingneobis@gmail.com" style={{whiteSpace: 'nowrap'}}>Тех. Поддержка</a></li>
                         <li onClick={logout}>Выйти</li>
                     </ul>
                 </div>

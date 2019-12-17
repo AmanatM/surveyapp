@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import arrow_left from '../../assets/imgs/arrow_left.svg'
 
 
+
 const PaginatorStyled = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -58,23 +59,31 @@ const PaginatorStyled = styled.div`
         
 
     }
+
+    .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 `
 
-const Paginator = ({count, offset, setOffset, getMyPollList, setPollList}) => {
+const Paginator = ({setLoading, count, offset, setOffset, getMyPollList, setPollList}) => {
 
-    const [ loading, setLoading ] = useState(false)
+    const [ pageLoading, setPageLoading ] = useState(false)
     
     
     const handleBackward = () => {
 
-        //setLoading(true)
 
         if(offset > 0) {
+            setPageLoading(true)
+            setLoading(true)
 
             getMyPollList(offset - 7)
             .then((res) => {
                 console.log(res)
                 setLoading(false)
+                setPageLoading(false)
                 setPollList(res.results)
                 setOffset(offset - 7)
     
@@ -90,12 +99,14 @@ const Paginator = ({count, offset, setOffset, getMyPollList, setPollList}) => {
 
         if(offset + 7 < count) {
             setLoading(true)
+            setPageLoading(true)
             getMyPollList()
     
     
             getMyPollList(offset + 7)
             .then((res) => {
                 console.log(res)
+                setPageLoading(false)
                 setLoading(false)
                 setPollList(res.results)
                 setOffset(offset + 7)
@@ -111,11 +122,12 @@ const Paginator = ({count, offset, setOffset, getMyPollList, setPollList}) => {
 
     return (
         <PaginatorStyled>
-            <div className="data">{offset} - {offset + 7} из {count}</div>
+            
+            <div className="data">{offset + 1} - {offset + 7} из {count}</div>
 
             <div className="buttons">
-                <button disabled={loading}> <img className="left" onClick={handleBackward} src={arrow_left}/></button>
-                <button disabled={loading}> <img className="right" onClick={handleForward} src={arrow_left}/></button>
+                <button disabled={pageLoading}> <img className="left" onClick={handleBackward} src={arrow_left}/></button>
+                <button disabled={pageLoading}> <img className="right" onClick={handleForward} src={arrow_left}/></button>
             </div>
 
      
