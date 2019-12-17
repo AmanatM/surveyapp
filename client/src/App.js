@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import GlobalStyle from './GlobalStyle' 
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { initUser } from './reducers/user'
@@ -21,9 +21,13 @@ const App = (props) => {
 
     useEffect(() => {
       props.initUser()
-
+      
     }, [])
 
+
+
+
+    
 
     return (
       <div className="App">
@@ -31,7 +35,7 @@ const App = (props) => {
         <PopUp/>
           <Router>
             <Switch>
-              
+      
               <Route exact path="/" render={() => <MainPage/>}/>
               <Route path="/main" render={() => <MainFrame/>}/>   
               <Route exact path="/login" render={() => <LoginPage/>}/>

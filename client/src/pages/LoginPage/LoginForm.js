@@ -23,6 +23,7 @@ const LoginForm = (props) => {
 
     useEffect(() => {
 
+        
         return () => {
             props.notify('')
         }
@@ -62,7 +63,7 @@ const LoginForm = (props) => {
                 props.notify({
                     heading: 'Ошибка',
                     type: 'error',
-                    text: `${err.response.status === 401 ? 'Ошибка авторизации' : 'Что-то пошло не так'}` 
+                    text: 'Ошибка авторизации'
                 })
             })
 

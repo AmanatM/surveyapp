@@ -13,4 +13,13 @@ export const register = async (data) => {
     return res.data
 }
 
+export const changePassword = async (data) => {
+    
+    const headers = {
+        'Authorization': `Token ${JSON.parse(window.sessionStorage.getItem('user')).token}`
+    }
+    const res = await axios.put(`${baseUrl}/change-password/`, data, {headers})
+    return res.data
+}
+
 export default { login }

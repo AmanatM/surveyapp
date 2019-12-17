@@ -140,17 +140,13 @@ const MyPollsPage = (props) => {
     const [ count, setCount ] = useState(null)
     const [ offset, setOffset ] = useState(0)
 
-    console.log('Count: ' + count,'Offset:' + offset)
-
 
     useEffect(() => {
-
         setLoading(true)
-        getMyPollList(offset)
 
+        getMyPollList(0)
         .then((data) => {
             setPollList(data.results)
-            console.log(data)
             setLoading(false)
             setCount(data.count)
 
@@ -164,11 +160,14 @@ const MyPollsPage = (props) => {
                 type: 'error',
                 text: 'Попробуйте еще раз'
             })
-            
         })
+    }, [])
+
+    useEffect(() => {
+
 
         return () => {
-            props.notify({})
+            props.notify('')
         }
     }, [])
 

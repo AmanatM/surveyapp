@@ -60,6 +60,7 @@ const StatisticsPage = (props) => {
 
     useEffect(() => {
         props.changePage('Статистика')
+        
         return () => {
             props.changePage('')
         }

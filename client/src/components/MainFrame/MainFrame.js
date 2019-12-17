@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import setMetaTheme from '../../utils/setThemeColor'
 
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
 import SideNav from '../SideNav/SideNav'
 import TopPanel from '../TopPanel/TopPanel'
@@ -18,6 +18,8 @@ import TakePollPage from '../../pages/TakePollPage/TakePollPage'
 import StatisticsPage from '../../pages/StatisticsPage/StatisticsPage'
 
 import NotFound from '../../components/NotFound/NotFound'
+
+import { logoutUser } from '../../reducers/user'
 
 
 import backgroundImg from './general-bg.jpg'
@@ -47,6 +49,16 @@ const MainFrame = (props) => {
 
     setMetaTheme('#283e37')
 
+    useEffect(() => {
+        let user = sessionStorage.getItem('user')
+        if(!user) {
+            props.logoutUser()
+            props.history.push('/login')
+        }
+    }, [])
+
+
+
     return (
         <MainFrameSection>
             <SideNav/>
@@ -54,6 +66,8 @@ const MainFrame = (props) => {
                 <TopPanel/>
 
                     <Switch>
+
+                        
                         <Route exact path="/main/my-polls" render={() => <MyPollsPage/>}/>
                         <Route exact path="/main/all-polls" render={() => <AllPolls/>}/>
                         <Route exact path="/main/all-polls/:id" render={({match}) => <TakePollPage id={match.params.id}/>}/>
@@ -77,4 +91,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, null)(MainFrame))
+export default withRouter(connect(mapStateToProps, {logoutUser})(MainFrame))
