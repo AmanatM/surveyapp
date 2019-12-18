@@ -3,6 +3,10 @@ import  styled from 'styled-components'
 import { connect } from 'react-redux'
 import { changePage } from '../../reducers/currentPage'
 import { Link } from 'react-router-dom'
+import Loader from 'react-loader-spinner'
+import { notify } from '../../reducers/popUp'
+
+
 
 
 import InnerTopBar from '../../components/InnerTopBar/InnerTopBar'
@@ -13,6 +17,38 @@ import PollTr from '../../elements/PollTr'
 
 import { getAllPolls } from '../../services/polls'
 
+import Paginator from './Paginator'
+
+
+const MainContainerCustom = styled(MainContainer)`
+    .empty_info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+            background-color: #5F76FF;
+            color: white;
+            font-weight: bold;
+            border-radius: 21px;
+            margin-top: 10px;
+            padding: 4px 20px;
+        }
+    }
+
+    &.loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .loader {
+        height: 120px;
+    }
+`
 
 const PollsContainerCustom = styled(PollsContainer)`
 
@@ -123,52 +159,101 @@ const AllPolls = (props) => {
     
 
     const [ pollList, setPollList ] = useState([])
+    const [ loading, setLoading ] = useState(false)
+    const [ count, setCount ] = useState(null)
+    const [ offset, setOffset ] = useState(0)
+
+    
     useEffect(() => {
-        getAllPolls().then((data) => {
-            setPollList(data)
+        setLoading(true)
+        
+        getAllPolls(7)
+        .then((data) => {
+            setPollList(data.results)
+
+            setLoading(false)
+            setCount(data.count)
+        })
+        .catch((err) => {
+            setLoading(false)
+            props.notify({
+                heading: 'Ошибка',
+                type: 'error',
+                text: 'Что-то пошло не так. Попробуйте позже.'
+            })
         })
     }, [])
 
 
+    const parseDate = (stringDate) => {
+
+        let date = new Date(stringDate)
+
+        let month = date.getMonth()
+        let day = date.getDate()
+        let year = date.getFullYear()
+
+        return day + '.' + month + '.' + year+','
+    }   
+
+
+    const parseTime = (time) => {
+        let string = new Date(time).toLocaleTimeString("ru", {  
+            hour: "numeric",  
+            minute: "numeric",   
+        });
+
+        return string
+    } 
+
+
     return (
-        <MainContainer>
-            <InnerTopBar/>
-            <PollsContainerCustom >
-                <thead>
-                    <tr>
-                        <th>Название опроса</th>
-                        <th>Никнэйм</th>
-                        <th>Имя пользователя</th>
-                        <th>Дата создания</th>
-                    </tr>
-                </thead>
+        <MainContainerCustom className={loading ? 'loading' : ''}>
 
-                <tbody>
-                        {pollList.map(poll => 
-                        
-                            <PollTrCustom key={poll.id}>
-                                <td className="poll_details">
-                                    <p><Link to={`/main/all-polls/${poll.id}`}>{poll.title}</Link></p>
-                                </td>
+            {loading ? <Loader className="loader" type="Oval" color="#5f76ff" height={120} width={120}/> : (
+                <>
+                <InnerTopBar/>
+                <PollsContainerCustom >
+                    <thead>
+                        <tr>
+                            <th>Название опроса</th>
+                            <th>Никнэйм</th>
+                            <th>Имя пользователя</th>
+                            <th>Дата создания</th>
+                        </tr>
+                    </thead>
 
-                                <td>
-                                    <div className="user">{poll.user.username}</div>
-                                </td>
+                    <tbody>
+                            {pollList.map(poll => 
+                            
+                                <PollTrCustom key={poll.id}>
+                                    <td className="poll_details">
+                                        <p><Link to={`/main/all-polls/${poll.id}`}>{poll.title}</Link></p>
+                                    </td>
 
-                                <td className="user">{poll.user.name} {poll.user.surname}</td>
+                                    <td>
+                                        <div className="user">-</div>
+                                    </td>
+
+                                    <td className="user">-</td>
 
 
-                                <td className="create_dates">
-                                    <div className="create_date">{poll.createdDate}</div>
-                                    <div className="create_time">{poll.createdTime}</div>
-                                </td>
-                            </PollTrCustom>   
-                        )}
-                </tbody>
-                
-            </PollsContainerCustom>
-        </MainContainer>
+                                    <td className="create_dates">
+                                        <div className="create_date">{parseDate(poll.created)}</div>
+                                        <div className="create_time">{parseTime(poll.created)}</div>
+                                    </td>
+                                </PollTrCustom>   
+                            )}
+                    </tbody>
+                    
+                </PollsContainerCustom>
+                {pollList.length === 0 ? null : (
+                    <Paginator setLoading={setLoading} count={count} offset={offset} setPollList={setPollList} getAllPolls={getAllPolls} setOffset={setOffset}></Paginator>
+                )}
+                </>
+            )}
+        </MainContainerCustom>
     )
 }
 
-export default connect(null, { changePage })(AllPolls)
+export default connect(null, { changePage, notify })(AllPolls)

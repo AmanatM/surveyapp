@@ -9,6 +9,24 @@ const PollListStyled = styled.div`
     margin-right: 20px;
     overflow-y: scroll;
 
+    &.loading {  
+
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        min-height: 120px;
+
+        .loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+
+        }
+    }
+
     @media screen and (max-width: 980px) {
         margin-right: 0;
         background-color: #EDEDED;

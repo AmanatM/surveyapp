@@ -181,7 +181,7 @@ export const getPollStatsById = async (id) => {
         'Authorization': `Token ${token}`
     }
 
-    let res = await axios.get(`${url}/statistics/18/`, { headers })
+    let res = await axios.get(`${url}/statistics/${id}/`, { headers })
     return(res.data)
 
 }
@@ -215,11 +215,34 @@ export const getMyPollList = async (offset) => {
     return(res.data)
 }
 
+export const getStatsList = async (offset) => {
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
 
-export const getAllPolls = async () => {
-    let data = await mockAllPolls
-    await wait(0)
-    return(data)
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+    let res = await axios.get(`${url}/list/?limit=99&offset=${offset}`,  { headers })
+    return(res.data)
+}
+
+
+export const getAllPolls = async (offset) => {
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
+
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+
+    let res = await axios.get(`${url}/list/all/?limit=7&offset=${offset}`, { headers })
+    return(res.data)
 }
 
 export const getPollList = async () => {

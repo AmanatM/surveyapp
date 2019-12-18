@@ -67,7 +67,7 @@ const PaginatorStyled = styled.div`
     }
 `
 
-const Paginator = ({setLoading, count, offset, setOffset, getMyPollList, setPollList}) => {
+const Paginator = ({setLoading, count, offset, setOffset, getAllPolls, setPollList}) => {
 
     const [ pageLoading, setPageLoading ] = useState(false)
     
@@ -79,7 +79,7 @@ const Paginator = ({setLoading, count, offset, setOffset, getMyPollList, setPoll
             setPageLoading(true)
             setLoading(true)
 
-            getMyPollList(offset - 7)
+            getAllPolls(offset - 7)
             .then((res) => {
                 console.log(res)
                 setLoading(false)
@@ -99,9 +99,9 @@ const Paginator = ({setLoading, count, offset, setOffset, getMyPollList, setPoll
 
         if(offset + 7 < count) {
             setLoading(true)
-            setPageLoading(true)    
+            setPageLoading(true)   
     
-            getMyPollList(offset + 7)
+            getAllPolls(offset + 7)
             .then((res) => {
                 console.log(res)
                 setPageLoading(false)

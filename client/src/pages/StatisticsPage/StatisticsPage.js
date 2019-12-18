@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import ReactMinimalPieChart from 'react-minimal-pie-chart'
-import { getPollList, getPollStatsById } from '../../services/polls'
+import { getStatsList, getPollStatsById } from '../../services/polls'
 import Loader from 'react-loader-spinner'
 import { changePage } from '../../reducers/currentPage'
+import { notify } from '../../reducers/popUp'
+
 
 
 
@@ -52,7 +54,8 @@ const StatisticsPage = (props) => {
     const [ activeStats, setActiveStats ] = useState(null)
     const [ loading, setLoading] = useState(false)
     const [ windowWidth, setWindowWidth ] = useState(window.innerWidth) 
-    console.log(activeStats)
+    const [ listLoading, setListLoading ] = useState(false)
+
 
 
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
@@ -68,24 +71,45 @@ const StatisticsPage = (props) => {
 
 
     useEffect(() => {
-        getPollList().then((list) => {
-            setPollList(list)
+        setListLoading(true)
+
+        getStatsList(0)
+        .then((data) => {
+            setPollList(data.results)
+            setListLoading(false)
+
+
         }) 
+        .catch((err) => {
+            setListLoading(false)
+            props.notify({
+                heading: 'Ошибка',
+                type: 'error',
+                text: 'Попробуйте попытку позже.'
+            })
+        })
     }, [])
 
 
     const handlePollClick = (id) => {
-
+        props.notify('')
         setLoading(true)
         setActiveStats(null)
 
         getPollStatsById(id)
         .then((res) => {
+            console.log(res)
             setLoading(false)
             setActiveStats(res.statistics)
         })
         .catch((err) => {
-            console.log(err)
+            setLoading(false)
+            props.notify({
+                heading: 'Слишком мало данных',
+                type: 'info',
+                text: 'Не достатчно данных для отоброжения статистики'
+            })
+            
         })
     }
 
@@ -107,32 +131,48 @@ const StatisticsPage = (props) => {
     }
 
 
+    const parseDate = (stringDate) => {
+
+        let date = new Date(stringDate)
+
+        let month = date.getMonth()
+        let day = date.getDate()
+        let year = date.getFullYear()
+
+        return day + '.' + month + '.' + year+''
+    }  
+
+
     return (
         <MainContainerCustom>
             <h1>Статистика</h1>
 
             <div className="content">
-                <PollListStyled className="column">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Название опроса</td>
-                                <td>Никнейм</td>
-                                <td>Дата создания </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pollList.map(poll => (
-                                <tr tabIndex="0" className={activeStats ? (activeStats.id === poll.id ? 'active' : '') : ''} onClick={() => handlePollClick(poll.id)} key={poll.id}>
 
-                                    <td className="name">{poll.name}</td>
-                                    <td className="nickname">{poll.nickname}</td>
-                                    <td className="create_date">{poll.createDate}</td>
-                             
+                <PollListStyled className={`column ${listLoading ? 'loading': ''}`}>
+                    {listLoading ? <Loader className="loader" type="TailSpin" color="#5f76ff" height={90} width={90}/> : (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Название опроса</td>
+                                    <td>Никнейм</td>
+                                    <td>Дата создания </td>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {pollList.map(poll => (
+                                    <tr tabIndex="0" className={activeStats ? (activeStats.id === poll.id ? 'active' : '') : ''} onClick={() => handlePollClick(poll.id)} key={poll.id}>
+
+                                        <td className="name">{poll.title}</td>
+                                        <td className="nickname">{props.user.username}</td>
+                                        <td className="create_date">{parseDate(poll.created)}</td>
+                                
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+   
                 </PollListStyled>
 
 
@@ -223,4 +263,11 @@ const StatisticsPage = (props) => {
     )
 }
 
-export default connect(null, {changePage})(StatisticsPage)
+const mapStateToProps = (state) => {
+
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {changePage, notify})(StatisticsPage)
