@@ -63,9 +63,12 @@ const StatisticsPage = (props) => {
 
     useEffect(() => {
         props.changePage('Статистика')
+        props.notify('')
+
         
         return () => {
             props.changePage('')
+            props.notify('')
         }
     }, [])
 
@@ -107,7 +110,7 @@ const StatisticsPage = (props) => {
             props.notify({
                 heading: 'Слишком мало данных',
                 type: 'info',
-                text: 'Не достатчно данных для отоброжения статистики'
+                text: 'Не достатчно данных для отображения статистики'
             })
             
         })
