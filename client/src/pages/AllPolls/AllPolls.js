@@ -21,6 +21,8 @@ import Paginator from './Paginator'
 
 
 const MainContainerCustom = styled(MainContainer)`
+    padding-bottom: 55px;
+
     .empty_info {
         width: 100%;
         display: flex;
@@ -170,7 +172,6 @@ const AllPolls = (props) => {
         getAllPolls(7)
         .then((data) => {
             setPollList(data.results)
-
             setLoading(false)
             setCount(data.count)
         })

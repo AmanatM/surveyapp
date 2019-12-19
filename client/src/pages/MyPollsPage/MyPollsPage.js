@@ -6,6 +6,7 @@ import { notify } from '../../reducers/popUp'
 import InnerTopBar from '../../components/InnerTopBar/InnerTopBar'
 import MainContainer from '../../elements/MainContainer'
 import threedots from './threedots-icon.svg'
+import { editPollName } from '../../services/polls'
 
 import { connect } from 'react-redux'
 import { changePage } from '../../reducers/currentPage'
@@ -20,6 +21,8 @@ import noAvatarImg from '../../assets/imgs/no-avatar.png'
 
 
 const MainContainerCustom = styled(MainContainer)`
+    padding-bottom: 55px;
+
     .empty_info {
         width: 100%;
         display: flex;
@@ -46,6 +49,28 @@ const MainContainerCustom = styled(MainContainer)`
 
     .loader {
         height: 120px;
+    }
+`
+
+const PollTrCustom = styled(PollTr)`
+    .edit {
+        input {
+            border: none;
+            padding: 5px;
+            outline: none;
+            background: transparent;
+            border-bottom: 1px solid black;
+        }
+
+        button {
+            padding: 4px;
+            margin-left: 10px;
+            margin-top: 20px;
+            background-color: #29CC97;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+        }
     }
 `
 
@@ -99,21 +124,120 @@ const PollsContainerCustom = styled(PollsContainer)`
 
 `
 
-const Poll = ({children }) => {
+
+
+const Poll = ({poll, notify, pollList, setPollList}) => {
 
     const [ submenuActive, setSubmenuActive] = useState(false)
-    let menuActive = submenuActive ? 'active' : ''
+    const [ editMode, setEditMode ] = useState(false)
+    const [ newPollName, setNewPollName ] = useState('')
+    const [ loading, setLoading ] = useState(false)
+
 
     const handleMouseLeave = () => {
         setSubmenuActive(false)
     }
 
-    
-    return (
-        <PollTr className={menuActive}>
+    const getPollById = (id) => {
+        let poll = pollList.find((poll) => poll.id === id)
+        return poll
+    }
 
-            {children}
+
+    const handleEditPoll = () => {
+        setEditMode(true)
+    }
+
+    const handleSubmit = (e, id) => {
+        e.preventDefault()
+
+        let poll = getPollById(id)
+        
+        if(newPollName !== '') {
+
+            let data = {
+                ...poll,
+                title: newPollName
+            }
+
+            editPollName(id, data)
+            .then((res) => {
+                setPollList(pollList.map(poll => poll.id !== id ? poll : data))
+                console.log(res)
+                setEditMode(false)
+                notify({
+                    heading: 'Название обновлено',
+                    type: 'success',
+                    text: 'Название опроса сменено'
+                })
+                
+            })
+            .catch((err) => {
+                console.log(err)
+                setEditMode(false)
+                notify({
+                    heading: 'Что-то пошло нетак',
+                    type: 'error',
+                    text: 'Попробуйте еще раз'
+                })
+
+            })
+
+        } else {
+            notify({
+                heading: 'Не оставляйте название опроса пустым!',
+                type: 'error',
+                text: ''
+            })
+        }
+    }
+
+    const parseDate = (stringDate) => {
+
+        let date = new Date(stringDate)
+
+        let month = date.getMonth()
+        let day = date.getDate()
+        let year = date.getFullYear()
+
+        return day + '.' + month + '.' + year+','
+    }   
+
+
+    const parseTime = (time) => {
+        let string = new Date(time).toLocaleTimeString("ru", {  
+            hour: "numeric",  
+            minute: "numeric",   
+        });
+
+        return string
+    } 
+
+    return (
+        <PollTrCustom className={submenuActive ? 'active' : ''}>
+            <td className="poll_details">
+                <img src={noAvatarImg}/>
+               
+                {editMode ? (
+                    <form onSubmit={(e) => handleSubmit(e, poll.id)} className="edit">
+                        <input onChange={(e) => setNewPollName(e.target.value)} value={newPollName}/>
+                        <button>Изменить</button>
+                    </form>
+                ) :  <p>{poll.title}</p>}
             
+            </td>
+
+            {/* <td className="user">{poll.publishedBy}</td> */}
+
+            <td className="create_dates">
+                <div className="create_date">{parseDate(poll.created)}</div>
+                <div className="create_time">{parseTime(poll.created)}</div>
+            </td>
+
+            {/* <td>
+                <div className="rating">{poll.rating}</div>
+            </td> */}
+
             <td className="submenu" onMouseLeave={handleMouseLeave} >
 
                 <div className="toggle_btn" onClick={() => setSubmenuActive(!submenuActive)}>
@@ -122,14 +246,19 @@ const Poll = ({children }) => {
 
                 <div className="menu_content">
                     <ul>
-                        <li><Link>Редактировать</Link></li>
-                        <li><Link>Деактивировать</Link></li>
-                        <li><Link>Пригласить</Link></li>
-                        <li><Link>Экспорт статистики</Link></li>
+                        <li>
+                            {editMode ? (<button onClick={() => setEditMode(false)}>Отмена</button>) 
+                            : (<button onClick={(e) => handleEditPoll(e)}>Редактировать</button>)}
+                        </li>
+                        <li><a>Деактивировать</a></li>
+                        <li><a>Пригласить</a></li>
+                        <li><a>Экспорт статистики</a></li>
                     </ul>
                 </div>
             </td>
-        </PollTr>
+
+
+        </PollTrCustom>
     )
 }
 
@@ -139,6 +268,8 @@ const MyPollsPage = (props) => {
     const [ loading, setLoading ] = useState(true)
     const [ count, setCount ] = useState(null)
     const [ offset, setOffset ] = useState(0)
+    console.log(pollList)
+
 
 
     useEffect(() => {
@@ -171,26 +302,6 @@ const MyPollsPage = (props) => {
         }
     }, [])
 
-    const parseDate = (stringDate) => {
-
-        let date = new Date(stringDate)
-
-        let month = date.getMonth()
-        let day = date.getDate()
-        let year = date.getFullYear()
-
-        return day + '.' + month + '.' + year+','
-    }   
-
-
-    const parseTime = (time) => {
-        let string = new Date(time).toLocaleTimeString("ru", {  
-            hour: "numeric",  
-            minute: "numeric",   
-        });
-
-        return string
-    } 
 
     useEffect(() => {
         props.changePage('Мои опросы')
@@ -222,29 +333,12 @@ const MyPollsPage = (props) => {
                     </thead>
                     <tbody>
 
-                        {pollList.map(poll => 
+                    {pollList.map(poll => (
 
-                            <Poll key={poll.id} id={poll.id}>
+                        <Poll setPollList={setPollList} pollList={pollList} notify={props.notify} key={poll.id} poll={poll} />
 
-                                <td className="poll_details">
-                                    <img src={noAvatarImg}/>
-                                    <p>{poll.title}</p>
-                                </td>
-
-                                {/* <td className="user">{poll.publishedBy}</td> */}
-
-                                <td className="create_dates">
-                                    <div className="create_date">{parseDate(poll.created)}</div>
-                                    <div className="create_time">{parseTime(poll.created)}</div>
-                                </td>
-
-                                {/* <td>
-                                    <div className="rating">{poll.rating}</div>
-                                </td> */}
-
-                            </Poll>
-                        )}
-                        
+                    ))}
+                     
                     </tbody>
 
                 </PollsContainerCustom>

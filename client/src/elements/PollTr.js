@@ -119,8 +119,12 @@ const PollTr = styled.tr`
                 padding: 3px;
                 left: -116px;
                 bottom: -80px;
-
-
+                
+                button {
+                    background: transparent;
+                    font-size: inherit;
+                    color: inherit;
+                }
 
 
                 li {

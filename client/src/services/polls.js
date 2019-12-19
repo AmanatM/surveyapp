@@ -200,6 +200,20 @@ export const postPoll = async (poll) => {
     return res.data
 }
 
+export const editPollName = async (id, name) => {
+    if(window.sessionStorage.getItem('user')) {
+        let user = JSON.parse(window.sessionStorage.getItem('user'))
+        token = user.token
+        userId = user.user_id
+    }
+
+    const headers = {
+        'Authorization': `Token ${token}`
+    }
+
+    let res = axios.put(`${url}/${id}/`, name, {headers})
+    return res.data
+}   
 
 export const getMyPollList = async (offset) => {
     if(window.sessionStorage.getItem('user')) {
