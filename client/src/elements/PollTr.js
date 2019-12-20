@@ -145,11 +145,11 @@ const PollTr = styled.tr`
 
                 @media screen and (max-width: 780px) {
                     border-radius: 10px 0px 10px 10px;
-                    left: -19px;
+                    left: -30px;
                     bottom: -98px;
 
                     li {
-                        padding: 7px 0;
+                        padding: 7px 5px;
                     }
                 }
 

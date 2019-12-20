@@ -164,7 +164,6 @@ const AllPolls = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ count, setCount ] = useState(null)
     const [ offset, setOffset ] = useState(0)
-
     
     useEffect(() => {
         setLoading(true)
@@ -233,10 +232,10 @@ const AllPolls = (props) => {
                                     </td>
 
                                     <td>
-                                        <div className="user">-</div>
+                                        <div className="user">{poll.owner.username}</div>
                                     </td>
 
-                                    <td className="user">-</td>
+                                    <td className="user">{poll.owner.first_name} {poll.owner.last_name}</td>
 
 
                                     <td className="create_dates">

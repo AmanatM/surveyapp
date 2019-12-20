@@ -122,7 +122,7 @@ const FinalScreen = ({poll}) => {
             </div>
             <p className="subheading">Вы успешно прошли опрос!</p>
             <img className="smile_img" src={smileImg} />
-            <p className="about_poll">Опрос состоял из <span className="poll_number">{poll.questions.length}</span> пунктов!</p>
+            <p className="about_poll">Опрос состоял из <span className="poll_number">{poll.question_list.length}</span> пунктов!</p>
             <button className="btn">Поделиться опросом</button>
             <Link className="btn" to="/main/all-polls">На главную</Link>
             

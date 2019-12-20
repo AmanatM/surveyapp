@@ -43,7 +43,6 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
     const [ editMode, setEditMode ] = useState(false)
     const [ newPollName, setNewPollName ] = useState('')
     const [ statsLoading, setStatsLoading ] = useState(false)
-    console.log(newPollName)
 
     const handleMouseLeave = () => {
         setSubmenuActive(false)
@@ -94,6 +93,50 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
                 text: 'Недостаточно данных для отображения статистики'
             })
         })
+    }
+
+    const handleDeactivate = (id) => {
+
+        notify('')
+
+        let data = {
+            ...poll,
+            active: !poll.active
+        }
+
+        editPollName(id, data)
+        .then((res) => {
+            setPollList(pollList.map(poll => poll.id !== id ? poll : data))
+            console.log(res)
+            setEditMode(false)
+            let poll = pollList.find((poll) => poll.id === id)
+            if(poll.active) {
+                notify({
+                    heading: 'Опрос деактивирован',
+                    type: 'success',
+                    text: 'Статус опроса сменен на не активный'
+                })
+            } else {
+                notify({
+                    heading: 'Опрос активирован',
+                    type: 'success',
+                    text: 'Статус опроса сменен на активный'
+                })
+            }
+
+            
+        })
+        .catch((err) => {
+            console.log(err)
+            setEditMode(false)
+            notify({
+                heading: 'Что-то пошло нетак',
+                type: 'error',
+                text: 'Попробуйте еще раз'
+            })
+
+        })
+
     }
 
     const handleSubmit = (e, id) => {
@@ -199,10 +242,10 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
                             {editMode ? (<button onClick={() => setEditMode(false)}>Отмена</button>) 
                             : (<button onClick={(e) => {setNewPollName(poll.title); handleEditPoll(e)}}>Редактировать</button>)}
                         </li>
-                        <li><a>Деактивировать</a></li>
+                        <li><button onClick={() => handleDeactivate(poll.id)}>{poll.active ? 'Деактивировать' : 'Активировать'}</button></li>
                         <li><button onClick={() => handleInvite(poll.id)}>Поделиться</button></li>
                         <li><button onClick={() => handleGetStats(poll.id)}>
-                            {statsLoading ? (<><Loader color="#fff" type="Audio" height={13} width={128}/></>) : <p>'Экспорт статистики'</p>}    
+                            {statsLoading ? (<><Loader color="#fff" type="Audio" height={13} width={128}/></>) : <p style={{whiteSpace: 'nowrap'}}>Экспорт статистики</p>}    
                         </button></li>
                     </ul>
                 </div>

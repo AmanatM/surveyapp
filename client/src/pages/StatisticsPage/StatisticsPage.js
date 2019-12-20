@@ -58,6 +58,7 @@ const StatisticsPage = (props) => {
 
 
 
+
     window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
 
 

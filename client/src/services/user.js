@@ -1,6 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'https://neobis-survey-app.herokuapp.com/api/v1/user'
-//const baseUrl = 'https://b6465aa0.ngrok.io/api/v1/user'
+//const baseUrl = 'https://neobis-survey-app.herokuapp.com/api/v1/user'
+const baseUrl = 'https://4ab6e111.ngrok.io/api/v1/user'
 
 
 export const login = async (credentials) => {

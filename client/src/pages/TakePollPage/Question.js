@@ -10,9 +10,10 @@ const TypeOption = ({question, setAnswers, answers, activeQuestion}) => {
 
 
     const changeOption = (answer, index) => {
-        setActiveOption(answer)
+        setActiveOption(answer.body)
 
-        let currentAnswer = {...answers[activeQuestion-1], userResponse: question.answers[index]}
+        let currentAnswer = {...answers[activeQuestion-1], userResponse: answer.body}
+        
         let newAnswers = [
             ...answers.slice(0, activeQuestion-1),
             currentAnswer,
@@ -26,8 +27,8 @@ const TypeOption = ({question, setAnswers, answers, activeQuestion}) => {
     return (
         <div className="options">
             <ul>
-                {question.answers.map((answer, index) => (
-                    <li key={index}><button className={activeOption === answer ? 'active' : ''} onClick={(e) => changeOption(answer, index)}>{answer}</button></li>
+                {question.answer_list.map((answer, index) => (
+                    <li key={answer.id}><button className={activeOption === answer.body ? 'active' : ''} onClick={(e) => {e.preventDefault(); changeOption(answer, index)}}>{answer.body}</button></li>
                 ))}
             </ul> 
         </div>
@@ -172,7 +173,7 @@ const TypeDate = ({question, setAnswers, answers, activeQuestion}) => {
                     <p onClick={openMonths}>{month}</p>
                     <ul className={active ? 'active' : ''}>
 
-                        {months.map((month, index) => <li key={index}><button onClick={(() => changeMonth(index))}>{month}</button></li>)}
+                        {months.map((month, index) => <li key={index}><button onClick={(e) => {e.preventDefault(); changeMonth(index)}}>{month}</button></li>)}
 
                     </ul>
                 </div>
@@ -275,7 +276,7 @@ const TypeTime = ({question, setAnswers, answers, activeQuestion}) => {
 const Input = ({type, question, setAnswers, answers, activeQuestion}) => {
     switch(type) {
 
-        case 'option':
+        case 'one_choice':
             return <TypeOption question={question} setAnswers={setAnswers} answers={answers} activeQuestion={activeQuestion}/>
 
 
@@ -298,8 +299,8 @@ const Question = ({question, setAnswers, answers, activeQuestion}) => {
     if(question) {
         return (
             <QuestionStyled>
-                <h1>{question.name}</h1>
-                <Input activeQuestion={activeQuestion} setAnswers={setAnswers} answers={answers} type={question.type} question={question}/>
+                <h1>{question.text}</h1>
+                <Input activeQuestion={activeQuestion} setAnswers={setAnswers} answers={answers} type={question.q_type} question={question}/>
             </QuestionStyled>
         )
     }
