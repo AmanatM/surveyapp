@@ -4,28 +4,37 @@ import PollTr from '../../elements/PollTr'
 import noAvatarImg from '../../assets/imgs/no-avatar.png'
 import threedots from './threedots-icon.svg'
 import { editPollName } from '../../services/polls'
+import Loader from 'react-loader-spinner'
+import {  getPollStatsById } from '../../services/polls'
+
 
 
 const PollTrCustom = styled(PollTr)`
-.edit {
-    input {
-        border: none;
-        padding: 5px;
-        outline: none;
-        background: transparent;
-        border-bottom: 1px solid black;
-    }
+    .edit {
 
-    button {
-        padding: 4px;
-        margin-left: 10px;
-        margin-top: 20px;
-        background-color: #29CC97;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
+        display: flex;
+        align-content: center;
+        width: 100%;
+
+        input {
+            border: none;
+            padding: 5px;
+            outline: none;
+            background: transparent;
+            border-bottom: 1px solid black;
+            padding-bottom: 2px;
+        }
+
+        button {
+            padding: 4px;
+            margin-left: 10px;
+            margin-top: 20px;
+            background-color: #29CC97;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+        }
     }
-}
 `
 
 const Poll = ({poll, notify, pollList, setPollList}) => {
@@ -33,7 +42,8 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
     const [ submenuActive, setSubmenuActive] = useState(false)
     const [ editMode, setEditMode ] = useState(false)
     const [ newPollName, setNewPollName ] = useState('')
-    const [ loading, setLoading ] = useState(false)
+    const [ statsLoading, setStatsLoading ] = useState(false)
+    console.log(newPollName)
 
     const handleMouseLeave = () => {
         setSubmenuActive(false)
@@ -50,7 +60,7 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
     }
 
     const handleInvite = (id) => {
-        
+
         let textField = document.createElement('textarea')
         textField.innerText = `${document.location.origin}/main/all-polls/${id}`
         document.body.appendChild(textField)
@@ -62,6 +72,27 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
             heading: 'Ссылка скопированна',
             text: `${document.location.origin}/main/all-polls/${id}`,
             type: 'success'
+        })
+    }
+
+    const handleGetStats = (id) => {
+        setStatsLoading(true)
+        notify('')
+
+        getPollStatsById(id)
+        .then((res) => {
+            setStatsLoading(false)
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+            setStatsLoading(false)
+
+            notify({
+                heading: 'Мало данных',
+                type: 'error',
+                text: 'Недостаточно данных для отображения статистики'
+            })
         })
     }
 
@@ -141,6 +172,7 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
                         <button>Изменить</button>
                     </form>
                 ) :  <p>{poll.title}</p>}
+                
             
             </td>
 
@@ -165,11 +197,13 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
                     <ul>
                         <li>
                             {editMode ? (<button onClick={() => setEditMode(false)}>Отмена</button>) 
-                            : (<button onClick={(e) => handleEditPoll(e)}>Редактировать</button>)}
+                            : (<button onClick={(e) => {setNewPollName(poll.title); handleEditPoll(e)}}>Редактировать</button>)}
                         </li>
                         <li><a>Деактивировать</a></li>
                         <li><button onClick={() => handleInvite(poll.id)}>Поделиться</button></li>
-                        <li><a>Экспорт статистики</a></li>
+                        <li><button onClick={() => handleGetStats(poll.id)}>
+                            {statsLoading ? (<><Loader color="#fff" type="Audio" height={13} width={128}/></>) : <p>'Экспорт статистики'</p>}    
+                        </button></li>
                     </ul>
                 </div>
             </td>

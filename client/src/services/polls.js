@@ -206,6 +206,7 @@ export const editPollName = async (id, name) => {
         token = user.token
         userId = user.user_id
     }
+    console.log(name)
 
     const headers = {
         'Authorization': `Token ${token}`
