@@ -50,10 +50,17 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
     }
 
     const handleInvite = (id) => {
-        navigator.clipboard.writeText(`${document.location.origin}/main/all-polls/${id}`)
+        
+        let textField = document.createElement('textarea')
+        textField.innerText = `${document.location.origin}/main/all-polls/${id}`
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+
         notify({
             heading: 'Ссылка скопированна',
-            text: `http://localhost:3000/main/all-polls/${id}`,
+            text: `${document.location.origin}/main/all-polls/${id}`,
             type: 'success'
         })
     }
