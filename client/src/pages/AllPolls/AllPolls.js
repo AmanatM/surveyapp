@@ -9,7 +9,7 @@ import { notify } from '../../reducers/popUp'
 
 
 
-import InnerTopBar from '../../components/InnerTopBar/InnerTopBar'
+import InnerTopBar from './InnerTopBar'
 import MainContainer from '../../elements/MainContainer'
 
 import PollsContainer from '../../elements/PollsContainer'
@@ -22,6 +22,7 @@ import Paginator from './Paginator'
 
 const MainContainerCustom = styled(MainContainer)`
     padding-bottom: 55px;
+    padding-top: 50px;
 
     .empty_info {
         width: 100%;
@@ -164,11 +165,12 @@ const AllPolls = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ count, setCount ] = useState(null)
     const [ offset, setOffset ] = useState(0)
+    const [ sorting, setSorting ] = useState('descending')
     
     useEffect(() => {
         setLoading(true)
         
-        getAllPolls(7)
+        getAllPolls(offset, sorting)
         .then((data) => {
             setPollList(data.results)
             setLoading(false)
@@ -183,6 +185,25 @@ const AllPolls = (props) => {
             })
         })
     }, [])
+
+    useEffect(() => {
+        setLoading(true)
+
+        getAllPolls(offset, sorting)
+        .then((data) => {
+            setPollList(data.results)
+            setLoading(false)
+            setCount(data.count)
+        })
+        .catch((err) => {
+            setLoading(false)
+            props.notify({
+                heading: 'Ошибка',
+                type: 'error',
+                text: 'Что-то пошло не так. Попробуйте позже.'
+            })
+        })
+    }, [sorting, count, offset])
 
 
     const parseDate = (stringDate) => {
@@ -210,9 +231,11 @@ const AllPolls = (props) => {
     return (
         <MainContainerCustom className={loading ? 'loading' : ''}>
 
+            <InnerTopBar loading={loading} setSorting={setSorting} sorting={sorting}/>
             {loading ? <Loader className="loader" type="Oval" color="#5f76ff" height={120} width={120}/> : (
                 <>
-                <InnerTopBar/>
+               
+
                 <PollsContainerCustom >
                     <thead>
                         <tr>
@@ -248,7 +271,7 @@ const AllPolls = (props) => {
                     
                 </PollsContainerCustom>
                 {pollList.length === 0 ? null : (
-                    <Paginator setLoading={setLoading} count={count} offset={offset} setPollList={setPollList} getAllPolls={getAllPolls} setOffset={setOffset}></Paginator>
+                    <Paginator offset={offset} sorting={sorting} setLoading={setLoading} count={count} offset={offset} setPollList={setPollList} getAllPolls={getAllPolls} setOffset={setOffset}></Paginator>
                 )}
                 </>
             )}

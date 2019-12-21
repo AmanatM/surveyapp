@@ -160,7 +160,7 @@ const MyPollsPage = (props) => {
 
                 {loading ? <Loader className="loader" type="Oval" color="#5f76ff" height={120} width={120}/> : (
                 <>
-                <InnerTopBar/>
+                {/* <InnerTopBar/> */}
                 
     
                 <PollsContainerCustom >

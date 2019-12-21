@@ -3,9 +3,22 @@ import MainContainer from '../../elements/MainContainer'
 
 export const MainContainerStyled = styled(MainContainer)`
     display: flex;
+
     @media screen and (max-width: 1160px) {
         flex-direction: column;
     }
+
+    &.loading {
+        display: flex;
+        flex-direction: row;
+
+
+        .loader {
+            width: 120px;
+            margin: auto
+        }
+    }
+    
 `
 
 export const FirstCol = styled.div`
@@ -57,6 +70,12 @@ export const ProfileBaseInfo = styled.div`
             margin-bottom: 20px;
             border-bottom: 3px solid #5F76FF;
             margin-top: 20px;
+        }
+
+        .username_input {
+            text-align: center;
+            border: none;
+            max-width: 100%;
         }
     }
 
@@ -159,7 +178,7 @@ export const InputGroup = styled.div`
         font-size: .85em;
     }
 
-    input {
+    input, select {
         outline-color: #5F76FF;
         transition: all .2s;
         flex: auto 1 0;
@@ -169,7 +188,12 @@ export const InputGroup = styled.div`
         padding: 5px 5px;
         font-weight: bold;
         font-size: .9em;
+        font-family: inherit;
+        max-width: 100%;
     }
+
+
+
 
     .toggle_gender {
         transition: all .2s;

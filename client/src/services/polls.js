@@ -8,8 +8,8 @@ async function wait(stallTime = 500) {
 
 
 
-//const url = 'https://neobis-survey-app.herokuapp.com/api/v1/survey'
-const url = 'https://4ab6e111.ngrok.io/api/v1/survey'
+const url = 'https://neobis-survey-app.herokuapp.com/api/v1/survey'
+//const url = 'https://d4b166a1.ngrok.io/api/v1/survey'
 
 
 let token = ''
@@ -52,7 +52,7 @@ export const editPollName = async (id, name) => {
 
 export const getMyPollList = async (offset) => {
     let headers = authCredentials()
-    let res = await axios.get(`${url}/list/?limit=7&offset=${offset}`,  { headers })
+    let res = await axios.get(`${url}/list/?limit=7&offset=${offset}`, { headers })
     return(res.data)
 }
 
@@ -63,9 +63,9 @@ export const getStatsList = async (offset) => {
 }
 
 
-export const getAllPolls = async (offset) => {
+export const getAllPolls = async (offset, sorting) => {
     let headers = authCredentials()
-    let res = await axios.get(`${url}/list/all/?limit=7&offset=${offset}`, { headers })
+    let res = await axios.get(`${url}/sorting/${sorting}/?limit=7&offset=${offset}`, { headers })
     return(res.data)
 }
 
@@ -83,3 +83,11 @@ export const postUserResponse = async (data) => {
     return(res.data) 
 }
 
+export const searchPolls = async (keyword) => {
+    let headers = authCredentials()
+    console.log(`${url}/searching/${keyword}/?limit=5&offset=0`)
+
+    let res = await axios.get(`${url}/searching/${keyword}/?limit=5&offset=0`, {headers})
+
+    return (res.data)
+}

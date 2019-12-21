@@ -11,7 +11,7 @@ const reducer = (state = null, action) => {
         case 'INITUSER':
             return action.data
             
-        case  'SET_USER_DATA':
+        case  'UPDATE_USER':
             return action.data
 
         default:
@@ -41,6 +41,18 @@ export const initUser = () => {
  
 }
 
+export const updateUser = (data) => {
+
+
+    window.sessionStorage.setItem('user', JSON.stringify(data))
+
+
+    return {
+        type: 'UPDATE_USER',
+        data: data
+    }
+}
+
 
 export const loginUser = (credentials) => {
 
@@ -52,20 +64,6 @@ export const loginUser = (credentials) => {
         type: 'LOGIN',
         data: credentials
     }
-
-    // return async (dispatch) => {
-    //     const loggedUser = await loginService.login(credentials)
-
-    //     window.sessionStorage.setItem(
-    //         'loggedUser', JSON.stringify(loggedUser)
-    //     ) 
-
-    //     dispatch({
-    //         type: 'LOGIN',
-    //         data: loggedUser
-    //     })
-    // }
-
 }
 
 export const logoutUser = () => {

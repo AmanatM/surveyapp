@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import sortIcon from './sort-icon.svg'
+import sortIcon from '../../components/InnerTopBar/sort-icon.svg'
 
 const BarSection = styled.div`
     display: flex;
     align-items: center;
     margin-top: 20px;
+    position: absolute;
+    top: 5px;
+    left: 20px;
 
     @media screen and (max-width: 1060px)    {
         flex-wrap: wrap;
@@ -30,6 +33,11 @@ const Filters = styled.div`
 
         img {
             margin-right: 4px;
+            transition: all .2s;
+            
+            &.descending {
+                transform: rotate(180deg);
+            }
         }
     }
 
@@ -39,14 +47,21 @@ const Filters = styled.div`
 `
 
 
-const InnerTopBar = () => {
+const InnerTopBar = ({loading, sorting, setSorting}) => {
+
+
+    const handleSorting = () => {
+        if(!loading) {
+            setSorting(sorting === 'descending' ? 'ascending' : 'descending')
+        }
+    }
 
     return (
         
         <BarSection>
             <Filters>
-                <div className="item sort">
-                    <img alt="Сортировка" src={sortIcon}/><span>Сортировка</span>
+                <div onClick={handleSorting} className="item sort">
+                    <img className={`${sorting}`} alt="Сортировка" src={sortIcon}/><span>Сортировка: {sorting === 'descending' ? 'Сначала новые' : 'Сначала старые'}</span>
                 </div>
             </Filters>
         </BarSection>

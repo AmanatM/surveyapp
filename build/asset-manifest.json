@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.112c0a6a.chunk.js",
-    "main.js.map": "/static/js/main.112c0a6a.chunk.js.map",
+    "main.js": "/static/js/main.c4ff2be8.chunk.js",
+    "main.js.map": "/static/js/main.c4ff2be8.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f33d3f62.js",
     "runtime-main.js.map": "/static/js/runtime-main.f33d3f62.js.map",
-    "static/js/2.6a742b83.chunk.js": "/static/js/2.6a742b83.chunk.js",
-    "static/js/2.6a742b83.chunk.js.map": "/static/js/2.6a742b83.chunk.js.map",
+    "static/js/2.45b07780.chunk.js": "/static/js/2.45b07780.chunk.js",
+    "static/js/2.45b07780.chunk.js.map": "/static/js/2.45b07780.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.75e4540de9a0539b3b06be8f2e229185.js": "/precache-manifest.75e4540de9a0539b3b06be8f2e229185.js",
+    "precache-manifest.0e744aaa3f423017011e65240618b6ae.js": "/precache-manifest.0e744aaa3f423017011e65240618b6ae.js",
     "service-worker.js": "/service-worker.js",
-    "static/js/2.6a742b83.chunk.js.LICENSE": "/static/js/2.6a742b83.chunk.js.LICENSE",
+    "static/js/2.45b07780.chunk.js.LICENSE": "/static/js/2.45b07780.chunk.js.LICENSE",
     "static/media/404.svg": "/static/media/404.c1eb98ce.svg",
     "static/media/arrow_left.svg": "/static/media/arrow_left.5ef5ef5f.svg",
     "static/media/bulb-icon.svg": "/static/media/bulb-icon.43b32b5f.svg",
     "static/media/facebook-icon.svg": "/static/media/facebook-icon.8cda0158.svg",
-    "static/media/filter-icon.svg": "/static/media/filter-icon.d184a890.svg",
     "static/media/firework.svg": "/static/media/firework.85d55edf.svg",
     "static/media/general-bg.jpg": "/static/media/general-bg.d33ff396.jpg",
     "static/media/google-icon.svg": "/static/media/google-icon.8d124e45.svg",
@@ -22,7 +21,6 @@
     "static/media/logo.svg": "/static/media/logo.fe84ffc3.svg",
     "static/media/logo_pure.svg": "/static/media/logo_pure.c44769df.svg",
     "static/media/members-icon.svg": "/static/media/members-icon.cb427b10.svg",
-    "static/media/notification-icon.svg": "/static/media/notification-icon.a85be627.svg",
     "static/media/person-icon.svg": "/static/media/person-icon.bb555c68.svg",
     "static/media/question-icon.svg": "/static/media/question-icon.9629a3c7.svg",
     "static/media/refresh-icon.svg": "/static/media/refresh-icon.dc4c3d95.svg",
@@ -36,7 +34,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.f33d3f62.js",
-    "static/js/2.6a742b83.chunk.js",
-    "static/js/main.112c0a6a.chunk.js"
+    "static/js/2.45b07780.chunk.js",
+    "static/js/main.c4ff2be8.chunk.js"
   ]
 }

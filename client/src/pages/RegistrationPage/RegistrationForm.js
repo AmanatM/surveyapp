@@ -37,11 +37,12 @@ const RegistrationForm = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ flag, setFlag ] = useState(globeIcon)
 
-    const [ inputData, handleInputChange ] = useInputChange({gender: 'male'})
+    const [ inputData, handleInputChange ] = useInputChange({})
     const [ country, setCountry ] = useState('AF')
     const [ dialCode, setDialCode] = useState('')
     const [ phone, setPhone] = useState('')
     const [ city, setCity ] = useState('')
+    const [ gender, setGender ] = useState('male')
 
 
     useEffect(() => {
@@ -88,17 +89,24 @@ const RegistrationForm = (props) => {
              dataToSend = {
                 ...inputData,
                 phone: dialCode + phone,
-                city: city
+                city: city,
+                country: country,
+                gender: gender
             }
         } else {
             dataToSend = {
                 ...inputData,
                 phone: dialCode + phone,
+                country: country,
+                gender: gender
+
             }
         }
 
         props.notify('')
 
+        console.log(dataToSend)
+        
         register(dataToSend)
         .then((res) => {
             console.log(res)
@@ -143,7 +151,7 @@ const RegistrationForm = (props) => {
             <TwoInOneLine colWidth="50">
                 <div>
                 <Input id="birth_date" onChange={handleInputChange} required aria-label="Дата" type="date" placeholder="Дата рождения*"/>
-                <select id="gender" onChange={handleInputChange} aria-label="Пол">
+                <select id="gender" onChange={(e) => setGender(e.target.value)} aria-label="Пол">
                     <option value="male">Мужской</option>
                     <option value="female">Женский</option>
                 </select>

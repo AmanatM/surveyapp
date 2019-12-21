@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { notify } from '../../reducers/popUp'
+import { connect } from 'react-redux'
 
 import smileImg from './smile.svg'
 import fireworkImg from './firework.svg'
@@ -110,7 +112,26 @@ const FinaleScreenStyled = styled.div`
     
 `
 
-const FinalScreen = ({poll}) => {
+const FinalScreen = ({poll, notify}) => {
+
+
+    const handleInvite = (id, e) => {
+        e.preventDefault()
+
+        let textField = document.createElement('textarea')
+        textField.innerText = `${document.location.origin}/main/all-polls/${id}`
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+
+        notify({
+            heading: 'Ссылка скопированна',
+            text: `${document.location.origin}/main/all-polls/${id}`,
+            type: 'success'
+        })
+    }
+
 
 
     return (
@@ -123,11 +144,11 @@ const FinalScreen = ({poll}) => {
             <p className="subheading">Вы успешно прошли опрос!</p>
             <img className="smile_img" src={smileImg} />
             <p className="about_poll">Опрос состоял из <span className="poll_number">{poll.question_list.length}</span> пунктов!</p>
-            <button className="btn">Поделиться опросом</button>
+            <button className="btn" onClick={(e) => handleInvite(poll.id, e)}>Поделиться опросом</button>
             <Link className="btn" to="/main/all-polls">На главную</Link>
             
         </FinaleScreenStyled>
     )
 }
 
-export default FinalScreen
+export default connect(null, {notify})(FinalScreen)
