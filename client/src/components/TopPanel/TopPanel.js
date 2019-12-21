@@ -79,7 +79,7 @@ const TopPanel = (props) => {
                         <li onClick={() => handleGoTo(poll.id)}>{poll.title}</li>
                     ))}
                     {pollList.length === 0 ? (
-                        <p>Page not foud</p>
+                        <p>Опрос не найден</p>
                     ): null}
                 </ul>
             </SearchBox>
