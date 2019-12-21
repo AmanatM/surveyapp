@@ -20,6 +20,7 @@ const QuestionStyled = styled.div`
         max-width: 100%;
         width: 350px;
         margin-top: 30px;
+        margin: 0 auto;
 
         ul {
 
