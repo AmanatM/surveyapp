@@ -32,6 +32,8 @@ const TopPanel = (props) => {
     const handleSearch = (e) => {
         e.preventDefault()
         setLoading(true)
+        setResultsActive(false)
+
         searchPolls(keyword)
         .then((res) => {
             console.log(res)
@@ -72,9 +74,13 @@ const TopPanel = (props) => {
                     <div></div>
                     <div></div>
                 </button>
+
                     {pollList.map((poll) => (
                         <li onClick={() => handleGoTo(poll.id)}>{poll.title}</li>
                     ))}
+                    {pollList.length === 0 ? (
+                        <p>Page not foud</p>
+                    ): null}
                 </ul>
             </SearchBox>
 
