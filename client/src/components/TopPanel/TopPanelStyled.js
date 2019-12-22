@@ -32,7 +32,7 @@ export const TopPanelSection = styled.div`
 export const SearchBox = styled.div`
 
     position: relative;
-    z-index: 999;
+    z-index: 9;
 
     form {
         height: 30px;
