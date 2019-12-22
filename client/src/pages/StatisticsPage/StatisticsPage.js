@@ -243,7 +243,7 @@ const StatisticsPage = (props) => {
 
                                         {activeStats.gender_list[1] ? (
                                             <div className="data">
-                                                <h5>{activeStats.gender_list[1].title === 'female' ? 'Мужчины' : 'Женщины'}</h5>
+                                                <h5>{activeStats.gender_list[1].title === 'female' ? 'Женщины' : 'Мужчины'}</h5>
                                                 <div className="amount">{activeStats.gender_list[1].amount}</div>
                                                 <div className="percent">{activeStats.gender_list[1].percentage}%</div>
                                             </div>
