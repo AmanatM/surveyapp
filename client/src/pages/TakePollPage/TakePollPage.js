@@ -176,7 +176,7 @@ const TakePollPage = (props) => {
                         <button onClick={handleNextSubmit} 
                                 className={`next ${activeQuestion === questions.length ? 'submit' : ''}`}>
 
-                            {activeQuestion === questions.length ? 'Заврешить' : 'Далее'}
+                            {activeQuestion === questions.length ? 'Завершить' : 'Далее'}
                         </button>
                     </div>
                 </TakePollPageStyled>)}
