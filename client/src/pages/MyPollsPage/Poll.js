@@ -244,9 +244,9 @@ const Poll = ({poll, notify, pollList, setPollList}) => {
                         </li>
                         <li><button onClick={() => handleDeactivate(poll.id)}>{poll.active ? 'Деактивировать' : 'Активировать'}</button></li>
                         <li><button onClick={() => handleInvite(poll.id)}>Поделиться</button></li>
-                        <li><button onClick={() => handleGetStats(poll.id)}>
+                        {/* <li><button onClick={() => handleGetStats(poll.id)}>
                             {statsLoading ? (<><Loader color="#fff" type="Audio" height={13} width={128}/></>) : <p style={{whiteSpace: 'nowrap'}}>Экспорт статистики</p>}    
-                        </button></li>
+                        </button></li> */}
                     </ul>
                 </div>
             </td>

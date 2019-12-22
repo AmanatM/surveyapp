@@ -117,8 +117,8 @@ const PollTr = styled.tr`
                 z-index: 19;
                 border-radius: 10px 0px 10px 10px;
                 padding: 3px;
-                left: -116px;
-                bottom: -80px;
+                left: -93px;
+                bottom: -60px;
                 
                 button {
                     background: transparent;
@@ -145,8 +145,8 @@ const PollTr = styled.tr`
 
                 @media screen and (max-width: 780px) {
                     border-radius: 10px 0px 10px 10px;
-                    left: -30px;
-                    bottom: -98px;
+                    left: -20px;
+                    bottom: -68px;
 
                     li {
                         padding: 7px 5px;
@@ -154,8 +154,8 @@ const PollTr = styled.tr`
                 }
 
                 @media screen and (max-width: 600px) {
-                    left: -94px;
-                    bottom: -100px;
+                    left: -80px;
+                    bottom: -68px;
                 }
 
             }
